@@ -1,30 +1,34 @@
-const items = document.querySelectorAll('.animate');
+const canvas = document.getElementById('snow');
+const ctx = canvas.getContext('2d');
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('show');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let snowflakes = Array.from({length: 80}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 3 + 1,
+  s: Math.random() + 0.5
+}));
+
+function drawSnow() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = 'white';
+
+  snowflakes.forEach(f => {
+    ctx.beginPath();
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    ctx.fill();
+    f.y += f.s;
+    if (f.y > canvas.height) f.y = -5;
   });
-}, { threshold: 0.15 });
 
-items.forEach(item => observer.observe(item));
+  requestAnimationFrame(drawSnow);
+}
 
-// Таймер до 31 декабря
-const endDate = new Date('December 31, 2025 23:59:59').getTime();
-const timer = document.getElementById('timer');
+drawSnow();
 
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = endDate - now;
-
-  if (diff <= 0) {
-    timer.innerHTML = "Акция завершена";
-    return;
-  }
-
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((diff / (1000 * 60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  timer.innerHTML = `${d}д ${h}ч ${m}м ${s}с`;
-}, 1000);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});

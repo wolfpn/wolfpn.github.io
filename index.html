@@ -2,13 +2,25 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>WolfPN — Secure Digital Service</title>
+<title>WolfPN — безопасный доступ к интернету</title>
+<meta name="description" content="WolfPN — цифровой сервис для защиты данных и безопасного доступа к интернету">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FAVICON -->
+<link rel="icon" href="./wolf.png" type="image/png">
+<link rel="apple-touch-icon" href="./wolf.png">
+
+<!-- MANIFEST -->
+<link rel="manifest" href="./manifest.json">
+
+<!-- SPEED OPT -->
+<meta http-equiv="Cache-Control" content="public, max-age=31536000">
+<meta name="theme-color" content="#000000">
 
 <style>
 :root{
-  --blue:#00a2ff;
-  --glass:rgba(255,255,255,.07);
+  --blue:#007fff;
+  --glass:rgba(255,255,255,.06);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -20,170 +32,175 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== ФОН ===== */
+/* ===== LOADER ===== */
+#loader{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:opacity .6s ease;
+}
+.loader-circle{
+  width:56px;height:56px;
+  border:3px solid rgba(255,255,255,.2);
+  border-top:3px solid var(--blue);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+#loader span{
+  margin-top:16px;
+  letter-spacing:3px;
+  font-size:13px;
+  color:#aaa;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== BACKGROUND ===== */
 .bg{
   position:fixed;
   inset:0;
   z-index:-1;
   background:
-    radial-gradient(circle at 30% 20%,rgba(0,162,255,.22),transparent 45%),
-    radial-gradient(circle at 70% 80%,rgba(0,120,255,.18),transparent 50%),
+    radial-gradient(circle at 30% 20%,rgba(0,127,255,.15),transparent 45%),
+    radial-gradient(circle at 70% 80%,rgba(0,90,200,.12),transparent 50%),
     #000;
-  animation:bgMove 30s ease-in-out infinite alternate;
-}
-@keyframes bgMove{
-  to{filter:hue-rotate(12deg)}
-}
-
-/* ===== НЕОН ТОЛЬКО ДЛЯ ЛОГО ===== */
-.neon{
-  text-shadow:
-    0 0 10px var(--blue),
-    0 0 25px rgba(0,162,255,.7);
 }
 
 /* ===== SECTIONS ===== */
 section{
   max-width:1300px;
   margin:auto;
-  padding:120px 20px;
+  padding:110px 20px;
   opacity:0;
-  transform:translateY(40px);
-  transition:1s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(24px);
+  transition:.8s ease;
 }
-section.show{
-  opacity:1;
-  transform:none;
-}
+section.show{opacity:1;transform:none}
 
 /* ===== HERO ===== */
 .hero{
   min-height:100vh;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  gap:26px;
   text-align:center;
-  gap:34px;
 }
 
 .avatar{
-  width:260px;height:260px;
+  width:220px;height:220px;
   border-radius:50%;
   overflow:hidden;
-  box-shadow:0 0 180px rgba(0,162,255,.8);
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
 
-h1{font-size:72px}
-h2{text-align:center;font-size:44px;margin-bottom:50px}
+h1{font-size:64px}
+h2{text-align:center;font-size:40px;margin-bottom:44px}
 
 .hero p{
-  color:#ccc;
-  max-width:1000px;
+  max-width:980px;
   line-height:1.9;
-  font-size:18px;
+  color:#ccc;
 }
 
 /* ===== BUTTON ===== */
 .btn{
-  padding:22px 64px;
-  background:linear-gradient(135deg,#004e99,var(--blue));
+  padding:24px 84px;
+  background:linear-gradient(135deg,#003f7f,var(--blue));
   border-radius:22px;
   color:#fff;
   font-weight:700;
   text-decoration:none;
-  box-shadow:0 25px 80px rgba(0,162,255,.9);
-  transition:.35s cubic-bezier(.2,.8,.2,1);
+  transition:.3s ease;
 }
-.btn:hover{transform:scale(1.06)}
-
-/* УВЕЛИЧЕНИЕ КНОПКИ НА ПК */
-@media(min-width:1024px){
-  .btn{
-    padding:26px 84px;
-    font-size:18px;
-  }
-}
+.btn:hover{transform:scale(1.04)}
 
 /* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:30px;
+  gap:26px;
 }
 
 /* ===== CARD ===== */
 .card{
   background:var(--glass);
-  padding:36px;
-  border-radius:26px;
+  padding:32px;
+  border-radius:22px;
   text-align:center;
-  backdrop-filter:blur(18px) saturate(150%);
-  box-shadow:0 25px 70px rgba(0,0,0,.8);
-  transition:.4s cubic-bezier(.2,.8,.2,1);
+  backdrop-filter:blur(14px);
+  box-shadow:0 18px 48px rgba(0,0,0,.65);
+  opacity:0;
+  transform:translateY(20px);
+  transition:.6s ease;
 }
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 40px 120px rgba(0,162,255,.6);
-}
+.card.show{opacity:1;transform:none}
 
-/* ===== BEST ===== */
-.best{
-  border:2px solid var(--blue);
-  box-shadow:0 0 120px rgba(0,162,255,1);
-}
-
-/* ===== BADGE ===== */
+/* ===== PRICE ===== */
+.old{text-decoration:line-through;color:#777}
+.price{font-size:25px;font-weight:800}
+.per{font-size:14px;color:#9fd3ff;margin-top:4px}
 .badge{
-  margin-top:14px;
-  display:inline-block;
+  margin-top:12px;
   padding:6px 14px;
-  background:rgba(0,162,255,.15);
+  display:inline-block;
+  background:rgba(0,127,255,.15);
   border-radius:12px;
-  font-size:14px;
-  color:#a8dcff;
 }
 
 /* ===== FAQ ===== */
-.faq{
-  max-width:900px;
-  margin:auto;
-}
+.faq{max-width:900px;margin:auto}
 .faq-item{
   background:var(--glass);
-  padding:28px;
-  border-radius:20px;
-  margin-bottom:20px;
-  backdrop-filter:blur(14px);
+  padding:26px;
+  border-radius:18px;
+  margin-bottom:16px;
 }
 
-/* ===== ADAPTIVE ===== */
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:36px 20px;
+  color:#777;
+  font-size:14px;
+}
+
+/* ===== MOBILE ===== */
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(2,1fr)}
-  h1{font-size:52px}
+  h1{font-size:50px}
 }
 @media(max-width:600px){
-  .grid{grid-template-columns:1fr}
-  h1{font-size:38px}
+  section{padding:90px 16px}
+  h1{font-size:36px}
+  .btn{padding:18px 50px;font-size:15px}
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-circle"></div>
+  <span>CONNECTING…</span>
+</div>
+
 <div class="bg"></div>
 
 <section class="hero show">
   <div class="avatar"><img src="./wolf.png" alt="WolfPN"></div>
-  <h1 class="neon">WolfPN</h1>
-
+  <h1>WolfPN</h1>
   <p>
-    <b>WolfPN</b> — это цифровой сервис для защиты данных, безопасного доступа к интернету и стабильного соединения.
-    Мы помогаем пользователям защитить свои данные и обеспечить стабильное соединение.
-    Современные технологии информационной безопасности теперь доступны каждому — без сложных настроек и технических знаний.
+    WolfPN — это цифровой сервис для защиты данных, безопасного доступа к интернету
+    и стабильного соединения. Современные технологии информационной безопасности
+    доступны каждому — без сложных настроек.
   </p>
-
   <a href="#pricing" class="btn">Подключиться</a>
 </section>
 
@@ -191,82 +208,80 @@ h2{text-align:center;font-size:44px;margin-bottom:50px}
 <h2>Почему выбирают WolfPN</h2>
 <div class="grid">
   <div class="card">🚀 Высокая скорость</div>
-  <div class="card">📹 Видео без рекламы на максимальной скорости</div>
-  <div class="card">⚡️ Без ограничений по скорости и трафику</div>
+  <div class="card">📹 Видео без рекламы</div>
+  <div class="card">⚡ Без ограничений</div>
   <div class="card">📶 Стабильное подключение</div>
-
-  <div class="card">🤤 Можно не выключать — вы не заметите разницы</div>
   <div class="card">🌍 Большой выбор локаций</div>
-  <div class="card">✔️ Запуск в один клик</div>
-  <div class="card">📱 iOS, Android, Windows, macOS, TV, Huawei</div>
-
-  <div class="card">🎁 Бесплатный пробный период</div>
-  <div class="card">⏳ Быстрая установка</div>
+  <div class="card">✔️ Один клик</div>
+  <div class="card">📱 Все устройства</div>
   <div class="card">🔐 Полная конфиденциальность</div>
 </div>
 </section>
 
 <section id="pricing">
 <h2>Подписка</h2>
-
 <div class="grid">
-  <div class="card">1 месяц<br><b>249 ₽</b></div>
-  <div class="card">3 месяца<br><b>699 ₽</b></div>
+  <div class="card"><b>1️⃣ месяц</b><div class="price">249 ₽</div></div>
 
-  <div class="card best">
-    6 месяцев<br><b>1299 ₽</b>
-    <div class="badge">🎁 +1 месяц в подарок</div>
+  <div class="card">
+    <b>3️⃣ месяца</b>
+    <div class="old">747 ₽</div>
+    <div class="price">699 ₽</div>
+    <div class="per">(233 ₽ / мес)</div>
   </div>
 
   <div class="card">
-    12 месяцев<br><b>2399 ₽</b>
-    <div class="badge">🎁 +3 месяца в подарок</div>
+    <b>6️⃣ месяцев</b>
+    <div class="old">1743 ₽</div>
+    <div class="price">1299 ₽</div>
+    <div class="per">(216 ₽ / мес)</div>
+    <div class="badge">🎁 +1 месяц</div>
+  </div>
+
+  <div class="card">
+    <b>1️⃣2️⃣ месяцев</b>
+    <div class="old">3735 ₽</div>
+    <div class="price">2399 ₽</div>
+    <div class="per">(199 ₽ / мес)</div>
+    <div class="badge">🎁 +3 месяца</div>
   </div>
 </div>
 
-<div style="display:flex;justify-content:center;margin-top:90px">
-  <a class="btn" href="https://t.me/WolfPN_bot" target="_blank">
-    Купить подписку
-  </a>
+<div style="display:flex;justify-content:center;margin-top:70px">
+  <a class="btn" href="https://t.me/WolfPN_bot" target="_blank">Купить подписку</a>
 </div>
 </section>
 
 <section>
 <h2>❓ FAQ</h2>
 <div class="faq">
-  <div class="faq-item">
-    <b>Законно ли использовать WolfPN?</b><br>
-    Да, использование VPN не запрещено и разрешено в большинстве стран.
-  </div>
-
-  <div class="faq-item">
-    <b>Вы храните логи пользователей?</b><br>
-    Нет, WolfPN не ведёт логи активности и не отслеживает действия пользователей.
-  </div>
-
-  <div class="faq-item">
-    <b>Насколько безопасно соединение?</b><br>
-    Используются современные протоколы шифрования для защиты данных.
-  </div>
-
-  <div class="faq-item">
-    <b>Подходит ли сервис для стриминга и видео?</b><br>
-    Да, соединение оптимизировано для видео и стабильной высокой скорости.
-  </div>
-
-  <div class="faq-item">
-    <b>Нужны ли технические знания для использования?</b><br>
-    Нет, подключение занимает один клик и не требует настроек.
-  </div>
+  <div class="faq-item"><b>Законно ли использовать WolfPN?</b><br>Да, использование VPN разрешено.</div>
+  <div class="faq-item"><b>Вы храните логи?</b><br>Нет, мы не ведём логи активности.</div>
+  <div class="faq-item"><b>Безопасно ли соединение?</b><br>Используется современное шифрование.</div>
+  <div class="faq-item"><b>Подходит ли для видео?</b><br>Да, сервис оптимизирован для стриминга.</div>
+  <div class="faq-item"><b>Нужны ли знания?</b><br>Нет, всё работает в один клик.</div>
 </div>
 </section>
 
+<footer>© 2025 WolfPN</footer>
+
 <script>
+/* LOADER — 2 сек */
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    const l=document.getElementById("loader");
+    l.style.opacity="0";
+    setTimeout(()=>l.remove(),600);
+  },2000);
+});
+
+/* APPEAR */
 const obs=new IntersectionObserver(e=>{
   e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
 },{threshold:.15});
-document.querySelectorAll("section").forEach(s=>obs.observe(s));
+document.querySelectorAll("section,.card").forEach(el=>obs.observe(el));
 </script>
 
 </body>
 </html>
+

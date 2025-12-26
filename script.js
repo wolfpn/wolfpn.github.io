@@ -1,34 +1,41 @@
-const canvas = document.getElementById('snow');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let snowflakes = Array.from({length: 80}, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-  r: Math.random() * 3 + 1,
-  s: Math.random() + 0.5
-}));
+let snow = [];
 
-function drawSnow() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = 'white';
-
-  snowflakes.forEach(f => {
-    ctx.beginPath();
-    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-    ctx.fill();
-    f.y += f.s;
-    if (f.y > canvas.height) f.y = -5;
+for (let i = 0; i < 120; i++) {
+  snow.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 3 + 1,
+    d: Math.random() + 1
   });
-
-  requestAnimationFrame(drawSnow);
 }
 
-drawSnow();
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  for (let i = 0; i < snow.length; i++) {
+    let s = snow[i];
+    ctx.moveTo(s.x, s.y);
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+  }
+  ctx.fill();
+  update();
+}
 
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+function update() {
+  for (let i = 0; i < snow.length; i++) {
+    let s = snow[i];
+    s.y += s.d;
+    if (s.y > canvas.height) {
+      snow[i] = { x: Math.random()*canvas.width, y: 0, r: s.r, d: s.d };
+    }
+  }
+}
+
+setInterval(draw, 30);

@@ -2,66 +2,44 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>WolfPN — Premium VPN</title>
+<title>WolfPN — Secure Digital Service</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
   --blue:#00a2ff;
-  --blue-dark:#003a66;
+  --glass:rgba(255,255,255,.07);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:Segoe UI,Arial;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
   background:#000;
   color:#fff;
   overflow-x:hidden;
-}
-
-/* ===== НЕОНОВЫЙ ТЕКСТ ===== */
-.neon{
-  text-shadow:
-    0 0 10px var(--blue),
-    0 0 30px var(--blue),
-    0 0 60px rgba(0,162,255,.8);
-}
-
-/* ===== CANVAS PARTICLES ===== */
-#particles{
-  position:fixed;
-  inset:0;
-  z-index:-3;
 }
 
 /* ===== ФОН ===== */
 .bg{
   position:fixed;
   inset:0;
-  z-index:-2;
+  z-index:-1;
   background:
-    radial-gradient(circle at 20% 20%,rgba(0,162,255,.25),transparent 45%),
-    radial-gradient(circle at 80% 30%,rgba(0,80,200,.2),transparent 45%),
-    radial-gradient(circle at 50% 80%,rgba(0,150,255,.15),transparent 50%),
+    radial-gradient(circle at 30% 20%,rgba(0,162,255,.22),transparent 45%),
+    radial-gradient(circle at 70% 80%,rgba(0,120,255,.18),transparent 50%),
     #000;
-  animation:bgMove 25s ease-in-out infinite alternate;
+  animation:bgMove 30s ease-in-out infinite alternate;
 }
 @keyframes bgMove{
-  from{filter:hue-rotate(0deg)}
-  to{filter:hue-rotate(18deg)}
+  to{filter:hue-rotate(12deg)}
 }
 
-/* ===== GRID LINES ===== */
-.grid-bg{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size:100px 100px;
-  mask-image:radial-gradient(circle at center,black 30%,transparent 80%);
+/* ===== НЕОН ТОЛЬКО ДЛЯ ЛОГО ===== */
+.neon{
+  text-shadow:
+    0 0 10px var(--blue),
+    0 0 25px rgba(0,162,255,.7);
 }
 
 /* ===== SECTIONS ===== */
@@ -73,7 +51,10 @@ section{
   transform:translateY(40px);
   transition:1s cubic-bezier(.2,.8,.2,1);
 }
-section.show{opacity:1;transform:none}
+section.show{
+  opacity:1;
+  transform:none;
+}
 
 /* ===== HERO ===== */
 .hero{
@@ -83,91 +64,107 @@ section.show{opacity:1;transform:none}
   justify-content:center;
   align-items:center;
   text-align:center;
-  gap:30px;
+  gap:34px;
 }
 
 .avatar{
-  width:280px;height:280px;
+  width:260px;height:260px;
   border-radius:50%;
   overflow:hidden;
-  box-shadow:0 0 220px rgba(0,162,255,1);
-  animation:pulse 3s infinite alternate;
+  box-shadow:0 0 180px rgba(0,162,255,.8);
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
 
-@keyframes pulse{
-  from{box-shadow:0 0 80px rgba(0,162,255,.6)}
-  to{box-shadow:0 0 260px rgba(0,162,255,1)}
-}
-
 h1{font-size:72px}
 h2{text-align:center;font-size:44px;margin-bottom:50px}
-p{color:#ccc;max-width:900px;margin:auto;line-height:1.8}
+
+.hero p{
+  color:#ccc;
+  max-width:1000px;
+  line-height:1.9;
+  font-size:18px;
+}
 
 /* ===== BUTTON ===== */
 .btn{
-  padding:20px 56px;
-  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
-  border-radius:18px;
+  padding:22px 64px;
+  background:linear-gradient(135deg,#004e99,var(--blue));
+  border-radius:22px;
   color:#fff;
-  font-weight:800;
+  font-weight:700;
   text-decoration:none;
-  box-shadow:0 25px 80px rgba(0,162,255,1);
-  position:relative;
-  overflow:hidden;
-  transition:.4s;
+  box-shadow:0 25px 80px rgba(0,162,255,.9);
+  transition:.35s cubic-bezier(.2,.8,.2,1);
 }
-.btn:hover{transform:scale(1.07)}
+.btn:hover{transform:scale(1.06)}
 
-.btn::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
-  transform:translateX(-120%);
-  animation:shine 3s infinite;
+/* УВЕЛИЧЕНИЕ КНОПКИ НА ПК */
+@media(min-width:1024px){
+  .btn{
+    padding:26px 84px;
+    font-size:18px;
+  }
 }
-@keyframes shine{to{transform:translateX(120%)}}
 
-/* ===== SLIDER ===== */
-.slider{
-  overflow:hidden;
-}
-.track{
-  display:flex;
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
   gap:30px;
-  animation:slide 25s linear infinite;
-}
-@keyframes slide{
-  to{transform:translateX(-50%)}
 }
 
 /* ===== CARD ===== */
 .card{
-  min-width:280px;
-  background:rgba(255,255,255,.06);
-  padding:34px;
+  background:var(--glass);
+  padding:36px;
   border-radius:26px;
   text-align:center;
-  backdrop-filter:blur(14px);
-  box-shadow:0 20px 60px rgba(0,0,0,.9);
-  transition:.4s;
+  backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:0 25px 70px rgba(0,0,0,.8);
+  transition:.4s cubic-bezier(.2,.8,.2,1);
 }
 .card:hover{
-  transform:scale(1.08);
-  box-shadow:0 40px 140px rgba(0,162,255,.8);
+  transform:translateY(-10px);
+  box-shadow:0 40px 120px rgba(0,162,255,.6);
 }
 
+/* ===== BEST ===== */
 .best{
   border:2px solid var(--blue);
-  box-shadow:0 0 140px rgba(0,162,255,1);
+  box-shadow:0 0 120px rgba(0,162,255,1);
+}
+
+/* ===== BADGE ===== */
+.badge{
+  margin-top:14px;
+  display:inline-block;
+  padding:6px 14px;
+  background:rgba(0,162,255,.15);
+  border-radius:12px;
+  font-size:14px;
+  color:#a8dcff;
+}
+
+/* ===== FAQ ===== */
+.faq{
+  max-width:900px;
+  margin:auto;
+}
+.faq-item{
+  background:var(--glass);
+  padding:28px;
+  border-radius:20px;
+  margin-bottom:20px;
+  backdrop-filter:blur(14px);
 }
 
 /* ===== ADAPTIVE ===== */
 @media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
   h1{font-size:52px}
 }
 @media(max-width:600px){
+  .grid{grid-template-columns:1fr}
   h1{font-size:38px}
 }
 </style>
@@ -175,54 +172,55 @@ p{color:#ccc;max-width:900px;margin:auto;line-height:1.8}
 
 <body>
 
-<canvas id="particles"></canvas>
 <div class="bg"></div>
-<div class="grid-bg"></div>
 
 <section class="hero show">
-  <div class="avatar"><img src="./wolf.png"></div>
+  <div class="avatar"><img src="./wolf.png" alt="WolfPN"></div>
   <h1 class="neon">WolfPN</h1>
-  <p>Премиальный доступ к интернету без ограничений</p>
+
+  <p>
+    <b>WolfPN</b> — это цифровой сервис для защиты данных, безопасного доступа к интернету и стабильного соединения.
+    Мы помогаем пользователям защитить свои данные и обеспечить стабильное соединение.
+    Современные технологии информационной безопасности теперь доступны каждому — без сложных настроек и технических знаний.
+  </p>
+
   <a href="#pricing" class="btn">Подключиться</a>
 </section>
 
 <section>
-<h2 class="neon">Почему выбирают WolfPN</h2>
+<h2>Почему выбирают WolfPN</h2>
+<div class="grid">
+  <div class="card">🚀 Высокая скорость</div>
+  <div class="card">📹 Видео без рекламы на максимальной скорости</div>
+  <div class="card">⚡️ Без ограничений по скорости и трафику</div>
+  <div class="card">📶 Стабильное подключение</div>
 
-<div class="slider">
-  <div class="track">
-    <div class="card">🚀 Высокая скорость</div>
-    <div class="card">📹 Видео без рекламы</div>
-    <div class="card">⚡️ Без ограничений</div>
-    <div class="card">📶 Стабильное подключение</div>
-    <div class="card">🌍 Большой выбор локаций</div>
-    <div class="card">📱 Все устройства</div>
-    <div class="card best">🔐 Полная конфиденциальность</div>
+  <div class="card">🤤 Можно не выключать — вы не заметите разницы</div>
+  <div class="card">🌍 Большой выбор локаций</div>
+  <div class="card">✔️ Запуск в один клик</div>
+  <div class="card">📱 iOS, Android, Windows, macOS, TV, Huawei</div>
 
-    <!-- дублируем для бесконечного слайда -->
-    <div class="card">🚀 Высокая скорость</div>
-    <div class="card">📹 Видео без рекламы</div>
-    <div class="card">⚡️ Без ограничений</div>
-    <div class="card">📶 Стабильное подключение</div>
-    <div class="card">🌍 Большой выбор локаций</div>
-    <div class="card">📱 Все устройства</div>
-  </div>
+  <div class="card">🎁 Бесплатный пробный период</div>
+  <div class="card">⏳ Быстрая установка</div>
+  <div class="card">🔐 Полная конфиденциальность</div>
 </div>
 </section>
 
 <section id="pricing">
-<h2 class="neon">Подписка</h2>
+<h2>Подписка</h2>
 
-<div class="slider">
-  <div class="track">
-    <div class="card">1 месяц<br><b>249 ₽</b></div>
-    <div class="card">3 месяца<br><b>699 ₽</b></div>
-    <div class="card best">6 месяцев<br><b>1299 ₽</b></div>
-    <div class="card">12 месяцев<br><b>2399 ₽</b></div>
+<div class="grid">
+  <div class="card">1 месяц<br><b>249 ₽</b></div>
+  <div class="card">3 месяца<br><b>699 ₽</b></div>
 
-    <div class="card">1 месяц<br><b>249 ₽</b></div>
-    <div class="card">3 месяца<br><b>699 ₽</b></div>
-    <div class="card best">6 месяцев<br><b>1299 ₽</b></div>
+  <div class="card best">
+    6 месяцев<br><b>1299 ₽</b>
+    <div class="badge">🎁 +1 месяц в подарок</div>
+  </div>
+
+  <div class="card">
+    12 месяцев<br><b>2399 ₽</b>
+    <div class="badge">🎁 +3 месяца в подарок</div>
   </div>
 </div>
 
@@ -233,50 +231,42 @@ p{color:#ccc;max-width:900px;margin:auto;line-height:1.8}
 </div>
 </section>
 
+<section>
+<h2>❓ FAQ</h2>
+<div class="faq">
+  <div class="faq-item">
+    <b>Законно ли использовать WolfPN?</b><br>
+    Да, использование VPN не запрещено и разрешено в большинстве стран.
+  </div>
+
+  <div class="faq-item">
+    <b>Вы храните логи пользователей?</b><br>
+    Нет, WolfPN не ведёт логи активности и не отслеживает действия пользователей.
+  </div>
+
+  <div class="faq-item">
+    <b>Насколько безопасно соединение?</b><br>
+    Используются современные протоколы шифрования для защиты данных.
+  </div>
+
+  <div class="faq-item">
+    <b>Подходит ли сервис для стриминга и видео?</b><br>
+    Да, соединение оптимизировано для видео и стабильной высокой скорости.
+  </div>
+
+  <div class="faq-item">
+    <b>Нужны ли технические знания для использования?</b><br>
+    Нет, подключение занимает один клик и не требует настроек.
+  </div>
+</div>
+</section>
+
 <script>
-/* SCROLL ANIMATION */
 const obs=new IntersectionObserver(e=>{
   e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
 },{threshold:.15});
 document.querySelectorAll("section").forEach(s=>obs.observe(s));
-
-/* PARTICLES */
-const c=document.getElementById("particles"),
-ctx=c.getContext("2d");
-let w,h,pts=[];
-function resize(){
-  w=c.width=window.innerWidth;
-  h=c.height=window.innerHeight;
-}
-window.onresize=resize;resize();
-
-for(let i=0;i<120;i++){
-  pts.push({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    vx:(Math.random()-.5)*0.4,
-    vy:(Math.random()-.5)*0.4,
-    r:Math.random()*2+1
-  });
-}
-
-function anim(){
-  ctx.clearRect(0,0,w,h);
-  ctx.fillStyle="rgba(0,162,255,.8)";
-  pts.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>w)p.vx*=-1;
-    if(p.y<0||p.y>h)p.vy*=-1;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-  });
-  requestAnimationFrame(anim);
-}
-anim();
 </script>
 
 </body>
 </html>
-
-

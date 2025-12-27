@@ -2,28 +2,32 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>WolfPN — VPN сервис для безопасного интернета</title>
-<meta name="description" content="WolfPN — VPN-сервис для защиты данных и анонимности.">
+
+<title>WolfPN — VPN сервис для безопасного и быстрого интернета</title>
+
+<meta name="description" content="WolfPN — VPN-сервис для защиты данных, анонимности и стабильного доступа к интернету. Поддержка iOS, Android, Windows, macOS. Бесплатный пробный период.">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="icon" href="favicon.ico">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
   font-family:Segoe UI,Arial,sans-serif;
   background:#000;
   color:#fff;
   overflow-x:hidden;
 }
+html{scroll-behavior:smooth}
 
 /* ===== BACKGROUND ===== */
 .bg{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 30% 20%,rgba(0,80,255,.18),transparent 45%),
-    radial-gradient(circle at 70% 80%,rgba(0,120,255,.15),transparent 50%),
+    radial-gradient(circle at 30% 20%,rgba(0,80,255,.15),transparent 40%),
+    radial-gradient(circle at 70% 80%,rgba(0,120,255,.12),transparent 45%),
     #000;
   z-index:-1;
 }
@@ -44,19 +48,10 @@ body{
   border:3px solid #222;
   border-top:3px solid #0af;
   border-radius:50%;
-  animation:spin 1s linear infinite, glow 2s ease-in-out infinite;
+  animation:spin 1s linear infinite;
 }
-#loader span{
-  margin-top:16px;
-  color:#888;
-  letter-spacing:3px;
-  font-size:13px;
-}
+#loader span{margin-top:16px;color:#aaa;letter-spacing:2px}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes glow{
-  0%,100%{box-shadow:0 0 10px #0af}
-  50%{box-shadow:0 0 40px #0af}
-}
 
 /* ===== SECTIONS ===== */
 section{
@@ -64,15 +59,10 @@ section{
   margin:auto;
   padding:100px 20px;
   opacity:0;
-  transform:translateY(50px) scale(.96);
-  filter:blur(6px);
-  transition:1s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(40px);
+  transition:.8s ease;
 }
-section.show{
-  opacity:1;
-  transform:none;
-  filter:none;
-}
+section.show{opacity:1;transform:none}
 
 /* ===== HERO ===== */
 .hero{
@@ -84,30 +74,17 @@ section.show{
   text-align:center;
   gap:26px;
 }
+
 .logo{
   width:260px;height:260px;
   border-radius:50%;
-  animation:pulse 4s ease-in-out infinite;
+  box-shadow:0 0 120px rgba(0,120,255,.8);
 }
-.logo img{
-  width:100%;height:100%;
-  object-fit:cover;
-  border-radius:50%;
-}
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 60px rgba(0,120,255,.6)}
-  50%{box-shadow:0 0 140px rgba(0,120,255,.9)}
-}
+.logo img{width:100%;height:100%;object-fit:cover}
 
 h1{
   font-size:64px;
-  text-shadow:0 0 35px rgba(0,120,255,1);
-}
-
-h2{
-  font-size:38px;
-  margin-bottom:40px;
-  text-align:center;
+  text-shadow:0 0 30px rgba(0,120,255,.9);
 }
 
 .hero p{
@@ -117,23 +94,18 @@ h2{
   font-size:18px;
 }
 
-/* ===== BUTTON ===== */
 .btn{
   margin-top:30px;
   padding:22px 70px;
   font-size:18px;
   font-weight:700;
   background:linear-gradient(135deg,#005cff,#0aa);
-  border-radius:20px;
+  border-radius:18px;
   color:#fff;
   text-decoration:none;
-  transition:.4s;
-  box-shadow:0 0 30px rgba(0,140,255,.4);
+  transition:.3s;
 }
-.btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 60px rgba(0,180,255,.9);
-}
+.btn:hover{transform:scale(1.06)}
 
 /* ===== GRID ===== */
 .grid{
@@ -142,19 +114,15 @@ h2{
   gap:26px;
 }
 .card{
-  background:rgba(255,255,255,.06);
+  background:rgba(255,255,255,.05);
   border-radius:22px;
-  padding:32px;
+  padding:30px;
   text-align:center;
-  transition:.4s;
+  transition:.3s;
 }
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-  background:rgba(255,255,255,.09);
-}
+.card:hover{transform:translateY(-8px)}
 
-/* ===== PRICES ===== */
-.price{font-size:36px;font-weight:800}
+.price{font-size:34px;font-weight:800}
 .old{color:#777;text-decoration:line-through}
 
 /* ===== FAQ ===== */
@@ -175,11 +143,10 @@ footer{
 
 /* ===== MOBILE ===== */
 @media(max-width:900px){
-  h1{font-size:42px}
-  h2{font-size:30px}
-  section{padding:70px 16px}
-  .logo{width:200px;height:200px}
+  h1{font-size:44px}
   .grid{grid-template-columns:1fr}
+  .logo{width:200px;height:200px}
+  section{padding:70px 16px}
 }
 </style>
 </head>
@@ -195,13 +162,17 @@ footer{
 
 <section class="hero show">
   <div class="logo">
-    <img src="wolf.png" alt="WolfPN">
+    <img src="wolf.png" alt="WolfPN VPN логотип" loading="lazy">
   </div>
+
   <h1>WolfPN</h1>
+
   <p>
     WolfPN — это цифровой сервис для защиты данных, безопасного доступа
-    к интернету и стабильного соединения.
+    к интернету и стабильного соединения. Современные технологии
+    информационной безопасности доступны каждому.
   </p>
+
   <a href="#pricing" class="btn">Подключиться</a>
 </section>
 
@@ -210,10 +181,10 @@ footer{
 <div class="grid">
   <div class="card">🚀 Высокая скорость</div>
   <div class="card">📹 Видео без рекламы</div>
-  <div class="card">⚡ Без ограничений</div>
+  <div class="card">⚡️ Без ограничений</div>
   <div class="card">📶 Стабильное подключение</div>
   <div class="card">🌍 Большой выбор локаций</div>
-  <div class="card">✔ Запуск в один клик</div>
+  <div class="card">✔️ Запуск в один клик</div>
   <div class="card">🎁 Бесплатный пробный период</div>
   <div class="card">🔐 Полная конфиденциальность</div>
 </div>
@@ -223,23 +194,29 @@ footer{
 <h2>Подписка</h2>
 <div class="grid">
   <div class="card">
-    <h3>1 месяц</h3>
+    <h3>1️⃣ месяц</h3>
     <div class="price">249 ₽</div>
   </div>
+
   <div class="card">
-    <h3>3 месяца</h3>
+    <h3>3️⃣ месяца</h3>
     <div class="old">747 ₽</div>
     <div class="price">699 ₽</div>
+    <small>233 ₽ / мес</small>
   </div>
+
   <div class="card">
-    <h3>6 месяцев + 1 🎁</h3>
+    <h3>6️⃣ месяцев + 🎁 1 месяц</h3>
     <div class="old">1743 ₽</div>
     <div class="price">1299 ₽</div>
+    <small>216 ₽ / мес</small>
   </div>
+
   <div class="card">
-    <h3>12 месяцев + 3 🎁</h3>
+    <h3>1️⃣2️⃣ месяцев + 🎁 3 месяца</h3>
     <div class="old">3735 ₽</div>
     <div class="price">2399 ₽</div>
+    <small>199 ₽ / мес</small>
   </div>
 </div>
 </section>
@@ -247,10 +224,11 @@ footer{
 <section>
 <h2>❓ FAQ</h2>
 <div class="faq">
-  <div class="faq-item"><b>Законно ли использовать VPN?</b><br>Да.</div>
-  <div class="faq-item"><b>Вы храните логи?</b><br>Нет.</div>
-  <div class="faq-item"><b>Безопасно?</b><br>Современное шифрование.</div>
-  <div class="faq-item"><b>Подходит для видео?</b><br>Да.</div>
+  <div class="faq-item"><b>Законно ли использовать WolfPN?</b><br>Да, использование VPN разрешено.</div>
+  <div class="faq-item"><b>Вы храните логи?</b><br>Нет, мы не ведём логи активности.</div>
+  <div class="faq-item"><b>Безопасно ли соединение?</b><br>Используется современное шифрование.</div>
+  <div class="faq-item"><b>Подходит ли для видео?</b><br>Да, сервис оптимизирован для стриминга.</div>
+  <div class="faq-item"><b>Нужны ли знания?</b><br>Нет, всё работает в один клик.</div>
 </div>
 </section>
 
@@ -260,22 +238,14 @@ footer{
 
 <script>
 setTimeout(()=>{
-  document.getElementById("loader").style.opacity="0";
-  setTimeout(()=>document.getElementById("loader").remove(),600);
-},1800);
+  document.getElementById("loader").style.display="none";
+},2000);
 
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("show");
-      obs.unobserve(e.target);
-    }
-  })
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
 },{threshold:.15});
-
 document.querySelectorAll("section").forEach(s=>obs.observe(s));
 </script>
 
 </body>
-</html>
-
+</html>  

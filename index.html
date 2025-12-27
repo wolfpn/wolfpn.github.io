@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#0b5cff" />
   <meta name="color-scheme" content="dark" />
 
-  <!-- ✅ SEO -->
+  <!-- SEO -->
   <title>WolfPN — быстрый и безопасный VPN | iOS, Android, Windows, macOS</title>
-  <meta name="description" content="WolfPN — быстрый VPN для защиты данных и анонимности. Стабильное соединение, простой запуск, поддержка iOS, Android, Windows, macOS. Попробуйте WolfPN." />
+  <meta name="description" content="WolfPN — быстрый VPN для защиты данных и анонимности. Стабильное соединение, простой запуск, iOS, Android, Windows, macOS." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://wolfpn.github.io/" />
   <link rel="alternate" href="https://wolfpn.github.io/" hreflang="ru" />
@@ -34,7 +34,6 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
 
-  <!-- ✅ Structured Data (Google/Yandex понимают) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -101,30 +100,6 @@
       opacity:.06;
       mix-blend-mode: overlay;
     }
-    .floaters{
-      position:fixed; inset:0; z-index:-2;
-      pointer-events:none;
-      filter: blur(18px);
-      opacity:.45;
-    }
-    .floater{
-      position:absolute;
-      width:320px; height:320px;
-      border-radius:50%;
-      background: radial-gradient(circle, rgba(11,92,255,.25), transparent 60%);
-      animation: floaty 10s ease-in-out infinite;
-      left:-80px; top:80px;
-    }
-    .floater.f2{
-      width:380px; height:380px;
-      left:auto; right:-100px; top:44%;
-      background: radial-gradient(circle, rgba(24,208,196,.18), transparent 60%);
-      animation-duration: 12s;
-    }
-    @keyframes floaty{
-      0%,100%{transform:translate(-30px,-20px)}
-      50%{transform:translate(30px,20px)}
-    }
 
     /* Header */
     header{
@@ -139,6 +114,7 @@
       height:72px;
       gap:14px;
     }
+
     .brand{
       display:flex; align-items:center; gap:12px;
       text-decoration:none; color:var(--text);
@@ -151,11 +127,19 @@
       box-shadow: 0 18px 55px rgba(11,92,255,.22);
       background: linear-gradient(135deg, rgba(11,92,255,.9), rgba(24,208,196,.75));
       flex: 0 0 auto;
-      transform: translateZ(0);
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
     .brand strong{letter-spacing:.4px}
     .brand small{display:block; color:rgba(238,242,255,.55); font-size:12px; font-weight:650}
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      min-width: 0;
+    }
 
     .nav a.link{
       color:var(--muted);
@@ -167,7 +151,6 @@
       white-space:nowrap;
     }
     .nav a.link:hover{background:rgba(255,255,255,.06); color:var(--text)}
-    .nav-right{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end}
 
     .pill{
       display:inline-flex; align-items:center; gap:8px;
@@ -268,6 +251,7 @@
       font-weight:800;
       transition:.2s;
       user-select:none;
+      min-width: 170px;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn.primary{
@@ -329,8 +313,6 @@
       0%,100%{transform:translate(-6%, -6%) scale(1)}
       50%{transform:translate(6%, 6%) scale(1.02)}
     }
-
-    /* орбита + восьмёрка */
     .orbit{
       position:absolute;
       inset:12px;
@@ -338,8 +320,6 @@
       border: 1px dashed rgba(255,255,255,.16);
       opacity:.45;
     }
-
-    /* Ракета по восьмёрке */
     .rocket8{
       position:absolute;
       left:50%; top:50%;
@@ -355,8 +335,6 @@
       75%  { transform: translate(-50%,-50%) translateX(0px)   translateY(28px) rotate(0deg); }
       100% { transform: translate(-50%,-50%) translateX(-55px) translateY(0px) rotate(25deg); }
     }
-
-    /* след */
     .trail{
       position:absolute;
       left:50%; top:50%;
@@ -373,7 +351,6 @@
       0%{opacity:.55; transform:translate(-50%,-50%) scale(1)}
       100%{opacity:0; transform:translate(-50%,-50%) scale(2.6)}
     }
-
     .rocket8 svg{width:100%; height:100%; display:block}
     .rocket8::after{
       content:"";
@@ -465,10 +442,7 @@
       display:flex;
       flex-direction:column;
       min-height: 100%;
-      transform: translateZ(0);
     }
-
-    /* ✅ Неоновая “движущаяся” обводка */
     .plan::before{
       content:"";
       position:absolute;
@@ -488,14 +462,11 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       opacity:.0;
-      filter: blur(.3px);
       transition: opacity .25s;
       pointer-events:none;
     }
     .plan:hover::before{opacity:.85; animation: spin 2.8s linear infinite}
-    @keyframes spin{
-      to{ --a: 360deg; }
-    }
+    @keyframes spin{ to{ --a: 360deg; } }
 
     .plan:hover{
       transform: translateY(-4px);
@@ -513,11 +484,12 @@
     .per{color:var(--muted); font-weight:650}
     .plan ul{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.7}
 
-    .plan .buy{
+    .btn.buy{
       margin-top:auto;
       height: var(--btnH);
       border-radius: 16px;
       width:100%;
+      min-width: 0;
     }
 
     .badge-top{
@@ -534,11 +506,11 @@
       letter-spacing:.25px;
       backdrop-filter: blur(10px);
       box-shadow: 0 16px 40px rgba(0,0,0,.25);
+      transform: translateY(-50%);
+      white-space:nowrap;
       display:flex;
       align-items:center;
       gap:8px;
-      transform: translateY(-50%);
-      white-space:nowrap;
     }
     .badge-top::before{content:"✨"}
 
@@ -600,18 +572,36 @@
     }
     .reveal.show{opacity:1; transform:none}
 
-    /* Mobile */
+    /* =========================
+       ✅ MOBILE FIXES (важное)
+       1) убираем pill и cta в хедере
+       2) оставляем только лого + текст
+       ========================= */
+    @media (max-width: 520px){
+      .nav-right .pill,
+      .nav-right .cta{
+        display:none !important;   /* ← убираем на мобиле */
+      }
+
+      .nav{height:66px}
+      section{padding:70px 0}
+      .hero{padding:54px 0 40px}
+
+      .grid2{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+
+      .btn{min-width: 0; flex:1}
+      .hero-actions{display:flex}
+    }
+
     @media (max-width: 980px){
       .grid2{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr 1fr}
       .pricing{grid-template-columns:1fr 1fr}
       .faq{grid-template-columns:1fr}
-    }
-    @media (max-width: 520px){
-      .nav a.link{display:none}
-      .grid{grid-template-columns:1fr}
-      .pricing{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr}
     }
 
     /* Reduced motion */
@@ -631,10 +621,6 @@
 <body>
   <div class="bg"></div>
   <div class="noise"></div>
-  <div class="floaters" aria-hidden="true">
-    <div class="floater"></div>
-    <div class="floater f2"></div>
-  </div>
 
   <header>
     <div class="wrap">
@@ -653,6 +639,8 @@
           <a class="link" href="#features">Возможности</a>
           <a class="link" href="#pricing">Тарифы</a>
           <a class="link" href="#faq">FAQ</a>
+
+          <!-- ✅ На мобиле скрываются (см. media max-width:520px) -->
           <a class="pill" href="#pricing">🎁 Пробный период</a>
           <a class="cta" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
         </div>
@@ -688,7 +676,6 @@
               <div class="orbit" aria-hidden="true"></div>
               <div class="trail" aria-hidden="true"></div>
 
-              <!-- ракета по восьмёрке -->
               <div class="rocket8" aria-hidden="true">
                 <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M36 6c10 3 18 11 21 21-7 4-14 7-22 8-2-8-1-19 1-29Z" fill="rgba(255,255,255,.92)"/>
@@ -738,7 +725,7 @@
           <div class="feature reveal">🔒 <b>Шифрование</b><span>Защита трафика в публичных сетях и дома.</span></div>
           <div class="feature reveal">🌍 <b>Локации</b><span>Выбор сервера под нужный сценарий.</span></div>
           <div class="feature reveal">📶 <b>Стабильность</b><span>Автоподключение при разрывах связи.</span></div>
-          <div class="feature reveal">🎥 <b>Стриминг</b><span>Подходит для просмотра видео и онлайн-сервисов.</span></div>
+          <div class="feature reveal">🎥 <b>Стриминг</b><span>Подходит для видео и онлайн-сервисов.</span></div>
           <div class="feature reveal">⚡️ <b>Без ограничений</b><span>Комфортное использование каждый день.</span></div>
           <div class="feature reveal">🎁 <b>Пробный период</b><span>Можно оценить сервис перед покупкой.</span></div>
           <div class="feature reveal">✔️ <b>Один клик</b><span>Минимум настроек — максимум результата.</span></div>
@@ -808,12 +795,6 @@
             <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
           </div>
         </div>
-
-        <div class="card reveal" style="margin-top:14px; padding:16px; border-radius:18px; background:rgba(255,255,255,.04); border:1px solid var(--line)">
-          <div class="tiny">
-            *Уточнения по “0 логов” лучше оформить в отдельной странице политики конфиденциальности.
-          </div>
-        </div>
       </div>
     </section>
 
@@ -832,16 +813,16 @@
             <p>В большинстве стран использование VPN разрешено. Если для вас это важно — проверьте правила вашей юрисдикции.</p>
           </details>
           <details class="reveal">
-            <summary>Вы храните логи?</summary>
-            <p>Это лучше подтверждать прозрачной политикой конфиденциальности: какие данные не собираются и что может логироваться технически.</p>
-          </details>
-          <details class="reveal">
             <summary>Безопасно ли соединение?</summary>
             <p>VPN шифрует трафик между устройством и сервером — это снижает риски при использовании публичных Wi-Fi сетей.</p>
           </details>
           <details class="reveal">
             <summary>Подойдёт ли для видео?</summary>
-            <p>Да, сервис оптимизирован под повседневные сценарии. Скорость зависит от выбранного сервера и качества вашей сети.</p>
+            <p>Да, сервис оптимизирован под повседневные сценарии. Скорость зависит от выбранного сервера и вашей сети.</p>
+          </details>
+          <details class="reveal">
+            <summary>Как подключиться?</summary>
+            <p>Нажмите “Подключиться” — откроется Telegram-бот, дальше он подскажет шаги.</p>
           </details>
         </div>
       </div>
@@ -871,7 +852,7 @@
     }, {threshold: 0.15});
     document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 
-    // "след" для ракеты: переносим trail к позиции ракеты
+    // След за ракетой
     (function(){
       const rocket = document.querySelector(".rocket8");
       const trail  = document.querySelector(".trail");
@@ -901,3 +882,4 @@
   </script>
 </body>
 </html>
+

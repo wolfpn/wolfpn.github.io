@@ -2,8 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>WolfPN — VPN сервис</title>
+<title>WolfPN — VPN сервис для безопасного интернета</title>
+<meta name="description" content="WolfPN — VPN-сервис для защиты данных и анонимности.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -45,7 +47,7 @@ body{
   animation:spin 1s linear infinite, glow 2s ease-in-out infinite;
 }
 #loader span{
-  margin-top:18px;
+  margin-top:16px;
   color:#888;
   letter-spacing:3px;
   font-size:13px;
@@ -82,15 +84,13 @@ section.show{
   text-align:center;
   gap:26px;
 }
-
 .logo{
   width:260px;height:260px;
   border-radius:50%;
   animation:pulse 4s ease-in-out infinite;
 }
 .logo img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   border-radius:50%;
 }
@@ -102,6 +102,12 @@ section.show{
 h1{
   font-size:64px;
   text-shadow:0 0 35px rgba(0,120,255,1);
+}
+
+h2{
+  font-size:38px;
+  margin-bottom:40px;
+  text-align:center;
 }
 
 .hero p{
@@ -141,21 +147,11 @@ h1{
   padding:32px;
   text-align:center;
   transition:.4s;
-  position:relative;
-  overflow:hidden;
-}
-.card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(0,150,255,.15),transparent);
-  opacity:0;
-  transition:.4s;
 }
 .card:hover{
   transform:translateY(-10px) scale(1.02);
+  background:rgba(255,255,255,.09);
 }
-.card:hover::after{opacity:1}
 
 /* ===== PRICES ===== */
 .price{font-size:36px;font-weight:800}
@@ -168,10 +164,6 @@ h1{
   border-radius:16px;
   padding:22px;
   margin-bottom:18px;
-  transition:.3s;
-}
-.faq-item:hover{
-  background:rgba(255,255,255,.08);
 }
 
 /* ===== FOOTER ===== */
@@ -181,20 +173,13 @@ footer{
   color:#666;
 }
 
-/* ===== MOBILE FIX ===== */
+/* ===== MOBILE ===== */
 @media(max-width:900px){
   h1{font-size:42px}
+  h2{font-size:30px}
   section{padding:70px 16px}
   .logo{width:200px;height:200px}
-
-  .grid{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-
-  .card{
-    width:100%;
-  }
+  .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -213,9 +198,65 @@ footer{
     <img src="wolf.png" alt="WolfPN">
   </div>
   <h1>WolfPN</h1>
-  <p>WolfPN — цифровой сервис для защиты данных, анонимности и стабильного доступа к интернету.</p>
+  <p>
+    WolfPN — это цифровой сервис для защиты данных, безопасного доступа
+    к интернету и стабильного соединения.
+  </p>
   <a href="#pricing" class="btn">Подключиться</a>
 </section>
+
+<section>
+<h2>Почему выбирают WolfPN</h2>
+<div class="grid">
+  <div class="card">🚀 Высокая скорость</div>
+  <div class="card">📹 Видео без рекламы</div>
+  <div class="card">⚡ Без ограничений</div>
+  <div class="card">📶 Стабильное подключение</div>
+  <div class="card">🌍 Большой выбор локаций</div>
+  <div class="card">✔ Запуск в один клик</div>
+  <div class="card">🎁 Бесплатный пробный период</div>
+  <div class="card">🔐 Полная конфиденциальность</div>
+</div>
+</section>
+
+<section id="pricing">
+<h2>Подписка</h2>
+<div class="grid">
+  <div class="card">
+    <h3>1 месяц</h3>
+    <div class="price">249 ₽</div>
+  </div>
+  <div class="card">
+    <h3>3 месяца</h3>
+    <div class="old">747 ₽</div>
+    <div class="price">699 ₽</div>
+  </div>
+  <div class="card">
+    <h3>6 месяцев + 1 🎁</h3>
+    <div class="old">1743 ₽</div>
+    <div class="price">1299 ₽</div>
+  </div>
+  <div class="card">
+    <h3>12 месяцев + 3 🎁</h3>
+    <div class="old">3735 ₽</div>
+    <div class="price">2399 ₽</div>
+  </div>
+</div>
+</section>
+
+<section>
+<h2>❓ FAQ</h2>
+<div class="faq">
+  <div class="faq-item"><b>Законно ли использовать VPN?</b><br>Да.</div>
+  <div class="faq-item"><b>Вы храните логи?</b><br>Нет.</div>
+  <div class="faq-item"><b>Безопасно?</b><br>Современное шифрование.</div>
+  <div class="faq-item"><b>Подходит для видео?</b><br>Да.</div>
+</div>
+</section>
+
+<footer>
+© 2025 WolfPN
+</footer>
 
 <script>
 setTimeout(()=>{
@@ -237,3 +278,4 @@ document.querySelectorAll("section").forEach(s=>obs.observe(s));
 
 </body>
 </html>
+

@@ -7,9 +7,11 @@
   <meta name="color-scheme" content="dark" />
 
   <!-- SEO -->
-  <title>WolfPN — быстрый и безопасный VPN | iOS, Android, Windows, macOS</title>
-  <meta name="description" content="WolfPN — быстрый VPN для защиты данных и анонимности. Стабильное соединение, простой запуск, iOS, Android, Windows, macOS." />
+  <title>WolfPN — VPN сервис: быстрый и безопасный VPN для iOS, Android, Windows, macOS</title>
+  <meta name="description" content="WolfPN — VPN сервис для приватности и защиты данных. Быстрый VPN, стабильное подключение, iOS/Android/Windows/macOS. Подключение через Telegram-бот." />
+  <meta name="keywords" content="vpn, впн, vpn сервис, быстрый vpn, безопасный vpn, vpn для iphone, vpn для android, vpn для windows, vpn для macos, анонимность, защита данных" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+
   <link rel="canonical" href="https://wolfpn.github.io/" />
   <link rel="alternate" href="https://wolfpn.github.io/" hreflang="ru" />
 
@@ -17,7 +19,7 @@
   <meta property="og:locale" content="ru_RU" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="WolfPN — быстрый и безопасный VPN" />
-  <meta property="og:description" content="Защита данных, анонимность и стабильный доступ. iOS, Android, Windows, macOS." />
+  <meta property="og:description" content="VPN для приватности и защиты данных. iOS, Android, Windows, macOS. Подключение через Telegram." />
   <meta property="og:url" content="https://wolfpn.github.io/" />
   <meta property="og:image" content="https://wolfpn.github.io/og.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -26,7 +28,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="WolfPN — быстрый и безопасный VPN" />
-  <meta name="twitter:description" content="Защита данных, анонимность и стабильный доступ. iOS, Android, Windows, macOS." />
+  <meta name="twitter:description" content="VPN для приватности и защиты данных. iOS, Android, Windows, macOS." />
   <meta name="twitter:image" content="https://wolfpn.github.io/og.jpg" />
 
   <!-- Icons / PWA -->
@@ -34,13 +36,17 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
 
+  <!-- Structured data: Organization + WebSite + WebPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Organization",
     "name":"WolfPN",
     "url":"https://wolfpn.github.io/",
-    "logo":"https://wolfpn.github.io/wolf.png"
+    "logo":"https://wolfpn.github.io/wolf.png",
+    "sameAs":[
+      "https://t.me/WolfPN_bot"
+    ]
   }
   </script>
   <script type="application/ld+json">
@@ -49,7 +55,22 @@
     "@type":"WebSite",
     "name":"WolfPN",
     "url":"https://wolfpn.github.io/",
-    "inLanguage":"ru-RU"
+    "inLanguage":"ru-RU",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://wolfpn.github.io/?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"WolfPN — VPN сервис",
+    "url":"https://wolfpn.github.io/",
+    "inLanguage":"ru-RU",
+    "description":"VPN сервис для приватности и защиты данных. Быстрый VPN для iOS, Android, Windows, macOS."
   }
   </script>
 
@@ -69,7 +90,6 @@
       --max: 1120px;
 
       --btnH: 52px;
-
       --glowA: rgba(11,92,255,.65);
       --glowB: rgba(24,208,196,.55);
     }
@@ -108,17 +128,27 @@
       background: rgba(5,7,13,.55);
       border-bottom:1px solid var(--line);
     }
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 18px;
+      width:100%;
+    }
+
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      height:72px;
-      gap:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      min-height:72px;
+      padding: 10px 0;
     }
 
     .brand{
       display:flex; align-items:center; gap:12px;
       text-decoration:none; color:var(--text);
-      min-width: 200px;
+      min-width: 180px;
+      flex: 0 0 auto;
     }
     .avatar{
       width:44px; height:44px; border-radius:16px;
@@ -132,23 +162,27 @@
     .brand strong{letter-spacing:.4px}
     .brand small{display:block; color:rgba(238,242,255,.55); font-size:12px; font-weight:650}
 
+    /* ✅ ВАЖНО: меню больше не “вылезает” и не перекрывает контент */
     .nav-right{
       display:flex;
       align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
       justify-content:flex-end;
+      gap:8px;
+      flex: 1 1 auto;
       min-width: 0;
+      flex-wrap: nowrap;          /* не даём ломаться в 2 строки на мобиле */
+      overflow: hidden;           /* чтобы ничего не торчало */
     }
 
     .nav a.link{
       color:var(--muted);
       text-decoration:none;
-      font-weight:600;
+      font-weight:700;
       padding:10px 12px;
       border-radius:12px;
       transition: .2s;
       white-space:nowrap;
+      flex: 0 0 auto;
     }
     .nav a.link:hover{background:rgba(255,255,255,.06); color:var(--text)}
 
@@ -159,25 +193,24 @@
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
       color:var(--muted);
-      font-weight:650;
+      font-weight:800;
       text-decoration:none;
       transition:.2s;
       white-space:nowrap;
+      flex: 0 0 auto;
     }
-    .pill:hover{transform:translateY(-1px); color:var(--text)}
-
     .cta{
       padding:10px 16px;
       border-radius:999px;
       color:white;
-      font-weight:800;
+      font-weight:900;
       text-decoration:none;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       box-shadow: 0 18px 55px rgba(11,92,255,.25);
       transition:.2s;
       white-space:nowrap;
+      flex: 0 0 auto;
     }
-    .cta:hover{transform:translateY(-1px) scale(1.02)}
 
     /* Sections */
     section{padding:84px 0}
@@ -189,6 +222,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      max-width: 100%;
     }
 
     /* Hero */
@@ -210,7 +244,7 @@
     .hero-top{
       display:flex; align-items:center; gap:10px; flex-wrap:wrap;
       color:var(--muted);
-      font-weight:650;
+      font-weight:800;
     }
     .chip{
       padding:8px 12px;
@@ -219,11 +253,10 @@
       background:rgba(255,255,255,.04);
       transition:.25s;
     }
-    .chip:hover{transform:translateY(-2px); background:rgba(255,255,255,.06)}
 
     h1{
       margin:14px 0 10px;
-      font-size: clamp(38px, 5vw, 64px);
+      font-size: clamp(34px, 5vw, 64px);
       line-height:1.05;
       letter-spacing:-.8px;
     }
@@ -248,31 +281,18 @@
       background: rgba(255,255,255,.06);
       color: var(--text);
       text-decoration:none;
-      font-weight:800;
+      font-weight:900;
       transition:.2s;
       user-select:none;
       min-width: 170px;
+      height: 52px;
     }
-    .btn:hover{transform:translateY(-1px)}
     .btn.primary{
       border:none;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       box-shadow: 0 18px 55px rgba(11,92,255,.23);
       position:relative;
       overflow:hidden;
-    }
-    .btn.primary::after{
-      content:"";
-      position:absolute;
-      inset:-40% -60%;
-      background: radial-gradient(circle, rgba(255,255,255,.35), transparent 55%);
-      transform: translateX(-40%);
-      opacity:.0;
-      transition:.25s;
-    }
-    .btn.primary:hover::after{
-      opacity:.9;
-      transform: translateX(30%);
     }
 
     /* Preview */
@@ -294,7 +314,6 @@
       overflow:hidden;
       position:relative;
     }
-
     .pulse{
       width:100%; height:160px;
       border-radius: 18px;
@@ -302,16 +321,6 @@
       position:relative;
       overflow:hidden;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-    }
-    .pulse::before{
-      content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle, rgba(255,255,255,.18), transparent 55%);
-      animation: breathe 4.2s ease-in-out infinite;
-    }
-    @keyframes breathe{
-      0%,100%{transform:translate(-6%, -6%) scale(1)}
-      50%{transform:translate(6%, 6%) scale(1.02)}
     }
     .orbit{
       position:absolute;
@@ -335,38 +344,7 @@
       75%  { transform: translate(-50%,-50%) translateX(0px)   translateY(28px) rotate(0deg); }
       100% { transform: translate(-50%,-50%) translateX(-55px) translateY(0px) rotate(25deg); }
     }
-    .trail{
-      position:absolute;
-      left:50%; top:50%;
-      width:12px; height:12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.18);
-      filter: blur(2px);
-      opacity:.0;
-      animation: trail 0.35s ease-out infinite;
-      transform: translate(-50%,-50%);
-      mix-blend-mode: screen;
-    }
-    @keyframes trail{
-      0%{opacity:.55; transform:translate(-50%,-50%) scale(1)}
-      100%{opacity:0; transform:translate(-50%,-50%) scale(2.6)}
-    }
     .rocket8 svg{width:100%; height:100%; display:block}
-    .rocket8::after{
-      content:"";
-      position:absolute;
-      left:50%; top:50%;
-      width:34px; height:34px;
-      transform: translate(-50%,-50%);
-      background: radial-gradient(circle, rgba(255,255,255,.28), transparent 60%);
-      animation: flare .55s ease-in-out infinite;
-      pointer-events:none;
-      mix-blend-mode: screen;
-    }
-    @keyframes flare{
-      0%,100%{opacity:.35; transform:translate(-50%,-50%) scale(.92)}
-      50%{opacity:.75; transform:translate(-50%,-50%) scale(1.12)}
-    }
 
     .stats{
       display:grid;
@@ -379,9 +357,7 @@
       border-radius:16px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
-      transition:.25s;
     }
-    .stat:hover{transform:translateY(-2px); background:rgba(255,255,255,.06)}
     .stat b{display:block; font-size:16px}
     .stat span{color:var(--muted); font-size:13px}
 
@@ -404,23 +380,8 @@
       border-radius:18px;
       background:rgba(255,255,255,.04);
       border:1px solid var(--line);
-      transition:.2s;
       min-height: 96px;
-      position:relative;
-      overflow:hidden;
     }
-    .feature::after{
-      content:"";
-      position:absolute; inset:-60% -60%;
-      background: radial-gradient(circle, rgba(255,255,255,.14), transparent 55%);
-      opacity:0;
-      transition:.25s;
-    }
-    .feature:hover{
-      transform:translateY(-3px);
-      background:rgba(255,255,255,.06)
-    }
-    .feature:hover::after{opacity:.7}
     .feature b{display:block; margin-top:8px}
     .feature span{color:var(--muted); font-size:13.5px; line-height:1.5}
 
@@ -437,65 +398,38 @@
       background:rgba(255,255,255,.04);
       border:1px solid var(--line);
       position:relative;
-      overflow:visible;
-      transition:.22s;
       display:flex;
       flex-direction:column;
       min-height: 100%;
+      max-width: 100%;
     }
-    .plan::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius:24px;
-      padding:1px;
-      background:
-        conic-gradient(from var(--a, 0deg),
-          transparent 0 30deg,
-          var(--glowA) 60deg,
-          transparent 90deg 180deg,
-          var(--glowB) 210deg,
-          transparent 240deg 360deg);
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity:.0;
-      transition: opacity .25s;
-      pointer-events:none;
-    }
-    .plan:hover::before{opacity:.85; animation: spin 2.8s linear infinite}
-    @keyframes spin{ to{ --a: 360deg; } }
-
-    .plan:hover{
-      transform: translateY(-4px);
-      background:rgba(255,255,255,.06);
-    }
-
-    .plan .name{font-weight:900; letter-spacing:.2px}
+    .plan .name{font-weight:900}
     .price{
       margin-top:10px;
       font-size:32px;
       font-weight:950;
-      letter-spacing:-.6px;
     }
     .old{color:rgba(238,242,255,.45); text-decoration:line-through; font-weight:700}
-    .per{color:var(--muted); font-weight:650}
+    .per{color:var(--muted); font-weight:800}
     .plan ul{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.7}
 
+    /* ✅ ОДИНАКОВАЯ кнопка на всех карточках */
     .btn.buy{
       margin-top:auto;
       height: var(--btnH);
-      border-radius: 16px;
       width:100%;
       min-width: 0;
+      border-radius:16px;
+      font-weight:950;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .badge-top{
       position:absolute;
       top:-14px;
-      right:14px;
+      left:18px;         /* чуть аккуратнее в мобиле */
       padding:7px 10px;
       border-radius:999px;
       background: rgba(255,255,255,.06);
@@ -505,7 +439,6 @@
       font-size:12px;
       letter-spacing:.25px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 16px 40px rgba(0,0,0,.25);
       transform: translateY(-50%);
       white-space:nowrap;
       display:flex;
@@ -513,12 +446,6 @@
       gap:8px;
     }
     .badge-top::before{content:"✨"}
-
-    .plan.best{
-      background: linear-gradient(180deg, rgba(11,92,255,.16), rgba(255,255,255,.04));
-      border: 1px solid rgba(11,92,255,.38);
-      box-shadow: 0 20px 80px rgba(11,92,255,.18);
-    }
 
     /* FAQ */
     .faq{
@@ -531,20 +458,10 @@
       border:1px solid var(--line);
       border-radius:18px;
       padding:14px 14px;
-      transition:.25s;
     }
-    details:hover{background:rgba(255,255,255,.06)}
-    summary{
-      cursor:pointer;
-      font-weight:900;
-      list-style:none;
-    }
+    summary{cursor:pointer; font-weight:900; list-style:none}
     summary::-webkit-details-marker{display:none}
-    details p{
-      margin:10px 0 0;
-      color:var(--muted);
-      line-height:1.7;
-    }
+    details p{margin:10px 0 0; color:var(--muted); line-height:1.7}
 
     /* Footer */
     footer{
@@ -560,43 +477,13 @@
       flex-wrap:wrap;
     }
     .foot a{color:rgba(238,242,255,.65); text-decoration:none}
-    .foot a:hover{color:var(--text)}
     .tiny{font-size:13px; line-height:1.6; color:rgba(238,242,255,.52)}
 
     /* Reveal */
-    .reveal{
-      opacity:0;
-      transform: translateY(18px);
-      transition: .7s ease;
-      will-change: transform, opacity;
-    }
+    .reveal{opacity:0; transform: translateY(18px); transition: .7s ease}
     .reveal.show{opacity:1; transform:none}
 
-    /* =========================
-       ✅ MOBILE FIXES (важное)
-       1) убираем pill и cta в хедере
-       2) оставляем только лого + текст
-       ========================= */
-    @media (max-width: 520px){
-      .nav-right .pill,
-      .nav-right .cta{
-        display:none !important;   /* ← убираем на мобиле */
-      }
-
-      .nav{height:66px}
-      section{padding:70px 0}
-      .hero{padding:54px 0 40px}
-
-      .grid2{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .pricing{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr}
-      .faq{grid-template-columns:1fr}
-
-      .btn{min-width: 0; flex:1}
-      .hero-actions{display:flex}
-    }
-
+    /* Desktop / Tablet */
     @media (max-width: 980px){
       .grid2{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr 1fr}
@@ -604,16 +491,50 @@
       .faq{grid-template-columns:1fr}
     }
 
-    /* Reduced motion */
+    /* ✅ Mobile: ничего не перекрывает, карточки не вылезают */
+    @media (max-width: 520px){
+      /* 1) УБИРАЕМ ПРОБНЫЙ ПЕРИОД + ПОДКЛЮЧИТЬСЯ В ХЕДЕРЕ */
+      .pill, .cta{display:none !important;}
+
+      /* 2) ВЕРХНЕЕ МЕНЮ (Возможности/Тарифы/FAQ) — ровно и не съезжает */
+      .nav{
+        min-height:66px;
+        padding: 8px 0;
+      }
+      .nav-right{
+        gap:6px;
+        justify-content:flex-end;
+      }
+      .nav a.link{
+        padding:8px 10px;
+        font-size:13px;
+        border-radius:10px;
+      }
+
+      /* 3) HERO кнопки — 2 колонки ровно */
+      .hero-actions{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:10px;
+      }
+      .btn{min-width:0; width:100%}
+
+      /* 4) КАРТОЧКИ ТАРИФОВ — 1 колонка, ничего не вылезает */
+      .pricing{grid-template-columns:1fr}
+      .plan{width:100%}
+      .wrap{padding:0 14px}
+      section{padding:70px 0}
+      .hero{padding:54px 0 40px}
+
+      /* 5) Блок статистики — 1 колонка */
+      .stats{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .reveal{transition:none}
-      .pulse::before{animation:none}
       .rocket8{animation:none}
-      .rocket8::after{animation:none}
-      .trail{display:none}
-      .btn.primary::after{display:none}
-      .plan:hover::before{animation:none}
     }
   </style>
 </head>
@@ -640,7 +561,7 @@
           <a class="link" href="#pricing">Тарифы</a>
           <a class="link" href="#faq">FAQ</a>
 
-          <!-- ✅ На мобиле скрываются (см. media max-width:520px) -->
+          <!-- На мобиле скрыто -->
           <a class="pill" href="#pricing">🎁 Пробный период</a>
           <a class="cta" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
         </div>
@@ -658,7 +579,7 @@
             <span class="chip">📱 iOS / Android / ПК</span>
           </div>
 
-          <h1>Быстрый VPN для приватности и стабильного доступа.</h1>
+          <h1>VPN сервис для приватности и стабильного доступа.</h1>
           <p class="sub">
             WolfPN помогает защитить трафик, скрыть IP и работать в интернете уверенно.
             Подключение — в один клик.
@@ -674,8 +595,6 @@
           <div class="mock">
             <div class="pulse" aria-hidden="true">
               <div class="orbit" aria-hidden="true"></div>
-              <div class="trail" aria-hidden="true"></div>
-
               <div class="rocket8" aria-hidden="true">
                 <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M36 6c10 3 18 11 21 21-7 4-14 7-22 8-2-8-1-19 1-29Z" fill="rgba(255,255,255,.92)"/>
@@ -716,19 +635,19 @@
         <div class="title reveal">
           <div>
             <h2>Возможности WolfPN</h2>
-            <p>Ставка на скорость, приватность и комфорт. Всё аккуратно и понятно.</p>
+            <p>Скорость, приватность и комфорт — всё в одном VPN сервисе.</p>
           </div>
         </div>
 
         <div class="grid">
-          <div class="feature reveal">🚀 <b>Высокая скорость</b><span>Стабильная работа для повседневных задач и видео.</span></div>
-          <div class="feature reveal">🔒 <b>Шифрование</b><span>Защита трафика в публичных сетях и дома.</span></div>
-          <div class="feature reveal">🌍 <b>Локации</b><span>Выбор сервера под нужный сценарий.</span></div>
-          <div class="feature reveal">📶 <b>Стабильность</b><span>Автоподключение при разрывах связи.</span></div>
-          <div class="feature reveal">🎥 <b>Стриминг</b><span>Подходит для видео и онлайн-сервисов.</span></div>
-          <div class="feature reveal">⚡️ <b>Без ограничений</b><span>Комфортное использование каждый день.</span></div>
-          <div class="feature reveal">🎁 <b>Пробный период</b><span>Можно оценить сервис перед покупкой.</span></div>
-          <div class="feature reveal">✔️ <b>Один клик</b><span>Минимум настроек — максимум результата.</span></div>
+          <div class="feature reveal">🚀 <b>Быстрый VPN</b><span>Комфортная скорость для работы и видео.</span></div>
+          <div class="feature reveal">🔒 <b>Безопасность</b><span>Шифрование трафика и защита данных.</span></div>
+          <div class="feature reveal">🌍 <b>Локации</b><span>Выбор серверов под разные задачи.</span></div>
+          <div class="feature reveal">📶 <b>Стабильность</b><span>Надёжное соединение каждый день.</span></div>
+          <div class="feature reveal">🎥 <b>Стриминг</b><span>Просмотр видео без лишних задержек.</span></div>
+          <div class="feature reveal">⚡️ <b>Без ограничений</b><span>Подходит для повседневного использования.</span></div>
+          <div class="feature reveal">🎁 <b>Пробный период</b><span>Оценка сервиса перед покупкой.</span></div>
+          <div class="feature reveal">✔️ <b>Один клик</b><span>Простое подключение через Telegram.</span></div>
         </div>
       </div>
     </section>
@@ -738,7 +657,7 @@
         <div class="title reveal">
           <div>
             <h2>Тарифы</h2>
-            <p>Выберите срок — и подключайтесь через Telegram-бота.</p>
+            <p>Подключение через Telegram-бота: выберите срок и нажмите “Подключиться”.</p>
           </div>
         </div>
 
@@ -768,7 +687,7 @@
             <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
           </div>
 
-          <div class="plan best reveal">
+          <div class="plan reveal">
             <div class="badge-top">РЕКОМЕНДУЕМ</div>
             <div class="name">6 месяцев + 🎁 1 месяц</div>
             <div class="old">1743 ₽</div>
@@ -803,26 +722,26 @@
         <div class="title reveal">
           <div>
             <h2>FAQ</h2>
-            <p>Ответы на частые вопросы о работе VPN.</p>
+            <p>Частые вопросы о VPN сервисе WolfPN.</p>
           </div>
         </div>
 
         <div class="faq">
           <details class="reveal">
-            <summary>Законно ли использовать VPN?</summary>
-            <p>В большинстве стран использование VPN разрешено. Если для вас это важно — проверьте правила вашей юрисдикции.</p>
+            <summary>Как подключиться?</summary>
+            <p>Нажмите “Подключиться” — откроется Telegram-бот, он подскажет дальнейшие шаги.</p>
+          </details>
+          <details class="reveal">
+            <summary>Подходит ли для видео?</summary>
+            <p>Да, VPN подходит для стриминга. Скорость зависит от сервера и вашей сети.</p>
+          </details>
+          <details class="reveal">
+            <summary>Какие устройства поддерживаются?</summary>
+            <p>iOS, Android, Windows, macOS.</p>
           </details>
           <details class="reveal">
             <summary>Безопасно ли соединение?</summary>
-            <p>VPN шифрует трафик между устройством и сервером — это снижает риски при использовании публичных Wi-Fi сетей.</p>
-          </details>
-          <details class="reveal">
-            <summary>Подойдёт ли для видео?</summary>
-            <p>Да, сервис оптимизирован под повседневные сценарии. Скорость зависит от выбранного сервера и вашей сети.</p>
-          </details>
-          <details class="reveal">
-            <summary>Как подключиться?</summary>
-            <p>Нажмите “Подключиться” — откроется Telegram-бот, дальше он подскажет шаги.</p>
+            <p>VPN шифрует трафик между устройством и сервером, снижая риски в публичных сетях.</p>
           </details>
         </div>
       </div>
@@ -832,54 +751,19 @@
       <div class="wrap foot">
         <div>
           <div style="font-weight:950; letter-spacing:.2px">© 2025 WolfPN</div>
-          <div class="tiny">WolfPN — VPN сервис для приватности, защиты данных и стабильного доступа.</div>
-        </div>
-        <div class="tiny">
-          <a href="#top">Наверх</a> ·
-          <a href="/privacy.html">Политика</a> ·
-          <a href="/terms.html">Условия</a>
+          <div class="tiny">WolfPN — VPN сервис: приватность, защита данных, стабильный доступ.</div>
         </div>
       </div>
     </footer>
   </main>
 
   <script>
-    // Reveal on scroll
     const obs = new IntersectionObserver((entries)=>{
       for(const e of entries){
         if(e.isIntersecting) e.target.classList.add("show");
       }
     }, {threshold: 0.15});
     document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
-
-    // След за ракетой
-    (function(){
-      const rocket = document.querySelector(".rocket8");
-      const trail  = document.querySelector(".trail");
-      const pulse  = document.querySelector(".pulse");
-      if(!rocket || !trail || !pulse) return;
-
-      const moveTrail = () => {
-        const r = rocket.getBoundingClientRect();
-        const p = pulse.getBoundingClientRect();
-        const cx = (r.left - p.left) + r.width/2;
-        const cy = (r.top - p.top) + r.height/2;
-
-        trail.style.left = cx + "px";
-        trail.style.top  = cy + "px";
-
-        requestAnimationFrame(moveTrail);
-      };
-      requestAnimationFrame(moveTrail);
-    })();
-
-    // PWA SW
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").catch(()=>{});
-      });
-    }
   </script>
 </body>
 </html>
-

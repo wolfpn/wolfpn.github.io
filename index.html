@@ -1,251 +1,903 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b5cff" />
+  <meta name="color-scheme" content="dark" />
 
-<title>WolfPN — VPN сервис для безопасного и быстрого интернета</title>
+  <!-- ✅ SEO -->
+  <title>WolfPN — быстрый и безопасный VPN | iOS, Android, Windows, macOS</title>
+  <meta name="description" content="WolfPN — быстрый VPN для защиты данных и анонимности. Стабильное соединение, простой запуск, поддержка iOS, Android, Windows, macOS. Попробуйте WolfPN." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://wolfpn.github.io/" />
+  <link rel="alternate" href="https://wolfpn.github.io/" hreflang="ru" />
 
-<meta name="description" content="WolfPN — VPN-сервис для защиты данных, анонимности и стабильного доступа к интернету. Поддержка iOS, Android, Windows, macOS. Бесплатный пробный период.">
+  <!-- Open Graph -->
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="WolfPN — быстрый и безопасный VPN" />
+  <meta property="og:description" content="Защита данных, анонимность и стабильный доступ. iOS, Android, Windows, macOS." />
+  <meta property="og:url" content="https://wolfpn.github.io/" />
+  <meta property="og:image" content="https://wolfpn.github.io/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WolfPN — быстрый и безопасный VPN" />
+  <meta name="twitter:description" content="Защита данных, анонимность и стабильный доступ. iOS, Android, Windows, macOS." />
+  <meta name="twitter:image" content="https://wolfpn.github.io/og.jpg" />
 
-<link rel="icon" href="favicon.ico">
+  <!-- Icons / PWA -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Segoe UI,Arial,sans-serif;
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
-html{scroll-behavior:smooth}
+  <!-- ✅ Structured Data (Google/Yandex понимают) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"WolfPN",
+    "url":"https://wolfpn.github.io/",
+    "logo":"https://wolfpn.github.io/wolf.png"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"WolfPN",
+    "url":"https://wolfpn.github.io/",
+    "inLanguage":"ru-RU"
+  }
+  </script>
 
-/* ===== BACKGROUND ===== */
-.bg{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 20%,rgba(0,80,255,.15),transparent 40%),
-    radial-gradient(circle at 70% 80%,rgba(0,120,255,.12),transparent 45%),
-    #000;
-  z-index:-1;
-}
+  <style>
+    :root{
+      --bg:#05070d;
+      --text:#eef2ff;
+      --muted:rgba(238,242,255,.72);
+      --line:rgba(255,255,255,.10);
 
-/* ===== LOADER ===== */
-#loader{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  z-index:9999;
-}
-.loader{
-  width:70px;height:70px;
-  border:3px solid #222;
-  border-top:3px solid #0af;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-#loader span{margin-top:16px;color:#aaa;letter-spacing:2px}
-@keyframes spin{to{transform:rotate(360deg)}}
+      --brand:#0b5cff;
+      --brand2:#18d0c4;
 
-/* ===== SECTIONS ===== */
-section{
-  max-width:1200px;
-  margin:auto;
-  padding:100px 20px;
-  opacity:0;
-  transform:translateY(40px);
-  transition:.8s ease;
-}
-section.show{opacity:1;transform:none}
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+      --radius2: 16px;
+      --max: 1120px;
 
-/* ===== HERO ===== */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  gap:26px;
-}
+      --btnH: 52px;
 
-.logo{
-  width:260px;height:260px;
-  border-radius:50%;
-  box-shadow:0 0 120px rgba(0,120,255,.8);
-}
-.logo img{width:100%;height:100%;object-fit:cover}
+      --glowA: rgba(11,92,255,.65);
+      --glowB: rgba(24,208,196,.55);
+    }
 
-h1{
-  font-size:64px;
-  text-shadow:0 0 30px rgba(0,120,255,.9);
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x:hidden;
+    }
 
-.hero p{
-  max-width:900px;
-  color:#ccc;
-  line-height:1.7;
-  font-size:18px;
-}
+    /* Background */
+    .bg{
+      position:fixed; inset:0; z-index:-4;
+      background:
+        radial-gradient(900px 500px at 20% 15%, rgba(11,92,255,.22), transparent 55%),
+        radial-gradient(900px 600px at 80% 85%, rgba(24,208,196,.16), transparent 55%),
+        radial-gradient(700px 450px at 70% 20%, rgba(11,92,255,.10), transparent 55%),
+        linear-gradient(180deg, #040611 0%, #05070d 65%, #040611 100%);
+    }
+    .noise{
+      position:fixed; inset:0; z-index:-3;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      opacity:.06;
+      mix-blend-mode: overlay;
+    }
+    .floaters{
+      position:fixed; inset:0; z-index:-2;
+      pointer-events:none;
+      filter: blur(18px);
+      opacity:.45;
+    }
+    .floater{
+      position:absolute;
+      width:320px; height:320px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(11,92,255,.25), transparent 60%);
+      animation: floaty 10s ease-in-out infinite;
+      left:-80px; top:80px;
+    }
+    .floater.f2{
+      width:380px; height:380px;
+      left:auto; right:-100px; top:44%;
+      background: radial-gradient(circle, rgba(24,208,196,.18), transparent 60%);
+      animation-duration: 12s;
+    }
+    @keyframes floaty{
+      0%,100%{transform:translate(-30px,-20px)}
+      50%{transform:translate(30px,20px)}
+    }
 
-.btn{
-  margin-top:30px;
-  padding:22px 70px;
-  font-size:18px;
-  font-weight:700;
-  background:linear-gradient(135deg,#005cff,#0aa);
-  border-radius:18px;
-  color:#fff;
-  text-decoration:none;
-  transition:.3s;
-}
-.btn:hover{transform:scale(1.06)}
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(5,7,13,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      height:72px;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color:var(--text);
+      min-width: 200px;
+    }
+    .avatar{
+      width:44px; height:44px; border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 55px rgba(11,92,255,.22);
+      background: linear-gradient(135deg, rgba(11,92,255,.9), rgba(24,208,196,.75));
+      flex: 0 0 auto;
+      transform: translateZ(0);
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    .brand strong{letter-spacing:.4px}
+    .brand small{display:block; color:rgba(238,242,255,.55); font-size:12px; font-weight:650}
 
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:26px;
-}
-.card{
-  background:rgba(255,255,255,.05);
-  border-radius:22px;
-  padding:30px;
-  text-align:center;
-  transition:.3s;
-}
-.card:hover{transform:translateY(-8px)}
+    .nav a.link{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      padding:10px 12px;
+      border-radius:12px;
+      transition: .2s;
+      white-space:nowrap;
+    }
+    .nav a.link:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .nav-right{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end}
 
-.price{font-size:34px;font-weight:800}
-.old{color:#777;text-decoration:line-through}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-weight:650;
+      text-decoration:none;
+      transition:.2s;
+      white-space:nowrap;
+    }
+    .pill:hover{transform:translateY(-1px); color:var(--text)}
 
-/* ===== FAQ ===== */
-.faq{max-width:900px;margin:auto}
-.faq-item{
-  background:rgba(255,255,255,.05);
-  border-radius:16px;
-  padding:22px;
-  margin-bottom:18px;
-}
+    .cta{
+      padding:10px 16px;
+      border-radius:999px;
+      color:white;
+      font-weight:800;
+      text-decoration:none;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 18px 55px rgba(11,92,255,.25);
+      transition:.2s;
+      white-space:nowrap;
+    }
+    .cta:hover{transform:translateY(-1px) scale(1.02)}
 
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:40px 20px;
-  color:#666;
-}
+    /* Sections */
+    section{padding:84px 0}
+    .hero{padding:70px 0 56px}
+    .grid2{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:stretch}
 
-/* ===== MOBILE ===== */
-@media(max-width:900px){
-  h1{font-size:44px}
-  .grid{grid-template-columns:1fr}
-  .logo{width:200px;height:200px}
-  section{padding:70px 16px}
-}
-</style>
+    .card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* Hero */
+    .hero-card{
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(650px 260px at 20% 10%, rgba(11,92,255,.22), transparent 55%),
+                  radial-gradient(550px 260px at 70% 20%, rgba(24,208,196,.12), transparent 55%);
+      filter: blur(10px);
+      z-index:0;
+    }
+    .hero-card > *{position:relative; z-index:1}
+
+    .hero-top{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      color:var(--muted);
+      font-weight:650;
+    }
+    .chip{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      transition:.25s;
+    }
+    .chip:hover{transform:translateY(-2px); background:rgba(255,255,255,.06)}
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size: 16.8px;
+      max-width: 62ch;
+    }
+    .hero-actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 18px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-weight:800;
+      transition:.2s;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 18px 55px rgba(11,92,255,.23);
+      position:relative;
+      overflow:hidden;
+    }
+    .btn.primary::after{
+      content:"";
+      position:absolute;
+      inset:-40% -60%;
+      background: radial-gradient(circle, rgba(255,255,255,.35), transparent 55%);
+      transform: translateX(-40%);
+      opacity:.0;
+      transition:.25s;
+    }
+    .btn.primary:hover::after{
+      opacity:.9;
+      transform: translateX(30%);
+    }
+
+    /* Preview */
+    .preview{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height: 100%;
+      gap:14px;
+    }
+    .mock{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background:
+        radial-gradient(700px 220px at 30% 0%, rgba(11,92,255,.20), transparent 55%),
+        rgba(255,255,255,.03);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .pulse{
+      width:100%; height:160px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(11,92,255,.55), rgba(24,208,196,.35));
+      position:relative;
+      overflow:hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .pulse::before{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle, rgba(255,255,255,.18), transparent 55%);
+      animation: breathe 4.2s ease-in-out infinite;
+    }
+    @keyframes breathe{
+      0%,100%{transform:translate(-6%, -6%) scale(1)}
+      50%{transform:translate(6%, 6%) scale(1.02)}
+    }
+
+    /* орбита + восьмёрка */
+    .orbit{
+      position:absolute;
+      inset:12px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255,255,255,.16);
+      opacity:.45;
+    }
+
+    /* Ракета по восьмёрке */
+    .rocket8{
+      position:absolute;
+      left:50%; top:50%;
+      width:34px; height:34px;
+      transform: translate(-50%,-50%);
+      animation: eight 3.8s linear infinite;
+      filter: drop-shadow(0 10px 18px rgba(11,92,255,.35));
+    }
+    @keyframes eight{
+      0%   { transform: translate(-50%,-50%) translateX(-55px) translateY(0px) rotate(25deg); }
+      25%  { transform: translate(-50%,-50%) translateX(0px)   translateY(-28px) rotate(0deg); }
+      50%  { transform: translate(-50%,-50%) translateX(55px)  translateY(0px) rotate(-25deg); }
+      75%  { transform: translate(-50%,-50%) translateX(0px)   translateY(28px) rotate(0deg); }
+      100% { transform: translate(-50%,-50%) translateX(-55px) translateY(0px) rotate(25deg); }
+    }
+
+    /* след */
+    .trail{
+      position:absolute;
+      left:50%; top:50%;
+      width:12px; height:12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.18);
+      filter: blur(2px);
+      opacity:.0;
+      animation: trail 0.35s ease-out infinite;
+      transform: translate(-50%,-50%);
+      mix-blend-mode: screen;
+    }
+    @keyframes trail{
+      0%{opacity:.55; transform:translate(-50%,-50%) scale(1)}
+      100%{opacity:0; transform:translate(-50%,-50%) scale(2.6)}
+    }
+
+    .rocket8 svg{width:100%; height:100%; display:block}
+    .rocket8::after{
+      content:"";
+      position:absolute;
+      left:50%; top:50%;
+      width:34px; height:34px;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle, rgba(255,255,255,.28), transparent 60%);
+      animation: flare .55s ease-in-out infinite;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+    @keyframes flare{
+      0%,100%{opacity:.35; transform:translate(-50%,-50%) scale(.92)}
+      50%{opacity:.75; transform:translate(-50%,-50%) scale(1.12)}
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    .stat{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      transition:.25s;
+    }
+    .stat:hover{transform:translateY(-2px); background:rgba(255,255,255,.06)}
+    .stat b{display:block; font-size:16px}
+    .stat span{color:var(--muted); font-size:13px}
+
+    /* Titles */
+    .title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-bottom:16px;
+    }
+    .title h2{margin:0; font-size: 26px; letter-spacing:-.3px}
+    .title p{margin:0; color:var(--muted); max-width:60ch; line-height:1.6}
+
+    /* Features */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+    }
+    .feature{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      transition:.2s;
+      min-height: 96px;
+      position:relative;
+      overflow:hidden;
+    }
+    .feature::after{
+      content:"";
+      position:absolute; inset:-60% -60%;
+      background: radial-gradient(circle, rgba(255,255,255,.14), transparent 55%);
+      opacity:0;
+      transition:.25s;
+    }
+    .feature:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.06)
+    }
+    .feature:hover::after{opacity:.7}
+    .feature b{display:block; margin-top:8px}
+    .feature span{color:var(--muted); font-size:13.5px; line-height:1.5}
+
+    /* Pricing */
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      align-items:stretch;
+    }
+    .plan{
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      position:relative;
+      overflow:visible;
+      transition:.22s;
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+      transform: translateZ(0);
+    }
+
+    /* ✅ Неоновая “движущаяся” обводка */
+    .plan::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:24px;
+      padding:1px;
+      background:
+        conic-gradient(from var(--a, 0deg),
+          transparent 0 30deg,
+          var(--glowA) 60deg,
+          transparent 90deg 180deg,
+          var(--glowB) 210deg,
+          transparent 240deg 360deg);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity:.0;
+      filter: blur(.3px);
+      transition: opacity .25s;
+      pointer-events:none;
+    }
+    .plan:hover::before{opacity:.85; animation: spin 2.8s linear infinite}
+    @keyframes spin{
+      to{ --a: 360deg; }
+    }
+
+    .plan:hover{
+      transform: translateY(-4px);
+      background:rgba(255,255,255,.06);
+    }
+
+    .plan .name{font-weight:900; letter-spacing:.2px}
+    .price{
+      margin-top:10px;
+      font-size:32px;
+      font-weight:950;
+      letter-spacing:-.6px;
+    }
+    .old{color:rgba(238,242,255,.45); text-decoration:line-through; font-weight:700}
+    .per{color:var(--muted); font-weight:650}
+    .plan ul{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.7}
+
+    .plan .buy{
+      margin-top:auto;
+      height: var(--btnH);
+      border-radius: 16px;
+      width:100%;
+    }
+
+    .badge-top{
+      position:absolute;
+      top:-14px;
+      right:14px;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.16);
+      color:#d8e6ff;
+      font-weight:950;
+      font-size:12px;
+      letter-spacing:.25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transform: translateY(-50%);
+      white-space:nowrap;
+    }
+    .badge-top::before{content:"✨"}
+
+    .plan.best{
+      background: linear-gradient(180deg, rgba(11,92,255,.16), rgba(255,255,255,.04));
+      border: 1px solid rgba(11,92,255,.38);
+      box-shadow: 0 20px 80px rgba(11,92,255,.18);
+    }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    details{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px 14px;
+      transition:.25s;
+    }
+    details:hover{background:rgba(255,255,255,.06)}
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    /* Footer */
+    footer{
+      padding:34px 0 48px;
+      color:rgba(238,242,255,.52);
+      border-top:1px solid var(--line);
+    }
+    .foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .foot a{color:rgba(238,242,255,.65); text-decoration:none}
+    .foot a:hover{color:var(--text)}
+    .tiny{font-size:13px; line-height:1.6; color:rgba(238,242,255,.52)}
+
+    /* Reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+      transition: .7s ease;
+      will-change: transform, opacity;
+    }
+    .reveal.show{opacity:1; transform:none}
+
+    /* Mobile */
+    @media (max-width: 980px){
+      .grid2{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .pricing{grid-template-columns:1fr 1fr}
+      .faq{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
+      .nav a.link{display:none}
+      .grid{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{transition:none}
+      .pulse::before{animation:none}
+      .rocket8{animation:none}
+      .rocket8::after{animation:none}
+      .trail{display:none}
+      .btn.primary::after{display:none}
+      .plan:hover::before{animation:none}
+    }
+  </style>
 </head>
 
 <body>
-
-<div class="bg"></div>
-
-<div id="loader">
-  <div class="loader"></div>
-  <span>CONNECTING…</span>
-</div>
-
-<section class="hero show">
-  <div class="logo">
-    <img src="wolf.png" alt="WolfPN VPN логотип" loading="lazy">
+  <div class="bg"></div>
+  <div class="noise"></div>
+  <div class="floaters" aria-hidden="true">
+    <div class="floater"></div>
+    <div class="floater f2"></div>
   </div>
 
-  <h1>WolfPN</h1>
+  <header>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="brand" href="#top" aria-label="WolfPN">
+          <div class="avatar">
+            <img src="/wolf.png" alt="WolfPN" loading="lazy">
+          </div>
+          <div>
+            <strong>WolfPN</strong>
+            <small>Secure VPN</small>
+          </div>
+        </a>
 
-  <p>
-    WolfPN — это цифровой сервис для защиты данных, безопасного доступа
-    к интернету и стабильного соединения. Современные технологии
-    информационной безопасности доступны каждому.
-  </p>
+        <div class="nav-right">
+          <a class="link" href="#features">Возможности</a>
+          <a class="link" href="#pricing">Тарифы</a>
+          <a class="link" href="#faq">FAQ</a>
+          <a class="pill" href="#pricing">🎁 Пробный период</a>
+          <a class="cta" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <a href="#pricing" class="btn">Подключиться</a>
-</section>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap grid2">
+        <div class="card hero-card reveal">
+          <div class="hero-top">
+            <span class="chip">🔐 Защита данных</span>
+            <span class="chip">⚡ Высокая скорость</span>
+            <span class="chip">📱 iOS / Android / ПК</span>
+          </div>
 
-<section>
-<h2>Почему выбирают WolfPN</h2>
-<div class="grid">
-  <div class="card">🚀 Высокая скорость</div>
-  <div class="card">📹 Видео без рекламы</div>
-  <div class="card">⚡️ Без ограничений</div>
-  <div class="card">📶 Стабильное подключение</div>
-  <div class="card">🌍 Большой выбор локаций</div>
-  <div class="card">✔️ Запуск в один клик</div>
-  <div class="card">🎁 Бесплатный пробный период</div>
-  <div class="card">🔐 Полная конфиденциальность</div>
-</div>
-</section>
+          <h1>Быстрый VPN для приватности и стабильного доступа.</h1>
+          <p class="sub">
+            WolfPN помогает защитить трафик, скрыть IP и работать в интернете уверенно.
+            Подключение — в один клик.
+          </p>
 
-<section id="pricing">
-<h2>Подписка</h2>
-<div class="grid">
-  <div class="card">
-    <h3>1️⃣ месяц</h3>
-    <div class="price">249 ₽</div>
-  </div>
+          <div class="hero-actions">
+            <a class="btn primary" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">🚀 Начать</a>
+            <a class="btn" href="#features">Возможности</a>
+          </div>
+        </div>
 
-  <div class="card">
-    <h3>3️⃣ месяца</h3>
-    <div class="old">747 ₽</div>
-    <div class="price">699 ₽</div>
-    <small>233 ₽ / мес</small>
-  </div>
+        <div class="card preview reveal">
+          <div class="mock">
+            <div class="pulse" aria-hidden="true">
+              <div class="orbit" aria-hidden="true"></div>
+              <div class="trail" aria-hidden="true"></div>
 
-  <div class="card">
-    <h3>6️⃣ месяцев + 🎁 1 месяц</h3>
-    <div class="old">1743 ₽</div>
-    <div class="price">1299 ₽</div>
-    <small>216 ₽ / мес</small>
-  </div>
+              <!-- ракета по восьмёрке -->
+              <div class="rocket8" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M36 6c10 3 18 11 21 21-7 4-14 7-22 8-2-8-1-19 1-29Z" fill="rgba(255,255,255,.92)"/>
+                  <path d="M27 15c-6 10-8 24-6 34 10 2 24 0 34-6-4-6-9-11-15-15-4-4-9-9-13-13Z" fill="rgba(11,92,255,.95)"/>
+                  <path d="M18 46l-6 10 12-6c-2-1-4-2-6-4Z" fill="rgba(24,208,196,.95)"/>
+                  <circle cx="40" cy="24" r="6" fill="rgba(255,255,255,.92)"/>
+                  <circle cx="40" cy="24" r="3" fill="rgba(5,7,13,.9)"/>
+                </svg>
+              </div>
+            </div>
 
-  <div class="card">
-    <h3>1️⃣2️⃣ месяцев + 🎁 3 месяца</h3>
-    <div class="old">3735 ₽</div>
-    <div class="price">2399 ₽</div>
-    <small>199 ₽ / мес</small>
-  </div>
-</div>
-</section>
+            <div class="stats">
+              <div class="stat">
+                <b>1 клик</b>
+                <span>подключение</span>
+              </div>
+              <div class="stat">
+                <b>0 логов*</b>
+                <span>конфиденциальность</span>
+              </div>
+              <div class="stat">
+                <b>Стриминг</b>
+                <span>без буфера</span>
+              </div>
+            </div>
+          </div>
 
-<section>
-<h2>❓ FAQ</h2>
-<div class="faq">
-  <div class="faq-item"><b>Законно ли использовать WolfPN?</b><br>Да, использование VPN разрешено.</div>
-  <div class="faq-item"><b>Вы храните логи?</b><br>Нет, мы не ведём логи активности.</div>
-  <div class="faq-item"><b>Безопасно ли соединение?</b><br>Используется современное шифрование.</div>
-  <div class="faq-item"><b>Подходит ли для видео?</b><br>Да, сервис оптимизирован для стриминга.</div>
-  <div class="faq-item"><b>Нужны ли знания?</b><br>Нет, всё работает в один клик.</div>
-</div>
-</section>
+          <div class="tiny">
+            Платформы: iOS, Android, Windows, macOS.<br/>
+            Поддержка: 24/7 • Обновления: регулярно
+          </div>
+        </div>
+      </div>
+    </section>
 
-<footer>
-© 2025 WolfPN
-</footer>
+    <section id="features">
+      <div class="wrap">
+        <div class="title reveal">
+          <div>
+            <h2>Возможности WolfPN</h2>
+            <p>Ставка на скорость, приватность и комфорт. Всё аккуратно и понятно.</p>
+          </div>
+        </div>
 
-<script>
-setTimeout(()=>{
-  document.getElementById("loader").style.display="none";
-},2000);
+        <div class="grid">
+          <div class="feature reveal">🚀 <b>Высокая скорость</b><span>Стабильная работа для повседневных задач и видео.</span></div>
+          <div class="feature reveal">🔒 <b>Шифрование</b><span>Защита трафика в публичных сетях и дома.</span></div>
+          <div class="feature reveal">🌍 <b>Локации</b><span>Выбор сервера под нужный сценарий.</span></div>
+          <div class="feature reveal">📶 <b>Стабильность</b><span>Автоподключение при разрывах связи.</span></div>
+          <div class="feature reveal">🎥 <b>Стриминг</b><span>Подходит для просмотра видео и онлайн-сервисов.</span></div>
+          <div class="feature reveal">⚡️ <b>Без ограничений</b><span>Комфортное использование каждый день.</span></div>
+          <div class="feature reveal">🎁 <b>Пробный период</b><span>Можно оценить сервис перед покупкой.</span></div>
+          <div class="feature reveal">✔️ <b>Один клик</b><span>Минимум настроек — максимум результата.</span></div>
+        </div>
+      </div>
+    </section>
 
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
-},{threshold:.15});
-document.querySelectorAll("section").forEach(s=>obs.observe(s));
-</script>
+    <section id="pricing">
+      <div class="wrap">
+        <div class="title reveal">
+          <div>
+            <h2>Тарифы</h2>
+            <p>Выберите срок — и подключайтесь через Telegram-бота.</p>
+          </div>
+        </div>
 
+        <div class="pricing">
+          <div class="plan reveal">
+            <div class="name">1 месяц</div>
+            <div class="price">249 ₽</div>
+            <div class="per">Оплата раз в месяц</div>
+            <ul>
+              <li>Все функции</li>
+              <li>Поддержка 24/7</li>
+              <li>Любые устройства</li>
+            </ul>
+            <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+          </div>
+
+          <div class="plan reveal">
+            <div class="name">3 месяца</div>
+            <div class="old">747 ₽</div>
+            <div class="price">699 ₽</div>
+            <div class="per">≈ 233 ₽ / мес</div>
+            <ul>
+              <li>Экономия</li>
+              <li>Все функции</li>
+              <li>Любые устройства</li>
+            </ul>
+            <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+          </div>
+
+          <div class="plan best reveal">
+            <div class="badge-top">РЕКОМЕНДУЕМ</div>
+            <div class="name">6 месяцев + 🎁 1 месяц</div>
+            <div class="old">1743 ₽</div>
+            <div class="price">1299 ₽</div>
+            <div class="per">≈ 216 ₽ / мес</div>
+            <ul>
+              <li>Лучшее соотношение цены</li>
+              <li>Подарочный месяц</li>
+              <li>Приоритетная поддержка</li>
+            </ul>
+            <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+          </div>
+
+          <div class="plan reveal">
+            <div class="name">12 месяцев + 🎁 3 месяца</div>
+            <div class="old">3735 ₽</div>
+            <div class="price">2399 ₽</div>
+            <div class="per">≈ 199 ₽ / мес</div>
+            <ul>
+              <li>Максимальная выгода</li>
+              <li>3 месяца в подарок</li>
+              <li>Все функции</li>
+            </ul>
+            <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:14px; padding:16px; border-radius:18px; background:rgba(255,255,255,.04); border:1px solid var(--line)">
+          <div class="tiny">
+            *Уточнения по “0 логов” лучше оформить в отдельной странице политики конфиденциальности.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="title reveal">
+          <div>
+            <h2>FAQ</h2>
+            <p>Ответы на частые вопросы о работе VPN.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>Законно ли использовать VPN?</summary>
+            <p>В большинстве стран использование VPN разрешено. Если для вас это важно — проверьте правила вашей юрисдикции.</p>
+          </details>
+          <details class="reveal">
+            <summary>Вы храните логи?</summary>
+            <p>Это лучше подтверждать прозрачной политикой конфиденциальности: какие данные не собираются и что может логироваться технически.</p>
+          </details>
+          <details class="reveal">
+            <summary>Безопасно ли соединение?</summary>
+            <p>VPN шифрует трафик между устройством и сервером — это снижает риски при использовании публичных Wi-Fi сетей.</p>
+          </details>
+          <details class="reveal">
+            <summary>Подойдёт ли для видео?</summary>
+            <p>Да, сервис оптимизирован под повседневные сценарии. Скорость зависит от выбранного сервера и качества вашей сети.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap foot">
+        <div>
+          <div style="font-weight:950; letter-spacing:.2px">© 2025 WolfPN</div>
+          <div class="tiny">WolfPN — VPN сервис для приватности, защиты данных и стабильного доступа.</div>
+        </div>
+        <div class="tiny">
+          <a href="#top">Наверх</a> ·
+          <a href="/privacy.html">Политика</a> ·
+          <a href="/terms.html">Условия</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Reveal on scroll
+    const obs = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting) e.target.classList.add("show");
+      }
+    }, {threshold: 0.15});
+    document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+
+    // "след" для ракеты: переносим trail к позиции ракеты
+    (function(){
+      const rocket = document.querySelector(".rocket8");
+      const trail  = document.querySelector(".trail");
+      const pulse  = document.querySelector(".pulse");
+      if(!rocket || !trail || !pulse) return;
+
+      const moveTrail = () => {
+        const r = rocket.getBoundingClientRect();
+        const p = pulse.getBoundingClientRect();
+        const cx = (r.left - p.left) + r.width/2;
+        const cy = (r.top - p.top) + r.height/2;
+
+        trail.style.left = cx + "px";
+        trail.style.top  = cy + "px";
+
+        requestAnimationFrame(moveTrail);
+      };
+      requestAnimationFrame(moveTrail);
+    })();
+
+    // PWA SW
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(()=>{});
+      });
+    }
+  </script>
 </body>
-</html>  
+</html>

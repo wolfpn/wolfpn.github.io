@@ -167,7 +167,7 @@
       z-index:1;
     }
 
-    /* ✅ гирлянда: НЕ ДВИГАЕТСЯ (убрали sway), только мерцание ламп */
+    /* ✅ ГИРЛЯНДА: ПОЛНОСТЬЮ СТАТИЧНАЯ (точки НЕ анимируются) */
     .garlandStrip{
       position:absolute;
       left:0; right:0;
@@ -185,9 +185,8 @@
         drop-shadow(0 14px 34px rgba(255,190,120,.20))
         drop-shadow(0 12px 30px rgba(255,150,90,.12));
       opacity: 1;
-      transform: none; /* фиксируем */
+      transform: none;
     }
-
     .garlandStrip::before{
       content:"";
       position:absolute;
@@ -204,11 +203,8 @@
       filter:
         drop-shadow(0 8px 18px rgba(255,214,140,.22))
         drop-shadow(0 10px 26px rgba(255,165,100,.12));
-      animation: bulbsTwinkleA 1.85s ease-in-out infinite, bulbsDrift 7.5s linear infinite;
-      will-change: opacity, filter, background-position;
-      mix-blend-mode: screen;
+      animation: none !important;
     }
-
     .garlandStrip::after{
       content:"";
       position:absolute;
@@ -225,22 +221,7 @@
       filter:
         drop-shadow(0 8px 18px rgba(255,230,170,.14))
         drop-shadow(0 10px 26px rgba(255,160,100,.10));
-      animation: bulbsTwinkleB 2.05s ease-in-out infinite, bulbsDrift 7.5s linear infinite reverse;
-      will-change: opacity, filter, background-position;
-      mix-blend-mode: screen;
-    }
-
-    @keyframes bulbsTwinkleA{
-      0%,100%{opacity:.92}
-      50%{opacity:.55}
-    }
-    @keyframes bulbsTwinkleB{
-      0%,100%{opacity:.35}
-      50%{opacity:.88}
-    }
-    @keyframes bulbsDrift{
-      0%{background-position:0 0}
-      100%{background-position:200px 0}
+      animation: none !important;
     }
 
     .wrap{
@@ -636,7 +617,7 @@
     .feature b{display:block; margin-top:8px; font-weight:1000}
     .feature span{color:var(--muted); font-size:13.5px; line-height:1.5}
 
-    /* ✅ Полезные статьи */
+    /* Полезные статьи */
     .articles{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -671,7 +652,7 @@
       transform: translateY(-1px);
     }
 
-    /* ✅ Аккордеон для статей (только на мобиле) */
+    /* Аккордеон для статей (только на мобиле) */
     .articles-acc{
       display:none;
       background: rgba(255,255,255,.04);
@@ -820,7 +801,6 @@
       .pricing{grid-template-columns:1fr}
       .kv{grid-template-columns:1fr}
 
-      /* ✅ на мобиле: статьи скрыты и открываются */
       .articles{display:none;}
       .articles-acc{display:block;}
 
@@ -833,7 +813,6 @@
       .grad{animation:none}
       .btn.primary::after{display:none}
       .snow{animation:none}
-      .garlandStrip::before, .garlandStrip::after{animation:none}
       .chip{animation:none}
       .card, .plan, .article{transition:none}
     }
@@ -1010,7 +989,6 @@
           </div>
         </div>
 
-        <!-- ПК/планшеты: обычная сетка -->
         <div class="articles">
           <article class="article reveal">
             <h3>VPN: что это и как работает</h3>
@@ -1055,7 +1033,6 @@
           </article>
         </div>
 
-        <!-- ✅ Мобила: скрыто/открывается -->
         <details class="articles-acc reveal" id="articlesAcc">
           <summary>
             Открыть полезные статьи
@@ -1281,7 +1258,7 @@
     applyAcc();
     mq.addEventListener?.("change", applyAcc);
 
-    // FAQ: гарантируем open/close на мобиле (iOS/Safari)
+    // FAQ: open/close на мобиле (iOS/Safari)
     const faqMq = window.matchMedia("(max-width: 900px)");
     document.querySelectorAll("#faq details > summary").forEach((s) => {
       s.addEventListener("click", (e) => {

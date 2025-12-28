@@ -64,7 +64,7 @@
 
     *{box-sizing:border-box}
 
-    /* ✅ анти-горизонтальная прокрутка (мобила) */
+    /* ✅ анти-горизонтальная прокрутка (мобила + вообще) */
     html, body{
       width:100%;
       max-width:100%;
@@ -76,7 +76,7 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      touch-action: pan-y; /* ✅ запрет бокового панорамирования */
+      touch-action: pan-y;
     }
     main{max-width:100vw; overflow-x:hidden;}
     img, svg{max-width:100%; height:auto;}
@@ -153,6 +153,9 @@
       background: rgba(5,7,13,.55);
       border-bottom:1px solid var(--line);
       isolation:isolate;
+
+      /* ✅ место под гирлянду снизу меню */
+      padding-bottom: 22px;
     }
 
     header::after{
@@ -167,26 +170,29 @@
       z-index:1;
     }
 
-    /* ✅ гирлянда снизу меню (под nav, над сосульками) */
-    .garlandBottom{
-      position:absolute;
-      left:0; right:0;
-      bottom:18px;
-      height:28px;
+    /* ✅ Гирлянда ВНИЗУ меню (видимая) */
+    .garlandStrip{
+      height:22px;
+      margin-top:-6px;
+      position: relative;
+      z-index: 5;
       pointer-events:none;
-      z-index:3;
+
       background-image: var(--garland);
       background-repeat: repeat-x;
       background-size: 1200px 80px;
-      opacity:.92;
+      opacity:.98;
+
       filter:
-        drop-shadow(0 10px 22px rgba(11,92,255,.18))
-        drop-shadow(0 10px 22px rgba(24,208,196,.12));
+        drop-shadow(0 10px 20px rgba(11,92,255,.18))
+        drop-shadow(0 10px 20px rgba(24,208,196,.12));
+
       animation: garlandGlow 3.2s ease-in-out infinite;
     }
-    .garlandBottom::after{
+    .garlandStrip::after{
       content:"";
-      position:absolute; inset:-20px -40px;
+      position:absolute;
+      inset:-18px -30px;
       background-image: var(--garland);
       background-repeat: repeat-x;
       background-size: 1200px 80px;
@@ -524,7 +530,6 @@
     .callout strong{font-weight:1000; color:rgba(238,242,255,.92)}
     .warn{border-color: rgba(255,140,140,.22); background: rgba(255,80,80,.06)}
 
-    /* KV блоки (4 карточки) */
     .kv{
       display:grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
@@ -543,7 +548,7 @@
     .kv b{display:block; font-size:14px; font-weight:1000; color:rgba(238,242,255,.92)}
     .kv span{display:block; margin-top:4px; font-size:13px; line-height:1.45}
 
-    /* ✅ раскрывашка для Special Unblock (мобила) */
+    /* ✅ раскрывашка Special Unblock */
     .su-details{
       grid-column: 1 / -1;
       border:1px solid rgba(255,255,255,.12);
@@ -719,7 +724,7 @@
       .grad{animation:none}
       .btn.primary::after{display:none}
       .snow{animation:none}
-      .garlandBottom, .garlandBottom::after{animation:none}
+      .garlandStrip, .garlandStrip::after{animation:none}
       .chip{animation:none}
       .card, .plan{transition:none}
     }
@@ -761,10 +766,10 @@
           </svg>
         </button>
       </nav>
-    </div>
 
-    <!-- ✅ гирлянда снизу меню -->
-    <div class="garlandBottom" aria-hidden="true"></div>
+      <!-- ✅ гирлянда снизу меню (видимая) -->
+      <div class="garlandStrip" aria-hidden="true"></div>
+    </div>
   </header>
 
   <div class="mnav" id="mnav" aria-hidden="true">
@@ -834,7 +839,6 @@
                   💾 Трафик: <b>90 ГБ</b>
                 </div>
 
-                <!-- ✅ На мобиле скрыто, можно раскрыть -->
                 <details class="su-details full" id="suDetails" open>
                   <summary>
                     Показать детали
@@ -853,7 +857,6 @@
                   Если у вас <b>НЕ</b> работают даже сайты из Белого списка (Яндекс, VK, Госуслуги и т.д.) – ни один Unblock технически не сможет работать.
                 </div>
 
-                <!-- ✅ кнопка всегда видна -->
                 <div class="special-actions full">
                   <a class="btn primary" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">🎁 Получить на тест</a>
                 </div>
@@ -1032,7 +1035,7 @@
       a.addEventListener("click", ()=>{ closeMenu(); });
     });
 
-    // ✅ Special Unblock: на мобиле по умолчанию закрыто, на ПК открыто
+    // Special Unblock: на мобиле закрыто, на ПК открыто
     const su = document.getElementById("suDetails");
     const mq = window.matchMedia("(max-width: 520px)");
     const applySU = () => {
@@ -1045,6 +1048,15 @@
     };
     applySU();
     mq.addEventListener?.("change", applySU);
+
+    // ✅ FAQ: гарантируем toggle (особенно iOS/Safari)
+    document.querySelectorAll("#faq details > summary").forEach((s) => {
+      s.addEventListener("click", (e) => {
+        e.preventDefault();
+        const d = s.parentElement;
+        d.open = !d.open;
+      });
+    });
   </script>
 </body>
 </html>

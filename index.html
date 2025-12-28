@@ -58,13 +58,10 @@
 
       --trees: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%20viewBox='0%200%20240%20240'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.10'%20stroke-width='6'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M120%2032%20L82%2074%20h24%20L76%20114%20h30%20L88%20142%20h64%20l-18%20-28%20h30%20l-30%20-40%20h24z'/%3E%3Cpath%20d='M108%20142%20v22%20h24%20v-22'/%3E%3C/g%3E%3C/svg%3E");
 
-      /* гирлянда */
-      --garland: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1200'%20height='80'%20viewBox='0%200%201200%2080'%3E%3Cpath%20d='M0%2042%20C150%2010%20300%2070%20450%2042%20C600%2010%20750%2070%20900%2042%20C1050%2010%201140%2056%201200%2042'%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.22'%20stroke-width='3'/%3E%3Cg%3E%3Ccircle%20cx='110'%20cy='38'%20r='7'%20fill='%230b5cff'%20fill-opacity='.85'/%3E%3Ccircle%20cx='220'%20cy='52'%20r='7'%20fill='%2318d0c4'%20fill-opacity='.78'/%3E%3Ccircle%20cx='330'%20cy='38'%20r='7'%20fill='%23ffffff'%20fill-opacity='.40'/%3E%3Ccircle%20cx='440'%20cy='52'%20r='7'%20fill='%230b5cff'%20fill-opacity='.82'/%3E%3Ccircle%20cx='550'%20cy='38'%20r='7'%20fill='%2318d0c4'%20fill-opacity='.78'/%3E%3Ccircle%20cx='660'%20cy='52'%20r='7'%20fill='%23ffffff'%20fill-opacity='.38'/%3E%3Ccircle%20cx='770'%20cy='38'%20r='7'%20fill='%230b5cff'%20fill-opacity='.80'/%3E%3Ccircle%20cx='880'%20cy='52'%20r='7'%20fill='%2318d0c4'%20fill-opacity='.76'/%3E%3Ccircle%20cx='990'%20cy='38'%20r='7'%20fill='%23ffffff'%20fill-opacity='.36'/%3E%3Ccircle%20cx='1100'%20cy='52'%20r='7'%20fill='%230b5cff'%20fill-opacity='.78'/%3E%3C/g%3E%3C/svg%3E");
+      --garlandWire: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1200'%20height='60'%20viewBox='0%200%201200%2060'%3E%3Cpath%20d='M0%2032%20C150%200%20300%2060%20450%2032%20C600%200%20750%2060%20900%2032%20C1050%200%201140%2046%201200%2032'%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.26'%20stroke-width='3'/%3E%3C/svg%3E");
     }
 
     *{box-sizing:border-box}
-
-    /* ✅ анти-горизонтальная прокрутка (мобила + вообще) */
     html, body{
       width:100%;
       max-width:100%;
@@ -80,7 +77,6 @@
     }
     main{max-width:100vw; overflow-x:hidden;}
     img, svg{max-width:100%; height:auto;}
-
     html{scroll-behavior:smooth}
 
     .bg{
@@ -91,7 +87,6 @@
         radial-gradient(700px 480px at 70% 20%, rgba(11,92,255,.10), transparent 60%),
         linear-gradient(180deg, #040611 0%, #05070d 65%, #040611 100%);
     }
-
     .trees{
       position:fixed; inset:0; z-index:-11;
       pointer-events:none;
@@ -103,7 +98,6 @@
       mix-blend-mode: screen;
       filter: blur(.05px);
     }
-
     .wolf-scratches{
       position:fixed; inset:0; z-index:-10;
       pointer-events:none;
@@ -117,7 +111,7 @@
       filter: blur(.12px);
     }
 
-    /* ✅ снег чуть сильнее */
+    /* снег */
     .snow{
       position:fixed; inset:0; z-index:-9;
       pointer-events:none;
@@ -147,15 +141,16 @@
       box-shadow:0 10px 25px rgba(11,92,255,.25);
     }
 
+    /* ✅ тоньше линия у меню */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
       background: rgba(5,7,13,.55);
-      border-bottom:1px solid var(--line);
+      border-bottom:.5px solid var(--line);
       isolation:isolate;
 
-      /* ✅ место под гирлянду снизу меню */
-      padding-bottom: 22px;
+      /* ✅ место под гирлянду (теперь она на самом меню) */
+      padding-bottom: 40px;
     }
 
     header::after{
@@ -170,44 +165,70 @@
       z-index:1;
     }
 
-    /* ✅ Гирлянда ВНИЗУ меню (видимая) */
+    /* ✅ гирлянда прямо НА МЕНЮ: под nav (и гарантированно видна) */
     .garlandStrip{
-      height:22px;
-      margin-top:-6px;
-      position: relative;
-      z-index: 5;
+      position:absolute;
+      left:0; right:0;
+
+      /* "на меню" — прямо под nav, а не в самом низу шапки */
+      top: 70px;
+
+      height: 34px;
+      z-index: 20;
       pointer-events:none;
 
-      background-image: var(--garland);
+      background-image: var(--garlandWire);
       background-repeat: repeat-x;
-      background-size: 1200px 80px;
-      opacity:.98;
+      background-size: 1200px 60px;
+      background-position: center;
 
       filter:
-        drop-shadow(0 10px 20px rgba(11,92,255,.18))
-        drop-shadow(0 10px 20px rgba(24,208,196,.12));
-
-      animation: garlandGlow 3.2s ease-in-out infinite;
+        drop-shadow(0 14px 34px rgba(11,92,255,.22))
+        drop-shadow(0 12px 30px rgba(24,208,196,.14));
+      opacity: 1;
     }
+
+    /* лампочки слой A */
+    .garlandStrip::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-repeat: repeat-x;
+      background-size: 180px 34px;
+      background-position: 0 0;
+      background-image:
+        radial-gradient(circle at 30px 16px, rgba(11,92,255,1) 0 5px, transparent 6px),
+        radial-gradient(circle at 90px 16px, rgba(24,208,196,1) 0 5px, transparent 6px),
+        radial-gradient(circle at 150px 16px, rgba(255,255,255,.75) 0 5px, transparent 6px);
+      opacity:.95;
+      filter: drop-shadow(0 10px 20px rgba(11,92,255,.28));
+      animation: bulbsBlinkA 1.7s steps(2,end) infinite;
+    }
+
+    /* лампочки слой B (другая фаза) */
     .garlandStrip::after{
       content:"";
       position:absolute;
-      inset:-18px -30px;
-      background-image: var(--garland);
+      inset:0;
       background-repeat: repeat-x;
-      background-size: 1200px 80px;
-      opacity:.26;
-      filter: blur(10px);
-      mix-blend-mode: screen;
-      animation: garlandShift 6.5s ease-in-out infinite;
+      background-size: 180px 34px;
+      background-position: 90px 0;
+      background-image:
+        radial-gradient(circle at 30px 16px, rgba(11,92,255,1) 0 5px, transparent 6px),
+        radial-gradient(circle at 90px 16px, rgba(24,208,196,1) 0 5px, transparent 6px),
+        radial-gradient(circle at 150px 16px, rgba(255,255,255,.75) 0 5px, transparent 6px);
+      opacity:.35;
+      filter: drop-shadow(0 10px 20px rgba(24,208,196,.18));
+      animation: bulbsBlinkB 1.7s steps(2,end) infinite;
     }
-    @keyframes garlandGlow{
-      0%,100%{opacity:.85; transform: translateY(0)}
-      50%{opacity:1; transform: translateY(1px)}
+
+    @keyframes bulbsBlinkA{
+      0%,49%{opacity:.95; filter: drop-shadow(0 10px 20px rgba(11,92,255,.32))}
+      50%,100%{opacity:.38; filter: drop-shadow(0 10px 20px rgba(11,92,255,.10))}
     }
-    @keyframes garlandShift{
-      0%,100%{transform: translateX(0)}
-      50%{transform: translateX(-18px)}
+    @keyframes bulbsBlinkB{
+      0%,49%{opacity:.35; filter: drop-shadow(0 10px 20px rgba(24,208,196,.10))}
+      50%,100%{opacity:.92; filter: drop-shadow(0 10px 22px rgba(24,208,196,.28))}
     }
 
     .wrap{
@@ -222,8 +243,9 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; min-height:72px; padding:10px 0;
       position:relative;
-      z-index:4;
+      z-index:30; /* выше гирлянды */
     }
+
     .brand{
       display:flex; align-items:center; gap:12px;
       text-decoration:none; color:var(--text);
@@ -291,6 +313,7 @@
     .cta:hover{transform: translateY(-1px) scale(1.02)}
     .cta:hover::after{opacity:.9; transform: translateX(30%)}
 
+    /* ✅ меню (бургер) меньше */
     .menuBtn{
       display:none;
       width:44px;height:44px;
@@ -302,8 +325,8 @@
       align-items:center;justify-content:center;
       transition:.2s;
     }
+    .menuBtn svg{width:18px;height:18px;opacity:.92}
     .menuBtn:hover{transform: translateY(-1px)}
-    .menuBtn svg{width:20px;height:20px;opacity:.9}
 
     .mnav{
       position:fixed;
@@ -548,7 +571,6 @@
     .kv b{display:block; font-size:14px; font-weight:1000; color:rgba(238,242,255,.92)}
     .kv span{display:block; margin-top:4px; font-size:13px; line-height:1.45}
 
-    /* ✅ раскрывашка Special Unblock */
     .su-details{
       grid-column: 1 / -1;
       border:1px solid rgba(255,255,255,.12);
@@ -602,6 +624,37 @@
     .feature:hover{transform: translateY(-3px); background: rgba(255,255,255,.06)}
     .feature b{display:block; margin-top:8px; font-weight:1000}
     .feature span{color:var(--muted); font-size:13.5px; line-height:1.5}
+
+    /* ✅ Полезные статьи */
+    .articles{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .article{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+      transition:.2s;
+    }
+    .article:hover{transform: translateY(-3px); background: rgba(255,255,255,.06)}
+    .article h3{margin:0; font-size:16px; letter-spacing:-.2px}
+    .article p{margin:8px 0 0; color:var(--muted); line-height:1.65; font-size:13.5px}
+    .article a{
+      display:inline-flex;
+      margin-top:12px;
+      font-weight:1000;
+      text-decoration:none;
+      color: rgba(238,242,255,.92);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:10px 12px;
+      border-radius:14px;
+    }
+    .article a:hover{background: rgba(255,255,255,.08)}
 
     .pricing{
       display:grid;
@@ -696,9 +749,13 @@
       .faq{grid-template-columns:1fr}
       .special-layout{grid-template-columns:1fr}
       .kv{grid-template-columns: repeat(2, minmax(0,1fr))}
+      .articles{grid-template-columns:1fr 1fr}
     }
 
     @media (max-width: 600px){
+      header{padding-bottom: 44px;}
+      .garlandStrip{top: 66px; height: 36px;}
+      .garlandStrip::before, .garlandStrip::after{background-size: 180px 36px;}
       .nav-right{display:none}
       .menuBtn{display:flex}
     }
@@ -714,6 +771,7 @@
       .grid{grid-template-columns:1fr}
       .pricing{grid-template-columns:1fr}
       .kv{grid-template-columns:1fr}
+      .articles{grid-template-columns:1fr}
 
       .snow{opacity:.17; animation-duration: 20s;}
     }
@@ -724,9 +782,9 @@
       .grad{animation:none}
       .btn.primary::after{display:none}
       .snow{animation:none}
-      .garlandStrip, .garlandStrip::after{animation:none}
+      .garlandStrip, .garlandStrip::before, .garlandStrip::after{animation:none}
       .chip{animation:none}
-      .card, .plan{transition:none}
+      .card, .plan, .article{transition:none}
     }
   </style>
 </head>
@@ -754,6 +812,7 @@
 
         <div class="nav-right">
           <a class="link" href="#features">Возможности</a>
+          <a class="link" href="#articles">Статьи</a>
           <a class="link" href="#pricing">Тарифы</a>
           <a class="link" href="#faq">FAQ</a>
           <a class="pill" href="#pricing">🎁 Пробный период</a>
@@ -761,15 +820,15 @@
         </div>
 
         <button class="menuBtn" id="menuBtn" aria-label="Открыть меню">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
           </svg>
         </button>
       </nav>
-
-      <!-- ✅ гирлянда снизу меню (видимая) -->
-      <div class="garlandStrip" aria-hidden="true"></div>
     </div>
+
+    <!-- ✅ Гирлянда прямо на меню -->
+    <div class="garlandStrip" aria-hidden="true"></div>
   </header>
 
   <div class="mnav" id="mnav" aria-hidden="true">
@@ -780,6 +839,7 @@
       </div>
       <div class="links">
         <a href="#features" class="mclose">Возможности</a>
+        <a href="#articles" class="mclose">Статьи</a>
         <a href="#pricing" class="mclose">Тарифы</a>
         <a href="#faq" class="mclose">FAQ</a>
         <a href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener" class="primary">🎁 Получить на тест</a>
@@ -887,6 +947,56 @@
           <div class="feature reveal">🎁 <b>Пробный период</b><span>Можно оценить сервис перед покупкой.</span></div>
           <div class="feature reveal">🛟 <b>Поддержка</b><span>Отвечаем на вопросы и быстро решаем технические задачи ежедневно с 10:00 до 22:00.</span></div>
           <div class="feature reveal">✔️ <b>Один клик</b><span>Простое подключение через Telegram.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✅ вернул полезные статьи -->
+    <section id="articles">
+      <div class="wrap">
+        <div class="title reveal">
+          <div>
+            <h2>Полезные статьи</h2>
+            <p>Коротко и по делу: как пользоваться VPN, что важно в настройках и безопасности.</p>
+          </div>
+        </div>
+
+        <div class="articles">
+          <article class="article reveal">
+            <h3>Как выбрать VPN: 7 критериев</h3>
+            <p>Скорость, стабильность, локации, поддержка, приватность и удобство подключения.</p>
+            <a href="#faq">Читать</a>
+          </article>
+
+          <article class="article reveal">
+            <h3>VPN и приватность: что защищает VPN</h3>
+            <p>Шифрование трафика, защита в публичных Wi-Fi и базовые правила цифровой гигиены.</p>
+            <a href="#faq">Читать</a>
+          </article>
+
+          <article class="article reveal">
+            <h3>Как быстрее: выбор сервера</h3>
+            <p>Почему ближняя локация часто быстрее и как проверить качество подключения.</p>
+            <a href="#faq">Читать</a>
+          </article>
+
+          <article class="article reveal">
+            <h3>iOS/Android: что делать, если “тормозит”</h3>
+            <p>Проверьте сеть, переключите локацию, перезапустите VPN — и подключение стабилизируется.</p>
+            <a href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Открыть бота</a>
+          </article>
+
+          <article class="article reveal">
+            <h3>Special Unblock: когда он нужен</h3>
+            <p>Если в регионе проблемы с мобильным интернетом. Если проблем нет — используйте обычный доступ.</p>
+            <a href="#top">К карточке</a>
+          </article>
+
+          <article class="article reveal">
+            <h3>Поддержка: как быстро помочь себе</h3>
+            <p>Соберите: устройство/ОС, сеть (Wi-Fi/моб.), локация сервера и описание ошибки.</p>
+            <a href="https://t.me/WolfPN_bot" target="_blank" rel="noopener">Написать</a>
+          </article>
         </div>
       </div>
     </section>
@@ -1049,9 +1159,11 @@
     applySU();
     mq.addEventListener?.("change", applySU);
 
-    // ✅ FAQ: гарантируем toggle (особенно iOS/Safari)
+    // FAQ: гарантируем open/close на мобиле (iOS/Safari)
+    const faqMq = window.matchMedia("(max-width: 900px)");
     document.querySelectorAll("#faq details > summary").forEach((s) => {
       s.addEventListener("click", (e) => {
+        if(!faqMq.matches) return;
         e.preventDefault();
         const d = s.parentElement;
         d.open = !d.open;

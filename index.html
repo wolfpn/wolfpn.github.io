@@ -53,10 +53,10 @@
       --btnH: 52px;
 
       /* warm garland palette */
-      --warm1: rgba(255,196,120,1); /* amber */
-      --warm2: rgba(255,234,190,1); /* warm white */
-      --warm3: rgba(255,115,115,1); /* soft red */
-      --warm4: rgba(255,214,120,1); /* gold */
+      --warm1: rgba(255,196,120,1);
+      --warm2: rgba(255,234,190,1);
+      --warm3: rgba(255,115,115,1);
+      --warm4: rgba(255,214,120,1);
 
       --scratch: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='260'%20height='260'%20viewBox='0%200%20260%20260'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.10'%20stroke-width='7'%20stroke-linecap='round'%3E%3Cpath%20d='M40,240%20C85,170%20115,115%20155,40'/%3E%3Cpath%20d='M80,250%20C120,175%20155,125%20210,45'/%3E%3Cpath%20d='M25,220%20C70,165%2095,125%20125,75'/%3E%3C/g%3E%3C/svg%3E");
 
@@ -151,7 +151,7 @@
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
       background: rgba(5,7,13,.55);
-      border-bottom:.5px solid var(--line); /* тоньше линия */
+      border-bottom:.5px solid var(--line);
       isolation:isolate;
       padding-bottom: 40px; /* место под гирлянду */
     }
@@ -167,11 +167,11 @@
       z-index:1;
     }
 
-    /* ✅ гирлянда на меню + тёплый цвет + усиленная анимация */
+    /* ✅ гирлянда: НЕ ДВИГАЕТСЯ (убрали sway), только мерцание ламп */
     .garlandStrip{
       position:absolute;
       left:0; right:0;
-      top: 70px;              /* на меню (под nav) */
+      top: 70px;
       height: 34px;
       z-index: 20;
       pointer-events:none;
@@ -185,16 +185,9 @@
         drop-shadow(0 14px 34px rgba(255,190,120,.20))
         drop-shadow(0 12px 30px rgba(255,150,90,.12));
       opacity: 1;
-
-      animation: garlandSway 6.2s ease-in-out infinite;
-      transform-origin: center;
-    }
-    @keyframes garlandSway{
-      0%,100%{transform: translateY(0)}
-      50%{transform: translateY(2px)}
+      transform: none; /* фиксируем */
     }
 
-    /* лампочки слой A */
     .garlandStrip::before{
       content:"";
       position:absolute;
@@ -216,7 +209,6 @@
       mix-blend-mode: screen;
     }
 
-    /* лампочки слой B (сдвиг + другая фаза) */
     .garlandStrip::after{
       content:"";
       position:absolute;
@@ -644,7 +636,7 @@
     .feature b{display:block; margin-top:8px; font-weight:1000}
     .feature span{color:var(--muted); font-size:13.5px; line-height:1.5}
 
-    /* ✅ Полезные статьи (обновлено) */
+    /* ✅ Полезные статьи */
     .articles{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -677,6 +669,39 @@
     .article a:hover{
       background: rgba(255,255,255,.10);
       transform: translateY(-1px);
+    }
+
+    /* ✅ Аккордеон для статей (только на мобиле) */
+    .articles-acc{
+      display:none;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:12px;
+      overflow:hidden;
+    }
+    .articles-acc summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:1000;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+      padding:6px 4px;
+    }
+    .articles-acc summary::-webkit-details-marker{display:none}
+    .articles-acc .chev{
+      opacity:.75;
+      transition: transform .2s ease;
+    }
+    .articles-acc[open] .chev{transform: rotate(180deg)}
+    .articles-acc .inside{margin-top:10px}
+    .articles-acc .articles{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
     }
 
     .pricing{
@@ -794,7 +819,10 @@
       .grid{grid-template-columns:1fr}
       .pricing{grid-template-columns:1fr}
       .kv{grid-template-columns:1fr}
-      .articles{grid-template-columns:1fr}
+
+      /* ✅ на мобиле: статьи скрыты и открываются */
+      .articles{display:none;}
+      .articles-acc{display:block;}
 
       .snow{opacity:.17; animation-duration: 20s;}
     }
@@ -805,7 +833,7 @@
       .grad{animation:none}
       .btn.primary::after{display:none}
       .snow{animation:none}
-      .garlandStrip, .garlandStrip::before, .garlandStrip::after{animation:none}
+      .garlandStrip::before, .garlandStrip::after{animation:none}
       .chip{animation:none}
       .card, .plan, .article{transition:none}
     }
@@ -973,7 +1001,6 @@
       </div>
     </section>
 
-    <!-- ✅ Полезные статьи: кнопки "Перейти" + твои ссылки -->
     <section id="articles">
       <div class="wrap">
         <div class="title reveal">
@@ -983,6 +1010,7 @@
           </div>
         </div>
 
+        <!-- ПК/планшеты: обычная сетка -->
         <div class="articles">
           <article class="article reveal">
             <h3>VPN: что это и как работает</h3>
@@ -1026,6 +1054,59 @@
             <a href="https://wolfpn.github.io/vpn-dlya-telegram.html">Перейти</a>
           </article>
         </div>
+
+        <!-- ✅ Мобила: скрыто/открывается -->
+        <details class="articles-acc reveal" id="articlesAcc">
+          <summary>
+            Открыть полезные статьи
+            <span class="chev">▾</span>
+          </summary>
+          <div class="inside">
+            <div class="articles">
+              <article class="article">
+                <h3>VPN: что это и как работает</h3>
+                <p>Базовое объяснение: зачем нужен VPN, что он защищает и как пользоваться.</p>
+                <a href="https://wolfpn.github.io/vpn-chto-eto.html">Перейти</a>
+              </article>
+
+              <article class="article">
+                <h3>Как включить VPN</h3>
+                <p>Быстрые шаги и советы: что нажать и что проверить, если не подключается.</p>
+                <a href="https://wolfpn.github.io/kak-vklyuchit-vpn.html">Перейти</a>
+              </article>
+
+              <article class="article">
+                <h3>VPN для Android</h3>
+                <p>Подключение на Android: настройки, типичные ошибки и как сделать стабильнее.</p>
+                <a href="https://wolfpn.github.io/vpn-dlya-android.html">Перейти</a>
+              </article>
+
+              <article class="article">
+                <h3>VPN для iPhone</h3>
+                <p>iOS: как включить VPN, что важно в настройках и как быстро восстановить связь.</p>
+                <a href="https://wolfpn.github.io/vpn-dlya-iphone.html">Перейти</a>
+              </article>
+
+              <article class="article">
+                <h3>VPN для Windows</h3>
+                <p>Windows: подключение, выбор сервера, что делать при падении скорости.</p>
+                <a href="https://wolfpn.github.io/vpn-dlya-windows.html">Перейти</a>
+              </article>
+
+              <article class="article">
+                <h3>VPN для macOS</h3>
+                <p>macOS: подключение и рекомендации для стабильности и приватности.</p>
+                <a href="https://wolfpn.github.io/vpn-dlya-macos.html">Перейти</a>
+              </article>
+
+              <article class="article">
+                <h3>VPN для Telegram</h3>
+                <p>Как использовать VPN для Telegram и что делать, если сообщения не отправляются.</p>
+                <a href="https://wolfpn.github.io/vpn-dlya-telegram.html">Перейти</a>
+              </article>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -1187,6 +1268,19 @@
     applySU();
     mq.addEventListener?.("change", applySU);
 
+    // Articles accordion: на мобиле по умолчанию закрыто
+    const acc = document.getElementById("articlesAcc");
+    const applyAcc = () => {
+      if(!acc) return;
+      if(mq.matches){
+        acc.removeAttribute("open");
+      } else {
+        acc.setAttribute("open", "");
+      }
+    };
+    applyAcc();
+    mq.addEventListener?.("change", applyAcc);
+
     // FAQ: гарантируем open/close на мобиле (iOS/Safari)
     const faqMq = window.matchMedia("(max-width: 900px)");
     document.querySelectorAll("#faq details > summary").forEach((s) => {
@@ -1200,4 +1294,3 @@
   </script>
 </body>
 </html>
-

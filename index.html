@@ -52,30 +52,37 @@
       --heroMax: 1560px;
       --btnH: 52px;
 
-      /* Wolf scratches (тонко) */
       --scratch: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='260'%20height='260'%20viewBox='0%200%20260%20260'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.10'%20stroke-width='7'%20stroke-linecap='round'%3E%3Cpath%20d='M40,240%20C85,170%20115,115%20155,40'/%3E%3Cpath%20d='M80,250%20C120,175%20155,125%20210,45'/%3E%3Cpath%20d='M25,220%20C70,165%2095,125%20125,75'/%3E%3C/g%3E%3C/svg%3E");
 
-      /* Icicles */
       --icicles: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='700'%20height='64'%20viewBox='0%200%20700%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23ffffff'%20stop-opacity='.18'/%3E%3Cstop%20offset='1'%20stop-color='%23ffffff'%20stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20x='0'%20y='0'%20width='700'%20height='10'%20fill='%23ffffff'%20opacity='.08'/%3E%3Cpath%20d='M0%2010%20C35%2010%2060%2048%2090%2048%20C120%2048%20120%2020%20155%2020%20C190%2020%20190%2060%20225%2060%20C260%2060%20260%2024%20295%2024%20C330%2024%20330%2052%20365%2052%20C400%2052%20405%2018%20440%2018%20C475%2018%20480%2046%20510%2046%20C540%2046%20540%2022%20575%2022%20C610%2022%20610%2058%20645%2058%20C670%2058%20685%2030%20700%2030%20V10%20Z'%20fill='url(%23g)'/%3E%3C/svg%3E");
 
-      /* Trees pattern (фоновые ёлочки) */
       --trees: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%20viewBox='0%200%20240%20240'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.10'%20stroke-width='6'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M120%2032%20L82%2074%20h24%20L76%20114%20h30%20L88%20142%20h64%20l-18%20-28%20h30%20l-30%20-40%20h24z'/%3E%3Cpath%20d='M108%20142%20v22%20h24%20v-22'/%3E%3C/g%3E%3C/svg%3E");
 
-      /* ✅ Светящаяся гирлянда (выше меню) */
+      /* гирлянда */
       --garland: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1200'%20height='80'%20viewBox='0%200%201200%2080'%3E%3Cpath%20d='M0%2042%20C150%2010%20300%2070%20450%2042%20C600%2010%20750%2070%20900%2042%20C1050%2010%201140%2056%201200%2042'%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='.22'%20stroke-width='3'/%3E%3Cg%3E%3Ccircle%20cx='110'%20cy='38'%20r='7'%20fill='%230b5cff'%20fill-opacity='.85'/%3E%3Ccircle%20cx='220'%20cy='52'%20r='7'%20fill='%2318d0c4'%20fill-opacity='.78'/%3E%3Ccircle%20cx='330'%20cy='38'%20r='7'%20fill='%23ffffff'%20fill-opacity='.40'/%3E%3Ccircle%20cx='440'%20cy='52'%20r='7'%20fill='%230b5cff'%20fill-opacity='.82'/%3E%3Ccircle%20cx='550'%20cy='38'%20r='7'%20fill='%2318d0c4'%20fill-opacity='.78'/%3E%3Ccircle%20cx='660'%20cy='52'%20r='7'%20fill='%23ffffff'%20fill-opacity='.38'/%3E%3Ccircle%20cx='770'%20cy='38'%20r='7'%20fill='%230b5cff'%20fill-opacity='.80'/%3E%3Ccircle%20cx='880'%20cy='52'%20r='7'%20fill='%2318d0c4'%20fill-opacity='.76'/%3E%3Ccircle%20cx='990'%20cy='38'%20r='7'%20fill='%23ffffff'%20fill-opacity='.36'/%3E%3Ccircle%20cx='1100'%20cy='52'%20r='7'%20fill='%230b5cff'%20fill-opacity='.78'/%3E%3C/g%3E%3C/svg%3E");
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+
+    /* ✅ анти-горизонтальная прокрутка (мобила) */
+    html, body{
+      width:100%;
+      max-width:100%;
+      overflow-x:hidden;
+      overscroll-behavior-x: none;
+    }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      overflow-x:hidden;
+      touch-action: pan-y; /* ✅ запрет бокового панорамирования */
     }
+    main{max-width:100vw; overflow-x:hidden;}
+    img, svg{max-width:100%; height:auto;}
 
-    /* ФОН */
+    html{scroll-behavior:smooth}
+
     .bg{
       position:fixed; inset:0; z-index:-12;
       background:
@@ -110,24 +117,23 @@
       filter: blur(.12px);
     }
 
-    /* СНЕГ (мелкий, аккуратный) */
+    /* ✅ снег чуть сильнее */
     .snow{
       position:fixed; inset:0; z-index:-9;
       pointer-events:none;
-      opacity:.14;
+      opacity:.19;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,.55) 0 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,255,255,.35) 0 1px, transparent 1.6px);
-      background-size: 240px 240px, 360px 360px;
+        radial-gradient(circle, rgba(255,255,255,.60) 0 1.1px, transparent 1.7px),
+        radial-gradient(circle, rgba(255,255,255,.42) 0 1.0px, transparent 1.7px);
+      background-size: 220px 220px, 320px 320px;
       background-position: 0 -260px, 0 -520px;
-      animation: snowFall 18s linear infinite;
+      animation: snowFall 16s linear infinite;
       mix-blend-mode: screen;
     }
     @keyframes snowFall{
       to{ background-position: 120px 1200px, -140px 1300px; }
     }
 
-    /* Progress */
     .progress{
       position:fixed; top:0; left:0; right:0; height:3px;
       z-index:1000;
@@ -147,8 +153,8 @@
       background: rgba(5,7,13,.55);
       border-bottom:1px solid var(--line);
       isolation:isolate;
-      padding-top: 16px; /* ✅ место под гирлянду сверху */
     }
+
     header::after{
       content:"";
       position:absolute; left:0; right:0; bottom:-1px;
@@ -161,11 +167,11 @@
       z-index:1;
     }
 
-    /* ✅ Гирлянда НАД меню */
-    .garlandTop{
+    /* ✅ гирлянда снизу меню (под nav, над сосульками) */
+    .garlandBottom{
       position:absolute;
       left:0; right:0;
-      top:6px;
+      bottom:18px;
       height:28px;
       pointer-events:none;
       z-index:3;
@@ -178,7 +184,7 @@
         drop-shadow(0 10px 22px rgba(24,208,196,.12));
       animation: garlandGlow 3.2s ease-in-out infinite;
     }
-    .garlandTop::after{
+    .garlandBottom::after{
       content:"";
       position:absolute; inset:-20px -40px;
       background-image: var(--garland);
@@ -210,7 +216,7 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; min-height:72px; padding:10px 0;
       position:relative;
-      z-index:4; /* ✅ выше гирлянды */
+      z-index:4;
     }
     .brand{
       display:flex; align-items:center; gap:12px;
@@ -279,7 +285,6 @@
     .cta:hover{transform: translateY(-1px) scale(1.02)}
     .cta:hover::after{opacity:.9; transform: translateX(30%)}
 
-    /* Mobile menu */
     .menuBtn{
       display:none;
       width:44px;height:44px;
@@ -363,7 +368,6 @@
       align-items:stretch;
     }
 
-    /* ✅ Новый премиальный card без артефактов/линий */
     .card{
       border-radius:var(--radius);
       border:1px solid var(--line2);
@@ -373,7 +377,7 @@
         linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
       box-shadow: var(--shadow);
       position:relative;
-      overflow:hidden;      /* ✅ клип по скруглению */
+      overflow:hidden;
       transform: translateZ(0);
       will-change: transform;
       transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
@@ -383,8 +387,6 @@
       box-shadow: var(--shadow2);
       border-color: rgba(255,255,255,.18);
     }
-
-    /* Лёгкая “премиальная” подсветка внутри (без линий) */
     .cardGlow{
       position:absolute;
       inset:-40% -60%;
@@ -469,7 +471,6 @@
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       box-shadow:0 18px 55px rgba(11,92,255,.20);
     }
-    /* премиальный shine при hover */
     .btn.primary::after{
       content:"";
       position:absolute;
@@ -523,10 +524,12 @@
     .callout strong{font-weight:1000; color:rgba(238,242,255,.92)}
     .warn{border-color: rgba(255,140,140,.22); background: rgba(255,80,80,.06)}
 
+    /* KV блоки (4 карточки) */
     .kv{
       display:grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
       gap:10px;
+      margin-top: 0;
     }
     .kv .box{
       border:1px solid rgba(255,255,255,.10);
@@ -539,6 +542,35 @@
     }
     .kv b{display:block; font-size:14px; font-weight:1000; color:rgba(238,242,255,.92)}
     .kv span{display:block; margin-top:4px; font-size:13px; line-height:1.45}
+
+    /* ✅ раскрывашка для Special Unblock (мобила) */
+    .su-details{
+      grid-column: 1 / -1;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.035);
+      border-radius: 16px;
+      padding: 10px 12px;
+      overflow:hidden;
+    }
+    .su-details summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:1000;
+      color: rgba(238,242,255,.92);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+    }
+    .su-details summary::-webkit-details-marker{display:none}
+    .su-details summary .chev{
+      opacity:.75;
+      transition: transform .2s ease;
+    }
+    .su-details[open] summary .chev{transform: rotate(180deg)}
+    .su-details .kv{margin-top:10px}
+
     .special-actions{display:flex; gap:10px; flex-wrap:wrap}
     .special-actions .btn{min-width:0; flex:1}
     .tiny{font-size:13px; line-height:1.6; color:rgba(238,242,255,.56)}
@@ -560,7 +592,7 @@
       min-height: 96px;
       transition:.2s;
       position:relative;
-      overflow:hidden; /* ✅ чтобы ничего не вылезало */
+      overflow:hidden;
     }
     .feature:hover{transform: translateY(-3px); background: rgba(255,255,255,.06)}
     .feature b{display:block; margin-top:8px; font-weight:1000}
@@ -645,7 +677,6 @@
     .foot a{color:rgba(238,242,255,.70); text-decoration:none}
     .foot a:hover{color:var(--text)}
 
-    /* Reveal */
     .reveal{
       opacity:0;
       translate: 0 18px;
@@ -653,7 +684,6 @@
     }
     .reveal.show{opacity:1; translate: 0 0}
 
-    /* Responsive */
     @media (max-width: 1100px){
       .grid2{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr 1fr}
@@ -666,8 +696,6 @@
     @media (max-width: 600px){
       .nav-right{display:none}
       .menuBtn{display:flex}
-      header{padding-top: 12px}
-      .garlandTop{opacity:.80}
     }
 
     @media (max-width: 520px){
@@ -682,7 +710,7 @@
       .pricing{grid-template-columns:1fr}
       .kv{grid-template-columns:1fr}
 
-      .snow{opacity:.10; animation-duration: 24s;}
+      .snow{opacity:.17; animation-duration: 20s;}
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -691,7 +719,7 @@
       .grad{animation:none}
       .btn.primary::after{display:none}
       .snow{animation:none}
-      .garlandTop, .garlandTop::after{animation:none}
+      .garlandBottom, .garlandBottom::after{animation:none}
       .chip{animation:none}
       .card, .plan{transition:none}
     }
@@ -707,8 +735,6 @@
   <div class="snow" aria-hidden="true"></div>
 
   <header>
-    <div class="garlandTop" aria-hidden="true"></div>
-
     <div class="wrap">
       <nav class="nav">
         <a class="brand" href="#top" aria-label="WolfPN">
@@ -736,9 +762,11 @@
         </button>
       </nav>
     </div>
+
+    <!-- ✅ гирлянда снизу меню -->
+    <div class="garlandBottom" aria-hidden="true"></div>
   </header>
 
-  <!-- Mobile menu -->
   <div class="mnav" id="mnav" aria-hidden="true">
     <div class="panel">
       <div class="row">
@@ -757,7 +785,6 @@
   <main id="top">
     <section class="hero">
       <div class="wrap hero-wrap grid2">
-        <!-- LEFT -->
         <div class="card reveal">
           <span class="cardGlow" aria-hidden="true"></span>
           <div class="hero-card">
@@ -781,7 +808,6 @@
           </div>
         </div>
 
-        <!-- RIGHT -->
         <div class="card reveal">
           <span class="cardGlow" aria-hidden="true"></span>
           <div class="preview">
@@ -808,18 +834,26 @@
                   💾 Трафик: <b>90 ГБ</b>
                 </div>
 
-                <div class="kv full">
-                  <div class="box"><b>📶 Трафик</b><span>Обычно достаточно для комфортного использования.</span></div>
-                  <div class="box"><b>➕ Докупка</b><span>После оплаты можно докупить трафик при необходимости.</span></div>
-                  <div class="box"><b>🎥 YouTube</b><span>Нет рекламы на YouTube.</span></div>
-                  <div class="box"><b>⚡ Быстрый старт</b><span>Подключение через Telegram-бот.</span></div>
-                </div>
+                <!-- ✅ На мобиле скрыто, можно раскрыть -->
+                <details class="su-details full" id="suDetails" open>
+                  <summary>
+                    Показать детали
+                    <span class="chev">▾</span>
+                  </summary>
+                  <div class="kv">
+                    <div class="box"><b>📶 Трафик</b><span>Обычно достаточно для комфортного использования.</span></div>
+                    <div class="box"><b>➕ Докупка</b><span>После оплаты можно докупить трафик при необходимости.</span></div>
+                    <div class="box"><b>🎥 YouTube</b><span>Нет рекламы на YouTube.</span></div>
+                    <div class="box"><b>⚡ Быстрый старт</b><span>Подключение через Telegram-бот.</span></div>
+                  </div>
+                </details>
 
                 <div class="callout warn full">
                   <strong>❗️Важно:</strong><br>
                   Если у вас <b>НЕ</b> работают даже сайты из Белого списка (Яндекс, VK, Госуслуги и т.д.) – ни один Unblock технически не сможет работать.
                 </div>
 
+                <!-- ✅ кнопка всегда видна -->
                 <div class="special-actions full">
                   <a class="btn primary" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">🎁 Получить на тест</a>
                 </div>
@@ -945,14 +979,6 @@
       <div class="wrap foot">
         <div>
           <div style="font-weight:1000; letter-spacing:.2px">© 2026 WolfPN</div>
-          <div style="margin-top:8px; font-size:13px; color:rgba(238,242,255,.56); line-height:1.6;">
-            Полезные статьи:
-            <a href="/vpn-chto-eto.html">VPN что это</a> ·
-            <a href="/vpn-dlya-telegram.html">VPN для Telegram</a> ·
-            <a href="/vpn-dlya-iphone.html">VPN для iPhone</a> ·
-            <a href="/vpn-dlya-android.html">VPN для Android</a> ·
-            <a href="/kak-vklyuchit-vpn.html">Как включить VPN</a>
-          </div>
         </div>
         <div style="font-size:13px">
           <a href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener" style="color:rgba(238,242,255,.72); text-decoration:none;">
@@ -1005,10 +1031,20 @@
     document.querySelectorAll(".mclose").forEach(a=>{
       a.addEventListener("click", ()=>{ closeMenu(); });
     });
+
+    // ✅ Special Unblock: на мобиле по умолчанию закрыто, на ПК открыто
+    const su = document.getElementById("suDetails");
+    const mq = window.matchMedia("(max-width: 520px)");
+    const applySU = () => {
+      if(!su) return;
+      if(mq.matches){
+        su.removeAttribute("open");
+      }else{
+        su.setAttribute("open", "");
+      }
+    };
+    applySU();
+    mq.addEventListener?.("change", applySU);
   </script>
 </body>
 </html>
-
-
-
-

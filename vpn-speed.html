@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#050505" />
+
+  <title>Быстрый VPN и низкий пинг — VPN для игр (gaming) и скорости | WolfPN</title>
+  <meta name="description" content="Как выбрать быстрый VPN: что влияет на скорость, как уменьшить пинг, какой протокол лучше (WireGuard/OpenVPN/IKEv2). Советы для игр и работы." />
+  <meta name="keywords" content="быстрый vpn, vpn низкий пинг, уменьшить пинг vpn, vpn для игр, gaming vpn, скорость vpn, wireguard openvpn ikev2" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://wolfpn.github.io/vpn-speed.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="WolfPN" />
+  <meta property="og:title" content="Быстрый VPN ⚡" />
+  <meta property="og:description" content="Скорость, пинг, протоколы и настройки — без воды." />
+  <meta property="og:url" content="https://wolfpn.github.io/vpn-speed.html" />
+  <meta property="og:image" content="https://wolfpn.github.io/og.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://wolfpn.github.io/og.jpg" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script defer src="/assets/app.js"></script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="bar">
+        <a class="brand" href="/" aria-label="WolfPN">
+          <span class="mark" aria-hidden="true"><img src="/wolf.png" alt="" loading="lazy"></span>
+          <div>
+            <b>WolfPN</b>
+            <div class="sub">Premium VPN · Black & White</div>
+          </div>
+        </a>
+        <nav class="nav" aria-label="Навигация">
+          <a href="/download-vpn.html">Скачать/Установить</a>
+          <a href="/best-vpn.html">Лучший VPN 2026</a>
+          <a href="/free-vpn.html">VPN бесплатно</a>
+          <a href="/guides.html">Гайды</a>
+        </nav>
+        <div class="actions">
+          <a class="btn btn--ghost" href="/vpn-security.html">Безопасность 🔒</a>
+          <a class="btn" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <div class="reveal in">
+          <h1 class="h1">Быстрый VPN и низкий пинг: игры, работа, стриминг ⚡🎮</h1>
+          <p class="lead">Если VPN «режет» скорость — почти всегда виноваты локация, протокол или перегруженный сервер. Ниже — быстрый, практичный чеклист, чтобы ускорить VPN и уменьшить пинг.</p>
+          <ul class="toc">
+            <li><a href="#reasons">Почему падает скорость</a></li>
+            <li><a href="#fix">Как ускорить VPN</a></li>
+            <li><a href="#protocols">WireGuard / OpenVPN / IKEv2</a></li>
+            <li><a href="#gaming">VPN для игр</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="reasons" class="section reveal">
+        <div class="card">
+          <h2>Почему VPN может быть медленным</h2>
+          <div class="grid">
+            <div class="col-6">
+              <h3 class="card-title">Далёкая локация 🌍</h3>
+              <p>Чем дальше сервер, тем выше задержка. Для скорости выбирайте ближайшую страну/город (см. <a href="/vpn-change-ip.html">сменить IP</a>).</p>
+            </div>
+            <div class="col-6">
+              <h3 class="card-title">Перегруз сервера</h3>
+              <p>Если сервер «забит», скорость падает даже на соседней локации. Переключитесь на другой сервер в той же стране.</p>
+            </div>
+            <div class="col-6">
+              <h3 class="card-title">Протокол</h3>
+              <p>WireGuard чаще всего быстрее. OpenVPN может быть стабильнее в некоторых сетях. IKEv2 — хорош для мобильных переключений.</p>
+            </div>
+            <div class="col-6">
+              <h3 class="card-title">Сеть/роутер</h3>
+              <p>Слабый Wi‑Fi, перегруженный канал, старый роутер — всё это важнее, чем «какой VPN».</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="fix" class="section reveal">
+        <div class="card">
+          <h2>Как ускорить VPN (реально рабочие шаги)</h2>
+          <ol>
+            <li><b>Выберите ближайшую локацию</b> и протестируйте скорость 2–3 серверов.</li>
+            <li><b>Поменяйте протокол</b>: начните с WireGuard → затем IKEv2 → затем OpenVPN.</li>
+            <li><b>Выключите «тяжёлые» приложения</b> (торренты/обновления/облака) на время теста.</li>
+            <li><b>Переключитесь на 5 GHz Wi‑Fi</b> (если есть) или провод на ПК.</li>
+            <li><b>Проверьте DNS</b> и утечки (см. <a href="/vpn-troubleshooting.html">VPN не работает</a>).</li>
+          </ol>
+          <div class="pills">
+            <span class="pill">⚡ Быстрый тест: сравни 3 сервера</span>
+            <span class="pill">🧠 Протокол важнее «бренда»</span>
+            <span class="pill">❄️ Тихий режим: меньше фоновых задач</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="protocols" class="section reveal">
+        <div class="card">
+          <h2>Какой протокол лучше: WireGuard / OpenVPN / IKEv2</h2>
+          <div class="grid">
+            <div class="col-4">
+              <h3 class="card-title">WireGuard 🏎️</h3>
+              <p>Обычно максимум скорости и низкий пинг. Отлично для игр и стриминга.</p>
+            </div>
+            <div class="col-4">
+              <h3 class="card-title">IKEv2 📱</h3>
+              <p>Часто хорош на мобильных сетях: быстро переподключается, когда вы меняете Wi‑Fi/4G.</p>
+            </div>
+            <div class="col-4">
+              <h3 class="card-title">OpenVPN 🛡️</h3>
+              <p>Стабильный, гибкий, но может быть медленнее. Иногда лучше проходит сложные сети.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gaming" class="section reveal">
+        <div class="card">
+          <h2>VPN для игр: как уменьшить пинг</h2>
+          <ul>
+            <li>Ставьте сервер <b>ближе к игровому серверу</b>, а не «красивую» страну.</li>
+            <li>Выбирайте <b>WireGuard</b>, если доступно.</li>
+            <li>Если нужно — используйте <b>split tunneling</b>, чтобы игра шла через VPN, а остальное — напрямую (подробнее: <a href="/vpn-security.html">безопасный VPN</a>).</li>
+          </ul>
+          <hr class="hr" />
+          <div class="grid">
+            <div class="col-6" data-href="/download-vpn.html" class="card">
+              <h3 class="card-title">Установка за минуту ✅</h3>
+              <p>Если вы ещё не ставили VPN — начните с короткой инструкции для телефона и ПК.</p>
+            </div>
+            <div class="col-6" data-href="/vpn-streaming.html" class="card">
+              <h3 class="card-title">Стриминг 🎬</h3>
+              <p>Для Netflix/YouTube важна не только локация, но и скорость — тут есть советы.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="card">
+          <h2>Быстрый старт</h2>
+          <p>Нужно «прямо сейчас»? Подключись через Telegram — и дальше подберёшь локацию/протокол под задачу.</p>
+          <div class="pills">
+            <a class="btn" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" target="_blank" rel="noopener">Подключиться</a>
+            <a class="btn btn--ghost" href="/best-vpn.html">Как выбрать VPN</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>© <span data-year></span> WolfPN · ⚫⚪ Премиальный ч/б стиль.</div>
+        <div class="links">
+          <a href="/">Главная</a>
+          <a href="/guides.html">Гайды</a>
+          <a href="/vpn-troubleshooting.html">Ошибки</a>
+          <a href="/vpn-change-ip.html">Смена IP</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

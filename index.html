@@ -1070,6 +1070,85 @@ details,
   opacity:0 !important;
 }
 
+
+/* ============================
+   FINAL FIXES (mobile v3)
+   ============================ */
+
+/* Box sizing safety (prevents grid overflow on mobile) */
+*,*::before,*::after{box-sizing:border-box}
+
+/* Remove any hover light/glow from older rules */
+.feature::before,.special::after{display:none!important;opacity:0!important}
+
+/* Make blur apply immediately (avoid transitions that include backdrop-filter/background) */
+:is(.card,.feature,.step,details,.deal,.guarantee,.final,.special,.callout,.kv .box,.plan){
+  will-change: transform, backdrop-filter;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transition: box-shadow .35s ease, border-color .35s ease, transform .35s ease;
+}
+
+/* Force pricing grid to 2x2 on mobile and prevent horizontal cut-off */
+.pricing{width:100%}
+.plan-wrap,.plan{min-width:0}
+.plan{width:100%}
+
+/* Background overlay ~70% light (same for desktop & mobile) */
+.bg{
+  background:
+    radial-gradient(ellipse 1100px 650px at 50% 0%, rgba(255,255,255,.03), transparent 60%),
+    radial-gradient(ellipse 900px 560px at 80% 100%, rgba(255,255,255,.02), transparent 55%),
+    linear-gradient(180deg, rgba(3,3,3,.24) 0%, rgba(5,5,5,.27) 55%, rgba(3,3,3,.24) 100%),
+    url("logokk.png") center/cover no-repeat fixed;
+}
+
+/* Mobile: ensure mobilelogo.png is used and pricing stays 2 columns */
+@media(max-width:600px){
+  .bg{
+    background:
+      radial-gradient(ellipse 900px 560px at 50% 0%, rgba(255,255,255,.03), transparent 60%),
+      linear-gradient(180deg, rgba(3,3,3,.24) 0%, rgba(5,5,5,.27) 55%, rgba(3,3,3,.24) 100%),
+      url("mobilelogo.png") center/cover no-repeat;
+    background-attachment: scroll;
+  }
+  .pricing{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  .wrap{padding:0 14px}
+  .plan{padding:16px}
+  .plan .price{font-size:36px}
+}
+
+/* Keep 2 columns even on very small screens */
+@media(max-width:420px){
+  .pricing{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .plan .price{font-size:34px}
+  .plan ul{margin-top:10px}
+}
+
+/* Special pack styling */
+.kv-pack-details{padding:16px;border-radius:20px}
+.kv-pack-details summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;font-weight:900
+}
+.kv-pack-details summary::-webkit-details-marker{display:none}
+.kv-pack-chevron{opacity:.7;font-weight:900}
+.kv-pack-details[open] .kv-pack-chevron{transform:rotate(180deg)}
+.kv-pack-body{margin-top:12px;display:grid;gap:10px}
+.kv-pack-row{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05)
+}
+.kv-pack-row b{font-weight:900}
+.kv-pack-row span{color:var(--muted);font-weight:800;text-align:right}
+
+/* On mobile it must be closed by default */
+@media(max-width:600px){
+  .kv-pack-details{padding:14px}
+  .kv-pack-row{padding:10px}
+}
+
 </style>
 </head>
 <body>
@@ -1458,22 +1537,18 @@ details,
                 💾 Трафик: <strong>90 ГБ</strong>
 </div>
 </div>
-<div class="kv kv-accordion">
-  <details class="box kv-item">
-    <summary><b>📶 Трафик</b></summary>
-    <div class="kv-body">90 ГБ — комфортно для ежедневных задач</div>
-  </details>
-  <details class="box kv-item">
-    <summary><b>➕ Докупка</b></summary>
-    <div class="kv-body">Можно докупить трафик при необходимости</div>
-  </details>
-  <details class="box kv-item">
-    <summary><b>🎬 YouTube</b></summary>
-    <div class="kv-body">Без рекламы на YouTube</div>
-  </details>
-  <details class="box kv-item">
-    <summary><b>⚡️ Быстрый старт</b></summary>
-    <div class="kv-body">Подключение через Telegram</div>
+<div class="kv-pack">
+  <details class="box kv-pack-details" open>
+    <summary>
+      <span class="kv-pack-title">⚡️ Опции тарифа</span>
+      <span class="kv-pack-chevron">▾</span>
+    </summary>
+    <div class="kv-pack-body">
+      <div class="kv-pack-row"><b>📶 Трафик</b><span>90 ГБ — комфортно для ежедневных задач</span></div>
+      <div class="kv-pack-row"><b>➕ Докупка</b><span>Можно докупить трафик при необходимости</span></div>
+      <div class="kv-pack-row"><b>🎬 YouTube</b><span>Без рекламы на YouTube</span></div>
+      <div class="kv-pack-row"><b>⚡️ Быстрый старт</b><span>Подключение через Telegram</span></div>
+    </div>
   </details>
 </div>
 <div class="callout warn">
@@ -1606,5 +1681,26 @@ details,
     renderTimer();
     setInterval(renderTimer, 1000);
 </script>
+
+<script>
+(function(){
+  var d = document.querySelector('.kv-pack-details');
+  if(!d) return;
+  function sync(){
+    var isMobile = window.matchMedia && window.matchMedia('(max-width:600px)').matches;
+    if(isMobile){ d.removeAttribute('open'); }
+    else { d.setAttribute('open',''); }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', sync, {once:true});
+  } else { sync(); }
+  if(window.matchMedia){
+    var mq = window.matchMedia('(max-width:600px)');
+    if(mq.addEventListener){ mq.addEventListener('change', sync); }
+    else if(mq.addListener){ mq.addListener(sync); }
+  }
+})();
+</script>
+
 </body>
 </html>

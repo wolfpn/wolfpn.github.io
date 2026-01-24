@@ -702,6 +702,9 @@
       .faq{grid-template-columns:1fr}
     }
     @media(max-width:600px){
+  /* Hide trust badges only on mobile */
+  .trust-row{display:none!important}
+
       :root{--heroPad:24px}
       section{padding:120px 0}
       .hero{padding:56px 0 60px;min-height:calc(100vh - 120px)}
@@ -716,32 +719,96 @@
       .final{padding:28px}
     }
 
-    @media(prefers-reduced-motion:reduce){
-      *{animation:none!important;transition:none!important}
-    }
+    
+
+/* ✅ Mobile fixes (performance + layout) */
+@media(max-width:600px){
+  /* Make hero fit on first screen */
+  .hero{padding:22px 0 34px;min-height:auto}
+  .hero-main{margin:18px auto 18px !important}
+
+  /* Remove bottom badges row already removed from HTML; keep spacing tidy */
+  .hero-top{margin-bottom:16px}
+  .chip{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,.06)}
+
+  /* Pricing: 2x2 grid */
+  .pricing{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .plan{padding:18px}
+  .plan .name{font-size:15px}
+  .plan .price{font-size:40px;letter-spacing:-.02em}
+  .plan .old{font-size:15px}
+  .plan .per{font-size:13px}
+  .plan ul{margin-top:12px}
+  .plan li{font-size:13px}
+
+  /* Buttons fit */
+  .plan .btn{width:100%}
+
+  /* Mobile wallpaper */
+  .bg{
+    background:
+      radial-gradient(ellipse 900px 560px at 50% 0%, rgba(255,255,255,.03), transparent 60%),
+      linear-gradient(180deg, rgba(3,3,3,.24) 0%, rgba(5,5,5,.27) 55%, rgba(3,3,3,.24) 100%),
+      url("mobilelogo.png") center/cover no-repeat;
+  }
+
+  /* Mobile performance: no snow + avoid fixed attachment */
+  .snow{
+  display:none!important}
+    body{background-attachment:scroll}
   
-
-/* Hero CTA layout (center + longer) */
-.hero-actions{flex-direction:column;align-items:center;gap:12px}
-.hero-actions .btn{justify-content:center}
-.hero-actions .btn:not(.primary){background:rgba(255,255,255,.04)}
-
-/* Social-proof: keep only counter */
-.social-proof{display:flex;align-items:center;justify-content:flex-start;gap:14px}
-
-
-/* Extra spacing between blocks */
-    #benefits{padding-top:140px;padding-bottom:140px}
-    #pricing{padding-top:150px;padding-bottom:150px}
-    #special{padding-top:150px;padding-bottom:140px}
-    #faq{padding-top:90px}
-
-
-/* ❄️ Snow (more visible + glow + 4 layers) */
-.snow{
-  position:fixed;inset:0;z-index:-9;
-  pointer-events:none;
-  opacity:.30;
+    /* Mobile performance: slightly lighter blur */
+    :is(.card,.feature,.step,details,.deal,.guarantee,.final,.special,.callout,.kv .box,.plan){
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+    
+  will-change: transform, backdrop-filter;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+  
+    /* Special accordion: closed by default */
+    .kv-accordion{grid-template-columns:1fr;gap:10px}
+    .kv-item{padding:14px}
+    .kv-item summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between}
+    .kv-item summary::-webkit-details-marker{display:none}
+    .kv-body{margin-top:10px;color:var(--muted);font-weight:700}
+  }
+  
+  /* Desktop/tablet: show special items expanded like before */
+  @media(min-width:601px){
+    .kv-item{padding:18px}
+    .kv-item summary{cursor:default;list-style:none}
+    .kv-item summary::-webkit-details-marker{display:none}
+    details.kv-item:not([open]) > :not(summary){display:block}
+    .kv-body{margin-top:6px}
+  }
+  @media(prefers-reduced-motion:reduce){
+        *{animation:none!important;transition:none!important}
+      }
+    
+  
+  /* Hero CTA layout (center + longer) */
+  .hero-actions{flex-direction:column;align-items:center;gap:12px}
+  .hero-actions .btn{justify-content:center}
+  .hero-actions .btn:not(.primary){background:rgba(255,255,255,.04)}
+  
+  /* Social-proof: keep only counter */
+  .social-proof{display:flex;align-items:center;justify-content:flex-start;gap:14px}
+  
+  
+  /* Extra spacing between blocks */
+      #benefits{padding-top:140px;padding-bottom:140px}
+      #pricing{padding-top:150px;padding-bottom:150px}
+      #special{padding-top:150px;padding-bottom:140px}
+      #faq{padding-top:90px}
+  
+  
+  /* ❄️ Snow (more visible + glow + 4 layers) */
+  .snow{
+    position:fixed;inset:0;z-index:-9;
+    pointer-events:none;
+    opacity:.22;
   background-image:
     radial-gradient(circle,rgba(255,255,255,.55) 0 1.3px,transparent 2.4px),
     radial-gradient(circle,rgba(255,255,255,.38) 0 1.0px,transparent 2.0px),
@@ -754,6 +821,8 @@
 }
 .snow::before,
 .snow::after{
+  display:none;
+
   content:"";
   position:absolute;inset:0;
   pointer-events:none;
@@ -937,7 +1006,7 @@ summary:focus-visible{
   background:
     radial-gradient(ellipse 1100px 650px at 50% 0%, rgba(255,255,255,.03), transparent 60%),
     radial-gradient(ellipse 900px 560px at 80% 100%, rgba(255,255,255,.02), transparent 55%),
-    linear-gradient(180deg, rgba(3,3,3,.16) 0%, rgba(5,5,5,.18) 55%, rgba(3,3,3,.16) 100%),
+    linear-gradient(180deg, rgba(3,3,3,.24) 0%, rgba(5,5,5,.27) 55%, rgba(3,3,3,.24) 100%),
     url("logokk.png") center/cover no-repeat fixed;
 }
 
@@ -1181,11 +1250,12 @@ details,
 <a class="btn primary big hero-cta" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">🧪 Пробный тест</a>
 <a class="btn" href="#pricing">Тарифы 💎</a>
 </div>
-</div>
 <div class="trust-row">
-<span class="badge">🧾 <strong>Без логов</strong></span>
-<span class="badge">🛡️ <strong>AES-256</strong> шифрование</span>
-<span class="badge">💬 <strong>Поддержка 24/7</strong></span>
+  <span class="badge">🧾 <strong>Без логов</strong></span>
+  <span class="badge">🛡️ <strong>AES-256</strong> шифрование</span>
+  <span class="badge">💬 <strong>Поддержка 24/7</strong></span>
+</div>
+
 </div>
 </div>
 </div>
@@ -1388,11 +1458,23 @@ details,
                 💾 Трафик: <strong>90 ГБ</strong>
 </div>
 </div>
-<div class="kv">
-<div class="box"><b>📶 Трафик</b><span>90 ГБ — комфортно для ежедневных задач</span></div>
-<div class="box"><b>➕ Докупка</b><span>Можно докупить трафик при необходимости</span></div>
-<div class="box"><b>🎬 YouTube</b><span>Без рекламы на YouTube</span></div>
-<div class="box"><b>⚡️ Быстрый старт</b><span>Подключение через Telegram</span></div>
+<div class="kv kv-accordion">
+  <details class="box kv-item">
+    <summary><b>📶 Трафик</b></summary>
+    <div class="kv-body">90 ГБ — комфортно для ежедневных задач</div>
+  </details>
+  <details class="box kv-item">
+    <summary><b>➕ Докупка</b></summary>
+    <div class="kv-body">Можно докупить трафик при необходимости</div>
+  </details>
+  <details class="box kv-item">
+    <summary><b>🎬 YouTube</b></summary>
+    <div class="kv-body">Без рекламы на YouTube</div>
+  </details>
+  <details class="box kv-item">
+    <summary><b>⚡️ Быстрый старт</b></summary>
+    <div class="kv-body">Подключение через Telegram</div>
+  </details>
 </div>
 <div class="callout warn">
 <strong>❗️ Ограничение:</strong> Если не работают даже сайты из белого списка (Яндекс, VK, Госуслуги) — Unblock технически не сможет помочь.
@@ -1431,7 +1513,12 @@ details,
       bar.style.transform = `scaleX(${p})`;
     };
     updateProgress();
-    window.addEventListener('scroll', () => requestAnimationFrame(updateProgress), { passive: true });
+    let _progTick=false;
+    window.addEventListener('scroll', () => {
+      if(_progTick) return;
+      _progTick=true;
+      requestAnimationFrame(() => { _progTick=false; updateProgress(); });
+    }, { passive: true });
 
     const mnav = document.getElementById('mnav');
     const menuBtn = document.getElementById('menuBtn');
@@ -1518,42 +1605,6 @@ details,
     };
     renderTimer();
     setInterval(renderTimer, 1000);
-
-
-    // ✨ Premium spotlight + gentle 3D tilt (pointer-follow)
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion) {
-      const targets = document.querySelectorAll('.spotlight, .feature, .step, .plan, .special');
-      targets.forEach((el) => {
-        let raf = 0;
-        const handle = (ev) => {
-          const e = (ev.touches && ev.touches[0]) ? ev.touches[0] : ev;
-          if (!e || typeof e.clientX !== 'number') return;
-          if (raf) return;
-          raf = requestAnimationFrame(() => {
-            raf = 0;
-            const r = el.getBoundingClientRect();
-            const x = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
-            const y = Math.min(Math.max((e.clientY - r.top) / r.height, 0), 1);
-const tilt = 6; // deg (subtle)
-            const rx = ((0.5 - y) * tilt).toFixed(2);
-            const ry = ((x - 0.5) * tilt).toFixed(2);
-            el.style.setProperty('--rx', `${rx}deg`);
-            el.style.setProperty('--ry', `${ry}deg`);
-          });
-        };
-
-        const reset = () => {
-          el.style.removeProperty('--rx');
-          el.style.removeProperty('--ry');
-};
-
-        el.addEventListener('pointerenter', handle, { passive: true });
-        el.addEventListener('pointermove', handle, { passive: true });
-        el.addEventListener('pointerleave', reset, { passive: true });
-        el.addEventListener('touchstart', handle, { passive: true });
-      });
-    }
-  </script>
+</script>
 </body>
 </html>

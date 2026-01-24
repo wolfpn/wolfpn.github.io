@@ -1149,6 +1149,56 @@ details,
   .kv-pack-row{padding:10px}
 }
 
+
+/* =========================
+   Mobile pricing compact fix
+   (smaller cards + no overlap)
+   ========================= */
+@media(max-width:600px){
+  /* keep 2x2 grid, but tighter */
+  .pricing{gap:10px !important}
+
+  /* remove floating badge overlap */
+  .plan-wrap{padding-top:0 !important}
+  .badge-over{
+    position:static !important;
+    transform:none !important;
+    left:auto !important; top:auto !important;
+    margin:0 0 10px 0 !important;
+    padding:8px 12px !important;
+    font-size:10px !important;
+    letter-spacing:.25px !important;
+    width:fit-content;
+    max-width:100%;
+  }
+
+  /* shrink plan cards */
+  .plan{padding:14px !important;border-radius:24px !important}
+  .plan .name{font-size:14px !important;line-height:1.15}
+  .plan .old{font-size:13px !important}
+  .plan .price{font-size:32px !important;line-height:1.0}
+  .plan .per{font-size:12px !important}
+
+  .plan ul{margin-top:10px !important}
+  .plan li{font-size:12px !important;line-height:1.25}
+
+  /* shrink button */
+  .plan .btn{
+    padding:14px 14px !important;
+    font-size:15px !important;
+    border-radius:18px !important;
+    min-height:48px !important;
+  }
+}
+
+@media(max-width:420px){
+  .pricing{gap:9px !important}
+  .plan{padding:12px !important}
+  .plan .price{font-size:30px !important}
+  .badge-over{font-size:9px !important}
+  .plan .btn{min-height:46px !important}
+}
+
 </style>
 </head>
 <body>

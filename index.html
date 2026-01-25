@@ -1253,6 +1253,51 @@ details,
   .plan .btn.buy{min-height:42px!important}
 }
 
+
+
+/* =========================
+   EXTRA: make pricing cards even smaller on mobile
+   ========================= */
+@media(max-width:600px){
+  .pricing{gap:6px!important}
+  .plan{padding:10px!important;border-radius:16px!important}
+  .plan .name{font-size:12px!important;line-height:1.12!important;margin-bottom:6px!important}
+  .plan .old{font-size:11px!important}
+  .plan .price{font-size:28px!important}
+  .plan .per{font-size:10px!important;line-height:1.2!important;margin-top:2px!important}
+  .plan ul{margin:6px 0 10px!important;padding-left:14px!important;line-height:1.28!important}
+  .plan ul li{margin-bottom:3px!important}
+  .plan li{font-size:10.5px!important}
+
+  .plan .btn,
+  .plan .btn.buy{
+    padding:10px 10px!important;
+    font-size:13px!important;
+    border-radius:14px!important;
+    min-height:40px!important;
+  }
+
+  .badge-over{
+    margin:0 0 6px 0!important;
+    padding:5px 8px!important;
+    font-size:8.5px!important;
+  }
+}
+
+@media(max-width:420px){
+  .pricing{gap:5px!important}
+  .plan{padding:9px!important}
+  .plan .price{font-size:26px!important}
+  .plan li{font-size:10px!important}
+  .plan .btn,
+  .plan .btn.buy{min-height:38px!important;padding:9px 10px!important}
+}
+
+@media(max-width:360px){
+  .plan .price{font-size:24px!important}
+  .plan .name{font-size:11px!important}
+}
+
 </style>
 </head>
 <body>
@@ -1820,6 +1865,45 @@ details,
       document.documentElement.classList.remove('bf-kick');
     });
   });
+})();
+</script>
+
+
+<script>
+(function(){
+  // Stronger iOS Safari fix: toggle backdrop-filter itself to force immediate rendering.
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if(!isIOS) return;
+
+  function forceBackdropRepaint(){
+    var sel = '.card,.plan,.feature,.step,details,.deal,.guarantee,.final,.special,.callout,.kv .box';
+    var els = document.querySelectorAll(sel);
+    if(!els.length) return;
+
+    // 1) temporarily override to blur(0), 2) force layout, 3) remove override -> CSS blur shows immediately
+    els.forEach(function(el){
+      el.style.webkitBackdropFilter = 'blur(0px)';
+      el.style.backdropFilter = 'blur(0px)';
+      // force layout
+      void el.offsetHeight;
+    });
+
+    requestAnimationFrame(function(){
+      els.forEach(function(el){
+        el.style.webkitBackdropFilter = '';
+        el.style.backdropFilter = '';
+      });
+    });
+  }
+
+  // Run after DOM is ready and once again after full load (covers late-loading fonts/images)
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', forceBackdropRepaint, {once:true});
+  } else {
+    forceBackdropRepaint();
+  }
+  window.addEventListener('load', function(){ setTimeout(forceBackdropRepaint, 0); }, {once:true});
 })();
 </script>
 

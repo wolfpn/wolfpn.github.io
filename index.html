@@ -17,13 +17,6 @@
 <meta content="vpn, впн, скачать vpn, установить vpn, лучший vpn" name="keywords"/>
 <meta content="index,follow" name="robots"/>
 <link href="https://wolfpn.github.io/" rel="canonical"/>
-<meta content="ru_RU" property="og:locale"/>
-<meta content="website" property="og:type"/>
-<meta content="WolfPN — лучший VPN 2026 | Пробный тест" property="og:title"/>
-<meta content="Пробный тест премиального VPN. Быстро и безопасно для iPhone, Android, Windows, macOS. Без логов. AES-256. Поддержка 24/7." property="og:description"/>
-<meta content="https://wolfpn.github.io/" property="og:url"/>
-<meta content="https://wolfpn.github.io/og.jpg" property="og:image"/>
-<meta content="WolfPN" property="og:site_name"/>
 
 <style>
 :root {
@@ -34,28 +27,26 @@
   --line: rgba(255,255,255,.08);
   --line2: rgba(255,255,255,.12);
   --line3: rgba(255,255,255,.18);
-
   --ctaText: #0a0a0a;
-
   --shadow: 0 20px 60px rgba(0,0,0,.5);
   --shadow2: 0 30px 110px rgba(0,0,0,.65);
-
-  /* Блюр 5px и прозрачность 0 */
   --blur: blur(5px);
-
   --radius: 24px;
   --radius2: 28px;
   --max: 1200px;
   --heroMax: 1200px;
   --heroPad: 56px;
-
-  /* Жидкое стекло - полностью прозрачный фон */
   --glass-bg: rgba(255,255,255,0);
   --glass-border: rgba(255,255,255,.15);
   --glass-shadow: 
     0 8px 32px rgba(0,0,0,.3),
     inset 0 1px 0 rgba(255,255,255,.1),
     inset 0 -1px 0 rgba(255,255,255,.05);
+  
+  /* Accent colors */
+  --accent1: rgba(255, 100, 150, 1);
+  --accent2: rgba(100, 150, 255, 1);
+  --accent3: rgba(255, 180, 100, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,7 +61,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Apple Emoji */
 h1, h2, h3, p, span, a, b, strong, summary, li {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
 }
@@ -83,93 +73,267 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   white-space: nowrap; border: 0;
 }
 
-/* ===== АБСТРАКТНЫЕ ОБОИ ===== */
+/* ===== COSMIC NEBULA BACKGROUND ===== */
 .bg {
   position: fixed;
   inset: 0;
-  z-index: -12;
-  background: #0a0a0f;
+  z-index: -15;
+  background: #030308;
+  overflow: hidden;
 }
 
-/* Абстрактные формы */
+/* Main nebula clouds */
 .bg::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -20%;
   background: 
-    /* Большой фиолетовый блоб слева сверху */
-    radial-gradient(ellipse 800px 600px at 15% 20%, rgba(120, 80, 200, .35) 0%, transparent 60%),
-    /* Синий блоб справа */
-    radial-gradient(ellipse 600px 500px at 85% 30%, rgba(60, 100, 180, .3) 0%, transparent 55%),
-    /* Розовый блоб снизу слева */
-    radial-gradient(ellipse 700px 550px at 20% 80%, rgba(180, 80, 150, .25) 0%, transparent 50%),
-    /* Голубой блоб справа снизу */
-    radial-gradient(ellipse 500px 400px at 80% 75%, rgba(80, 150, 200, .28) 0%, transparent 50%),
-    /* Оранжевый акцент по центру */
-    radial-gradient(ellipse 400px 350px at 50% 50%, rgba(200, 120, 80, .15) 0%, transparent 50%),
-    /* Тёмный градиент основа */
-    linear-gradient(135deg, #0a0a12 0%, #0f0a18 25%, #0a0f15 50%, #12081a 75%, #0a0a0f 100%);
-  animation: bgShift 30s ease-in-out infinite;
+    /* Hot pink nebula - top left */
+    radial-gradient(ellipse 70% 50% at 20% 25%, rgba(255, 60, 120, .22) 0%, rgba(255, 60, 120, .08) 30%, transparent 60%),
+    /* Deep blue nebula - right */
+    radial-gradient(ellipse 60% 70% at 85% 40%, rgba(60, 100, 255, .2) 0%, rgba(60, 100, 255, .06) 35%, transparent 60%),
+    /* Purple core - center */
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(140, 80, 200, .15) 0%, rgba(100, 60, 180, .05) 40%, transparent 65%),
+    /* Orange/gold accent - bottom */
+    radial-gradient(ellipse 50% 40% at 30% 80%, rgba(255, 150, 80, .18) 0%, rgba(255, 120, 60, .05) 35%, transparent 55%),
+    /* Cyan mist - top right */
+    radial-gradient(ellipse 45% 35% at 75% 15%, rgba(80, 200, 255, .12) 0%, transparent 50%),
+    /* Deep space gradient */
+    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(20, 10, 40, .8) 0%, transparent 70%),
+    linear-gradient(160deg, #08050f 0%, #0a0815 30%, #050812 60%, #0a0510 100%);
+  animation: nebulaFlow 40s ease-in-out infinite;
 }
 
-@keyframes bgShift {
+@keyframes nebulaFlow {
   0%, 100% { 
-    filter: hue-rotate(0deg) brightness(1);
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg);
   }
-  50% { 
-    filter: hue-rotate(15deg) brightness(1.05);
+  33% { 
+    transform: scale(1.02) rotate(0.5deg);
+    filter: hue-rotate(10deg);
+  }
+  66% { 
+    transform: scale(0.98) rotate(-0.5deg);
+    filter: hue-rotate(-5deg);
   }
 }
 
-/* Дополнительные плавающие блобы */
+/* Secondary nebula layer */
 .bg::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10%;
   background:
-    radial-gradient(circle 300px at 30% 40%, rgba(150, 100, 220, .2) 0%, transparent 50%),
-    radial-gradient(circle 250px at 70% 60%, rgba(100, 140, 200, .18) 0%, transparent 45%),
-    radial-gradient(circle 200px at 50% 20%, rgba(180, 100, 160, .15) 0%, transparent 40%);
-  animation: blobFloat 20s ease-in-out infinite;
-  pointer-events: none;
+    /* Wispy clouds */
+    radial-gradient(ellipse 100% 30% at 50% 20%, rgba(255, 100, 150, .08) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 25% at 20% 60%, rgba(100, 140, 255, .06) 0%, transparent 45%),
+    radial-gradient(ellipse 70% 20% at 80% 75%, rgba(255, 180, 120, .07) 0%, transparent 40%),
+    /* Dust particles effect */
+    radial-gradient(ellipse 120% 40% at 50% 80%, rgba(180, 140, 220, .05) 0%, transparent 50%);
+  animation: nebulaDrift 30s ease-in-out infinite reverse;
+  opacity: .9;
 }
 
-@keyframes blobFloat {
+@keyframes nebulaDrift {
   0%, 100% { 
-    transform: translate(0, 0) scale(1);
-    opacity: .8;
+    transform: translateX(0) translateY(0);
   }
-  33% { 
-    transform: translate(30px, -20px) scale(1.05);
-    opacity: 1;
-  }
-  66% { 
-    transform: translate(-20px, 30px) scale(.95);
-    opacity: .85;
+  50% { 
+    transform: translateX(2%) translateY(-1%);
   }
 }
 
-/* Мелкие частицы */
-.particles {
+/* Stars layer */
+.stars {
   position: fixed;
   inset: 0;
-  z-index: -11;
-  background-image:
-    radial-gradient(circle 2px at 20% 30%, rgba(255,255,255,.15) 0%, transparent 100%),
-    radial-gradient(circle 1.5px at 80% 20%, rgba(255,255,255,.12) 0%, transparent 100%),
-    radial-gradient(circle 2px at 40% 70%, rgba(255,255,255,.1) 0%, transparent 100%),
-    radial-gradient(circle 1px at 60% 50%, rgba(255,255,255,.18) 0%, transparent 100%),
-    radial-gradient(circle 1.5px at 10% 80%, rgba(255,255,255,.08) 0%, transparent 100%),
-    radial-gradient(circle 2px at 90% 60%, rgba(255,255,255,.12) 0%, transparent 100%),
-    radial-gradient(circle 1px at 35% 15%, rgba(255,255,255,.15) 0%, transparent 100%),
-    radial-gradient(circle 1.5px at 75% 85%, rgba(255,255,255,.1) 0%, transparent 100%);
-  animation: particlesDrift 25s linear infinite;
+  z-index: -14;
   pointer-events: none;
 }
 
-@keyframes particlesDrift {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50px); }
+/* Dense star field */
+.stars::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    /* Bright stars */
+    radial-gradient(circle 2px at 15% 15%, rgba(255,255,255,.95) 0%, transparent 100%),
+    radial-gradient(circle 1.8px at 85% 25%, rgba(255,240,220,.9) 0%, transparent 100%),
+    radial-gradient(circle 2.2px at 45% 10%, rgba(220,240,255,.85) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 70% 45%, rgba(255,255,255,.8) 0%, transparent 100%),
+    radial-gradient(circle 2px at 25% 55%, rgba(255,220,200,.9) 0%, transparent 100%),
+    radial-gradient(circle 1.7px at 90% 70%, rgba(200,220,255,.85) 0%, transparent 100%),
+    radial-gradient(circle 2.5px at 10% 85%, rgba(255,255,255,.95) 0%, transparent 100%),
+    radial-gradient(circle 1.8px at 55% 90%, rgba(255,240,230,.8) 0%, transparent 100%),
+    radial-gradient(circle 2px at 75% 5%, rgba(230,240,255,.9) 0%, transparent 100%),
+    radial-gradient(circle 1.6px at 35% 35%, rgba(255,255,255,.75) 0%, transparent 100%),
+    /* Medium stars */
+    radial-gradient(circle 1.2px at 5% 40%, rgba(255,255,255,.6) 0%, transparent 100%),
+    radial-gradient(circle 1px at 95% 55%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(circle 1.3px at 40% 65%, rgba(255,255,255,.55) 0%, transparent 100%),
+    radial-gradient(circle 1.1px at 60% 30%, rgba(255,255,255,.6) 0%, transparent 100%),
+    radial-gradient(circle 1px at 20% 75%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(circle 1.2px at 80% 85%, rgba(255,255,255,.55) 0%, transparent 100%),
+    /* Dim stars */
+    radial-gradient(circle .8px at 12% 28%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(circle .7px at 48% 48%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(circle .9px at 72% 18%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(circle .8px at 88% 38%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(circle .7px at 32% 88%, rgba(255,255,255,.25) 0%, transparent 100%),
+    radial-gradient(circle .9px at 58% 72%, rgba(255,255,255,.35) 0%, transparent 100%);
+  animation: starsTwinkle 6s ease-in-out infinite;
+}
+
+/* More stars - second layer */
+.stars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 1px at 8% 12%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(circle .8px at 22% 8%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(circle 1.1px at 38% 22%, rgba(255,255,255,.45) 0%, transparent 100%),
+    radial-gradient(circle .9px at 52% 5%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(circle 1px at 68% 32%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(circle .7px at 82% 12%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(circle 1.2px at 92% 28%, rgba(255,255,255,.55) 0%, transparent 100%),
+    radial-gradient(circle .8px at 18% 42%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(circle 1px at 28% 68%, rgba(255,255,255,.45) 0%, transparent 100%),
+    radial-gradient(circle .9px at 42% 82%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(circle 1.1px at 62% 58%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(circle .8px at 78% 78%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(circle 1px at 88% 92%, rgba(255,255,255,.45) 0%, transparent 100%),
+    radial-gradient(circle .7px at 2% 95%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(circle .9px at 98% 48%, rgba(255,255,255,.4) 0%, transparent 100%);
+  animation: starsTwinkle 8s ease-in-out infinite reverse;
+  opacity: .85;
+}
+
+@keyframes starsTwinkle {
+  0%, 100% { opacity: 1; }
+  25% { opacity: .7; }
+  50% { opacity: .9; }
+  75% { opacity: .6; }
+}
+
+/* Shooting star */
+.shooting-star {
+  position: fixed;
+  z-index: -13;
+  pointer-events: none;
+}
+
+.shooting-star::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.8), rgba(255,255,255,0));
+  top: 15%;
+  left: -100px;
+  transform: rotate(-35deg);
+  animation: shootingStar 8s ease-in-out infinite;
+  opacity: 0;
+}
+
+.shooting-star::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.6), rgba(255,255,255,0));
+  top: 65%;
+  right: -80px;
+  transform: rotate(-40deg);
+  animation: shootingStar2 12s ease-in-out infinite;
+  animation-delay: 4s;
+  opacity: 0;
+}
+
+@keyframes shootingStar {
+  0%, 90%, 100% { 
+    opacity: 0;
+    transform: rotate(-35deg) translateX(0);
+  }
+  92% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0;
+    transform: rotate(-35deg) translateX(calc(100vw + 200px));
+  }
+}
+
+@keyframes shootingStar2 {
+  0%, 85%, 100% { 
+    opacity: 0;
+    transform: rotate(-40deg) translateX(0);
+  }
+  87% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+    transform: rotate(-40deg) translateX(calc(-100vw - 200px));
+  }
+}
+
+/* Glowing orbs */
+.orbs {
+  position: fixed;
+  inset: 0;
+  z-index: -12;
+  pointer-events: none;
+}
+
+.orbs::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 100, 150, .15) 0%, rgba(255, 100, 150, .05) 40%, transparent 70%);
+  top: 10%;
+  left: 5%;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: orbPulse1 10s ease-in-out infinite;
+}
+
+.orbs::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(100, 150, 255, .12) 0%, rgba(100, 150, 255, .04) 40%, transparent 70%);
+  bottom: 15%;
+  right: 10%;
+  border-radius: 50%;
+  filter: blur(35px);
+  animation: orbPulse2 12s ease-in-out infinite;
+}
+
+@keyframes orbPulse1 {
+  0%, 100% { 
+    transform: scale(1) translate(0, 0);
+    opacity: .8;
+  }
+  50% { 
+    transform: scale(1.15) translate(20px, -10px);
+    opacity: 1;
+  }
+}
+
+@keyframes orbPulse2 {
+  0%, 100% { 
+    transform: scale(1) translate(0, 0);
+    opacity: .7;
+  }
+  50% { 
+    transform: scale(1.1) translate(-15px, 15px);
+    opacity: .9;
+  }
 }
 
 /* Progress bar */
@@ -186,11 +350,11 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   height: 100%;
   transform-origin: left;
   transform: scaleX(0);
-  background: linear-gradient(90deg, rgba(255,217,163,.25), rgba(255,179,106,.95), rgba(255,217,163,.25));
+  background: linear-gradient(90deg, rgba(255,100,150,.4), rgba(255,255,255,.9), rgba(100,150,255,.4));
   transition: transform .1s linear;
 }
 
-/* ===== ОСТРОВОК МЕНЮ (ШИРЕ) ===== */
+/* ===== ISLAND MENU ===== */
 header {
   position: fixed;
   top: 16px;
@@ -227,7 +391,7 @@ header {
 
 .nav-island:hover {
   padding: 12px 24px;
-  box-shadow: var(--glass-shadow), 0 0 40px rgba(255,255,255,.05);
+  box-shadow: var(--glass-shadow), 0 0 50px rgba(255,100,150,.08);
 }
 
 .brand {
@@ -290,7 +454,7 @@ header {
 .cta-island {
   padding: 10px 22px;
   border-radius: 30px;
-  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffffff 100%);
   color: var(--ctaText);
   border: none;
   font-weight: 700;
@@ -302,7 +466,7 @@ header {
 
 .cta-island:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(255,255,255,.15);
+  box-shadow: 0 8px 30px rgba(255,100,150,.2);
 }
 
 .menuBtn {
@@ -431,38 +595,13 @@ header {
 }
 
 .mnav a.primary {
-  border: 1px solid rgba(255,179,106,.4);
-  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  border: 1px solid rgba(255,100,150,.3);
+  background: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
   color: #1a1a1a;
   font-weight: 800;
 }
 
-/* ===== ЖИДКОЕ СТЕКЛО ===== */
-.glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: var(--blur) saturate(180%);
-  -webkit-backdrop-filter: var(--blur) saturate(180%);
-  box-shadow: var(--glass-shadow);
-}
-
-/* Блик при наведении */
-.glass::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
-  transition: left .5s ease;
-  pointer-events: none;
-}
-
-.glass:hover::before {
-  left: 100%;
-}
-
+/* Glass effect */
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
@@ -506,7 +645,7 @@ header {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,100,150,.25), rgba(100,150,255,.25), transparent);
 }
 
 .card:hover {
@@ -551,11 +690,11 @@ header {
 
 .chip:hover {
   background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.2);
+  border-color: rgba(255,100,150,.25);
   color: var(--text);
 }
 
-/* ===== ЗАГОЛОВОК ВИДИМЫЙ ===== */
+/* Headline */
 h1 {
   font-size: clamp(36px, 6vw, 64px);
   font-weight: 800;
@@ -565,9 +704,8 @@ h1 {
   color: #ffffff;
 }
 
-/* Градиент для заголовка */
 .grad {
-  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 40%, #ffffff 60%, #d0d0d0 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffb8d0 25%, #ffffff 50%, #b8d0ff 75%, #ffffff 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -580,7 +718,6 @@ h1 {
   50% { background-position: 100% 50%; }
 }
 
-/* Анимация букв */
 .headline-anim {
   display: inline;
 }
@@ -592,7 +729,7 @@ h1 {
   transform: translateY(15px);
   animation: letterIn .5s cubic-bezier(.2,.8,.2,1) forwards;
   animation-delay: calc(var(--i) * .025s);
-  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 40%, #ffffff 60%, #d0d0d0 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffb8d0 25%, #ffffff 50%, #b8d0ff 75%, #ffffff 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -621,7 +758,7 @@ h1 {
   margin-top: 26px;
 }
 
-/* Кнопки */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -645,7 +782,7 @@ h1 {
 
 .btn:hover {
   background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.2);
+  border-color: rgba(255,100,150,.25);
   transform: translateY(-2px);
 }
 
@@ -654,21 +791,21 @@ h1 {
 }
 
 .btn.primary {
-  border: 1px solid rgba(255,179,106,.4);
+  border: 1px solid rgba(255,100,150,.35);
   color: var(--ctaText);
-  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
-  box-shadow: 0 8px 30px rgba(255,179,106,.2);
+  background: linear-gradient(135deg, #ffffff 0%, #fff5f8 50%, #ffffff 100%);
+  box-shadow: 0 8px 30px rgba(255,100,150,.2);
   animation: pulseCTA 3s ease-in-out infinite;
 }
 
 .btn.primary:hover {
-  box-shadow: 0 12px 40px rgba(255,179,106,.3);
+  box-shadow: 0 12px 45px rgba(255,100,150,.3);
   transform: translateY(-3px);
 }
 
 @keyframes pulseCTA {
-  0%, 100% { box-shadow: 0 8px 30px rgba(255,179,106,.2); }
-  50% { box-shadow: 0 8px 40px rgba(255,179,106,.35); }
+  0%, 100% { box-shadow: 0 8px 30px rgba(255,100,150,.2); }
+  50% { box-shadow: 0 8px 45px rgba(255,100,150,.35); }
 }
 
 .btn.big {
@@ -715,6 +852,7 @@ h1 {
 .badge:hover {
   transform: translateY(-2px);
   background: rgba(255,255,255,.06);
+  border-color: rgba(255,100,150,.2);
 }
 
 .badge strong {
@@ -722,7 +860,7 @@ h1 {
   font-weight: 800;
 }
 
-/* Hero plaque - скрыт на мобильных */
+/* Hero plaque */
 .hero-plaque {
   position: absolute;
   top: 18px;
@@ -802,12 +940,12 @@ section {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,100,150,.04), transparent);
   transition: left .5s ease;
 }
 
 .feature:hover {
-  border-color: rgba(255,255,255,.2);
+  border-color: rgba(255,100,150,.2);
 }
 
 .feature:hover::before {
@@ -897,8 +1035,8 @@ section {
   transform: translateY(-40%);
   padding: 10px 16px;
   border-radius: 100px;
-  background: rgba(255,255,255,.1);
-  border: 1px solid var(--glass-border);
+  background: linear-gradient(135deg, rgba(255,100,150,.15), rgba(100,150,255,.1));
+  border: 1px solid rgba(255,100,150,.3);
   backdrop-filter: var(--blur);
   -webkit-backdrop-filter: var(--blur);
   color: var(--text);
@@ -911,8 +1049,8 @@ section {
 }
 
 @keyframes badgePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.2); }
-  50% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,100,150,.3); }
+  50% { box-shadow: 0 0 0 8px rgba(255,100,150,0); }
 }
 
 .plan {
@@ -938,12 +1076,12 @@ section {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,100,150,.03), transparent);
   transition: left .5s ease;
 }
 
 .plan:hover {
-  border-color: rgba(255,255,255,.2);
+  border-color: rgba(255,100,150,.2);
 }
 
 .plan:hover::before {
@@ -951,12 +1089,12 @@ section {
 }
 
 .plan.best {
-  border-color: rgba(255,179,106,.25);
-  background: rgba(255,179,106,.03);
+  border-color: rgba(255,100,150,.25);
+  background: linear-gradient(135deg, rgba(255,100,150,.03), rgba(100,150,255,.02));
 }
 
 .plan.best:hover {
-  border-color: rgba(255,179,106,.4);
+  border-color: rgba(255,100,150,.4);
 }
 
 .plan .name {
@@ -1022,11 +1160,11 @@ details {
 }
 
 details:hover {
-  border-color: rgba(255,255,255,.2);
+  border-color: rgba(255,100,150,.2);
 }
 
 details[open] {
-  background: rgba(255,255,255,.03);
+  background: rgba(255,100,150,.02);
 }
 
 summary {
@@ -1124,7 +1262,7 @@ details p {
 }
 
 .special:hover {
-  border-color: rgba(255,255,255,.2);
+  border-color: rgba(255,100,150,.2);
 }
 
 .special-head {
@@ -1283,7 +1421,7 @@ footer {
   color: var(--text);
 }
 
-/* Reveal animations */
+/* Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -1306,7 +1444,7 @@ footer {
   transform: translateY(0);
 }
 
-/* Stagger animation */
+/* Stagger */
 .grid .reveal:nth-child(1) { transition-delay: .05s; }
 .grid .reveal:nth-child(2) { transition-delay: .1s; }
 .grid .reveal:nth-child(3) { transition-delay: .15s; }
@@ -1323,296 +1461,80 @@ footer {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .pricing {
-    grid-template-columns: 1fr 1fr;
-  }
+  .grid { grid-template-columns: 1fr 1fr; }
+  .pricing { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 850px) {
-  .nav-island {
-    min-width: auto;
-    padding: 8px 12px;
-  }
-  
-  .nav-links {
-    display: none;
-  }
-  
-  .cta-island {
-    display: none;
-  }
-  
-  .menuBtn {
-    display: flex;
-  }
+  .nav-island { min-width: auto; padding: 8px 12px; }
+  .nav-links { display: none; }
+  .cta-island { display: none; }
+  .menuBtn { display: flex; }
 }
 
 @media (max-width: 768px) {
-  :root {
-    --heroPad: 30px;
-  }
-  
-  .special-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .faq {
-    grid-template-columns: 1fr;
-  }
+  :root { --heroPad: 30px; }
+  .special-grid { grid-template-columns: 1fr; }
+  .faq { grid-template-columns: 1fr; }
 }
 
-/* ===== МОБИЛЬНЫЕ - КАРТОЧКИ МЕНЬШЕ ===== */
 @media (max-width: 600px) {
-  :root {
-    --heroPad: 20px;
-  }
-  
-  header {
-    top: 10px;
-  }
-  
-  .nav-island {
-    padding: 6px 10px;
-    gap: 8px;
-  }
-  
-  .avatar {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .brand strong {
-    font-size: 14px;
-  }
-  
-  section {
-    padding: 60px 0;
-  }
-  
-  .hero {
-    padding: 90px 0 50px;
-    min-height: auto;
-  }
-  
-  h1 {
-    font-size: 28px;
-    letter-spacing: -1px;
-  }
-  
-  .sub {
-    font-size: 15px;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  /* Карточки меньше на мобильных */
-  .feature {
-    padding: 16px;
-    border-radius: 16px;
-  }
-  
-  .feature .icon {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .feature b {
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-  
-  .feature span {
-    font-size: 13px;
-  }
-  
-  /* Pricing - 2 колонки, маленькие карточки */
-  .pricing {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-  
-  .plan-wrap {
-    padding-top: 0;
-  }
-  
-  .badge-over {
-    position: static;
-    transform: none;
-    margin-bottom: 8px;
-    font-size: 9px;
-    padding: 6px 10px;
-  }
-  
-  .plan {
-    padding: 14px;
-    border-radius: 18px;
-  }
-  
-  .plan .name {
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  
-  .plan .old {
-    font-size: 12px;
-  }
-  
-  .plan .price {
-    font-size: 24px;
-  }
-  
-  .plan .per {
-    font-size: 11px;
-  }
-  
-  .plan ul {
-    margin: 10px 0;
-    padding-left: 14px;
-  }
-  
-  .plan li {
-    font-size: 11px;
-    margin-bottom: 3px;
-  }
-  
-  .btn.buy {
-    padding: 10px 12px;
-    font-size: 12px;
-    border-radius: 12px;
-    min-height: 40px;
-    min-width: auto;
-  }
-  
-  .hero-actions {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
-  .btn.hero-cta {
-    min-height: 60px;
-    padding: 16px 24px;
-    font-size: 16px;
-  }
-  
-  /* Скрыть trust row и hero plaque на мобильных */
-  .trust-row {
-    display: none !important;
-  }
-  
-  .hero-plaque {
-    display: none !important;
-  }
-  
-  .chip {
-    padding: 8px 12px;
-    font-size: 11px;
-  }
-  
-  .deal {
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  .deal .timer {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-  
-  details {
-    padding: 14px;
-  }
-  
-  summary {
-    font-size: 13px;
-  }
-  
-  details p {
-    font-size: 12px;
-  }
-  
-  .final {
-    padding: 20px;
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .final h3 {
-    font-size: 18px;
-  }
-  
-  .final p {
-    font-size: 14px;
-  }
-  
-  .final .right {
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .special {
-    padding: 20px;
-  }
-  
-  .special-title {
-    font-size: 18px;
-  }
-  
-  .callout {
-    padding: 12px;
-    font-size: 12px;
-  }
-  
-  .kv-pack-details {
-    padding: 12px;
-  }
-  
-  .kv-pack-row {
-    padding: 10px;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .kv-pack-row span {
-    text-align: left;
-    font-size: 12px;
-  }
-  
-  .title h2 {
-    font-size: 24px;
-  }
-  
-  .title p {
-    font-size: 14px;
-  }
+  :root { --heroPad: 20px; }
+  header { top: 10px; }
+  .nav-island { padding: 6px 10px; gap: 8px; }
+  .avatar { width: 32px; height: 32px; }
+  .brand strong { font-size: 14px; }
+  section { padding: 60px 0; }
+  .hero { padding: 90px 0 50px; min-height: auto; }
+  h1 { font-size: 28px; letter-spacing: -1px; }
+  .sub { font-size: 15px; }
+  .grid { grid-template-columns: 1fr; gap: 12px; }
+  .feature { padding: 16px; border-radius: 16px; }
+  .feature .icon { font-size: 24px; margin-bottom: 10px; }
+  .feature b { font-size: 14px; margin-bottom: 6px; }
+  .feature span { font-size: 13px; }
+  .pricing { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .plan-wrap { padding-top: 0; }
+  .badge-over { position: static; transform: none; margin-bottom: 8px; font-size: 9px; padding: 6px 10px; }
+  .plan { padding: 14px; border-radius: 18px; }
+  .plan .name { font-size: 12px; margin-bottom: 8px; }
+  .plan .old { font-size: 12px; }
+  .plan .price { font-size: 24px; }
+  .plan .per { font-size: 11px; }
+  .plan ul { margin: 10px 0; padding-left: 14px; }
+  .plan li { font-size: 11px; margin-bottom: 3px; }
+  .btn.buy { padding: 10px 12px; font-size: 12px; border-radius: 12px; min-height: 40px; min-width: auto; }
+  .hero-actions { flex-direction: column; }
+  .btn { width: 100%; }
+  .btn.hero-cta { min-height: 60px; padding: 16px 24px; font-size: 16px; }
+  .trust-row { display: none !important; }
+  .hero-plaque { display: none !important; }
+  .chip { padding: 8px 12px; font-size: 11px; }
+  .deal { padding: 12px; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .deal .timer { padding: 8px 10px; font-size: 12px; }
+  details { padding: 14px; }
+  summary { font-size: 13px; }
+  details p { font-size: 12px; }
+  .final { padding: 20px; flex-direction: column; text-align: center; }
+  .final h3 { font-size: 18px; }
+  .final p { font-size: 14px; }
+  .final .right { justify-content: center; width: 100%; }
+  .special { padding: 20px; }
+  .special-title { font-size: 18px; }
+  .callout { padding: 12px; font-size: 12px; }
+  .kv-pack-details { padding: 12px; }
+  .kv-pack-row { padding: 10px; flex-direction: column; gap: 4px; }
+  .kv-pack-row span { text-align: left; font-size: 12px; }
+  .title h2 { font-size: 24px; }
+  .title p { font-size: 14px; }
 }
 
 @media (max-width: 380px) {
-  .plan .price {
-    font-size: 22px;
-  }
-  
-  .plan .name {
-    font-size: 11px;
-  }
-  
-  .btn.buy {
-    padding: 8px 10px;
-    font-size: 11px;
-  }
+  .plan .price { font-size: 22px; }
+  .plan .name { font-size: 11px; }
+  .btn.buy { padding: 8px 10px; font-size: 11px; }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1626,7 +1548,9 @@ footer {
 <body>
 <div aria-hidden="true" class="progress"><i></i></div>
 <div aria-hidden="true" class="bg"></div>
-<div aria-hidden="true" class="particles"></div>
+<div aria-hidden="true" class="stars"></div>
+<div aria-hidden="true" class="shooting-star"></div>
+<div aria-hidden="true" class="orbs"></div>
 
 <!-- Island Navigation -->
 <header>
@@ -1703,46 +1627,14 @@ footer {
         <p>Премиальный VPN для скорости, приватности и стабильной связи — без лишних сложностей.</p>
       </div>
       <div class="grid">
-        <div class="feature reveal">
-          <span class="icon">🚀</span>
-          <b>Молниеносная скорость</b>
-          <span>Быстрые серверы для стриминга, игр и работы без задержек</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">🔒</span>
-          <b>Военное шифрование</b>
-          <span>AES-256 защита всего трафика. Полная безопасность в любой сети</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">🌍</span>
-          <b>Глобальные серверы</b>
-          <span>Выбор локации для доступа к контенту из любой страны</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">🚫</span>
-          <b>Без логов</b>
-          <span>Мы не храним историю. Ваша приватность — наш приоритет</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">🎬</span>
-          <b>Стриминг без границ</b>
-          <span>Netflix, YouTube, Spotify — смотрите что хотите, где хотите</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">🎁</span>
-          <b>Пробный тест</b>
-          <span>Попробуйте перед покупкой. Без карты и регистрации</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">🛟</span>
-          <b>Поддержка 24/7</b>
-          <span>Отвечаем на вопросы ежедневно и помогаем с настройкой</span>
-        </div>
-        <div class="feature reveal">
-          <span class="icon">✨</span>
-          <b>Один клик</b>
-          <span>Подключение через Telegram без сложных настроек</span>
-        </div>
+        <div class="feature reveal"><span class="icon">🚀</span><b>Молниеносная скорость</b><span>Быстрые серверы для стриминга, игр и работы без задержек</span></div>
+        <div class="feature reveal"><span class="icon">🔒</span><b>Военное шифрование</b><span>AES-256 защита всего трафика. Полная безопасность в любой сети</span></div>
+        <div class="feature reveal"><span class="icon">🌍</span><b>Глобальные серверы</b><span>Выбор локации для доступа к контенту из любой страны</span></div>
+        <div class="feature reveal"><span class="icon">🚫</span><b>Без логов</b><span>Мы не храним историю. Ваша приватность — наш приоритет</span></div>
+        <div class="feature reveal"><span class="icon">🎬</span><b>Стриминг без границ</b><span>Netflix, YouTube, Spotify — смотрите что хотите, где хотите</span></div>
+        <div class="feature reveal"><span class="icon">🎁</span><b>Пробный тест</b><span>Попробуйте перед покупкой. Без карты и регистрации</span></div>
+        <div class="feature reveal"><span class="icon">🛟</span><b>Поддержка 24/7</b><span>Отвечаем на вопросы ежедневно и помогаем с настройкой</span></div>
+        <div class="feature reveal"><span class="icon">✨</span><b>Один клик</b><span>Подключение через Telegram без сложных настроек</span></div>
       </div>
     </div>
   </section>
@@ -1754,12 +1646,8 @@ footer {
         <p>Базовый / популярный / премиум — классическая схема, чтобы выбор был очевидным.</p>
       </div>
       <div class="deal reveal">
-        <div>
-          <strong>🔥 Скидка 35%</strong> на подписку — действует ограниченное время
-        </div>
-        <div aria-live="polite" class="timer">
-          ⏳ <span>истекает через</span> <code id="dealTimer">02:34:15</code>
-        </div>
+        <div><strong>🔥 Скидка 35%</strong> на подписку — действует ограниченное время</div>
+        <div aria-live="polite" class="timer">⏳ <span>истекает через</span> <code id="dealTimer">02:34:15</code></div>
       </div>
       <div class="pricing">
         <div class="plan-wrap reveal">
@@ -1768,30 +1656,20 @@ footer {
             <div class="old">383 ₽</div>
             <div class="price">249 ₽</div>
             <div class="per">Для старта и проверки скорости</div>
-            <ul>
-              <li>✓ Приватность и защита</li>
-              <li>✓ Любые устройства</li>
-              <li>✓ Поддержка 24/7</li>
-            </ul>
+            <ul><li>✓ Приватность и защита</li><li>✓ Любые устройства</li><li>✓ Поддержка 24/7</li></ul>
             <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">Выбрать</a>
           </div>
         </div>
-
         <div class="plan-wrap reveal">
           <div class="plan card">
             <div class="name">3 месяца</div>
             <div class="old">1075 ₽</div>
             <div class="price">699 ₽</div>
             <div class="per">≈ 233 ₽ / мес</div>
-            <ul>
-              <li>✓ Экономия 6%</li>
-              <li>✓ Все функции</li>
-              <li>✓ Все устройства</li>
-            </ul>
+            <ul><li>✓ Экономия 6%</li><li>✓ Все функции</li><li>✓ Все устройства</li></ul>
             <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">Выбрать</a>
           </div>
         </div>
-
         <div class="plan-wrap reveal">
           <div class="badge-over">⭐️ ПОПУЛЯРНЫЙ ВЫБОР</div>
           <div class="plan card best">
@@ -1799,26 +1677,17 @@ footer {
             <div class="old">1998 ₽</div>
             <div class="price">1299 ₽</div>
             <div class="per">Лучшая цена / мес — оптимально</div>
-            <ul>
-              <li>✓ +1 месяц в подарок</li>
-              <li>✓ Приоритетная скорость</li>
-              <li>✓ Быстрый саппорт</li>
-            </ul>
+            <ul><li>✓ +1 месяц в подарок</li><li>✓ Приоритетная скорость</li><li>✓ Быстрый саппорт</li></ul>
             <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">Выбрать</a>
           </div>
         </div>
-
         <div class="plan-wrap reveal">
           <div class="plan card">
             <div class="name">Премиум • 12 мес + 🎁 3 мес</div>
             <div class="old">3691 ₽</div>
             <div class="price">2399 ₽</div>
             <div class="per">Максимальная экономия</div>
-            <ul>
-              <li>✓ +3 месяца в подарок</li>
-              <li>✓ VIP поддержка</li>
-              <li>✓ Стабильность на максимум</li>
-            </ul>
+            <ul><li>✓ +3 месяца в подарок</li><li>✓ VIP поддержка</li><li>✓ Стабильность на максимум</li></ul>
             <a class="btn primary buy" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">Выбрать</a>
           </div>
         </div>
@@ -1833,32 +1702,13 @@ footer {
         <p>Снимаем страхи и отвечаем на то, что обычно мешает нажать кнопку.</p>
       </div>
       <div class="faq">
-        <details class="reveal">
-          <summary>⚖️ Это легально?</summary>
-          <p>В большинстве стран использование VPN легально. Вы соблюдаете законы своей страны и правила сервисов, которыми пользуетесь.</p>
-        </details>
-        <details class="reveal">
-          <summary>🔒 Мои данные в безопасности?</summary>
-          <p>Да. Трафик шифруется, а политика "без логов" помогает сохранить приватность.</p>
-        </details>
-        <details class="reveal">
-          <summary>📱 Сколько устройств можно подключить?</summary>
-          <p>Подключайтесь на телефоне, планшете и компьютере — WolfPN работает на iOS, Android, Windows и macOS. Инструкция придёт в Telegram-боте.</p>
-        </details>
-        <details class="reveal">
-          <summary>🧪 Что такое «Пробный тест»?</summary>
-          <p>Это тестовый доступ через Telegram-бота, чтобы вы оценили скорость и стабильность перед покупкой.</p>
-        </details>
-        <details class="reveal">
-          <summary>🚀 Будет ли работать стриминг?</summary>
-          <p>Да — для большинства популярных сервисов. Если что-то не открывается, поддержка подскажет оптимальную локацию.</p>
-        </details>
-        <details class="reveal">
-          <summary>🛟 Как связаться с поддержкой?</summary>
-          <p>Напишите в Telegram — мы отвечаем 24/7 и помогаем с настройкой.</p>
-        </details>
+        <details class="reveal"><summary>⚖️ Это легально?</summary><p>В большинстве стран использование VPN легально. Вы соблюдаете законы своей страны и правила сервисов, которыми пользуетесь.</p></details>
+        <details class="reveal"><summary>🔒 Мои данные в безопасности?</summary><p>Да. Трафик шифруется, а политика "без логов" помогает сохранить приватность.</p></details>
+        <details class="reveal"><summary>📱 Сколько устройств можно подключить?</summary><p>Подключайтесь на телефоне, планшете и компьютере — WolfPN работает на iOS, Android, Windows и macOS. Инструкция придёт в Telegram-боте.</p></details>
+        <details class="reveal"><summary>🧪 Что такое «Пробный тест»?</summary><p>Это тестовый доступ через Telegram-бота, чтобы вы оценили скорость и стабильность перед покупкой.</p></details>
+        <details class="reveal"><summary>🚀 Будет ли работать стриминг?</summary><p>Да — для большинства популярных сервисов. Если что-то не открывается, поддержка подскажет оптимальную локацию.</p></details>
+        <details class="reveal"><summary>🛟 Как связаться с поддержкой?</summary><p>Напишите в Telegram — мы отвечаем 24/7 и помогаем с настройкой.</p></details>
       </div>
-
       <div class="reveal" style="margin-top: 32px">
         <div class="final">
           <div>
@@ -1886,26 +1736,13 @@ footer {
             <div class="special-title">🦾 Special Unblock</div>
             <div class="tag">30 дней • 245 ₽ • 90 ГБ</div>
           </div>
-          <p class="special-desc">
-            <strong>Special Unblock</strong> — специальный тариф 2026 года, который помогает оставаться на связи в сложных условиях. Подключение — через Telegram.
-          </p>
+          <p class="special-desc"><strong>Special Unblock</strong> — специальный тариф 2026 года, который помогает оставаться на связи в сложных условиях. Подключение — через Telegram.</p>
           <div class="special-grid">
-            <div class="callout">
-              <strong>💡 Важно:</strong><br/>
-              Если у вас нет проблем с мобильным интернетом и нужен просто VPN — выбирайте тарифы выше.
-            </div>
-            <div class="callout">
-              <strong>🔥 Что входит:</strong><br/>
-              📆 Срок: <strong>30 дней</strong><br/>
-              💰 Цена: <strong>245 ₽</strong><br/>
-              💾 Трафик: <strong>90 ГБ</strong>
-            </div>
+            <div class="callout"><strong>💡 Важно:</strong><br/>Если у вас нет проблем с мобильным интернетом и нужен просто VPN — выбирайте тарифы выше.</div>
+            <div class="callout"><strong>🔥 Что входит:</strong><br/>📆 Срок: <strong>30 дней</strong><br/>💰 Цена: <strong>245 ₽</strong><br/>💾 Трафик: <strong>90 ГБ</strong></div>
           </div>
           <details class="kv-pack-details" open>
-            <summary>
-              <span>⚡️ Опции тарифа</span>
-              <span class="kv-pack-chevron">▾</span>
-            </summary>
+            <summary><span>⚡️ Опции тарифа</span><span class="kv-pack-chevron">▾</span></summary>
             <div class="kv-pack-body">
               <div class="kv-pack-row"><b>📶 Трафик</b><span>90 ГБ — комфортно для ежедневных задач</span></div>
               <div class="kv-pack-row"><b>➕ Докупка</b><span>Можно докупить трафик при необходимости</span></div>
@@ -1913,9 +1750,7 @@ footer {
               <div class="kv-pack-row"><b>⚡️ Быстрый старт</b><span>Подключение через Telegram</span></div>
             </div>
           </details>
-          <div class="callout warn">
-            <strong>❗️ Ограничение:</strong> Если не работают даже сайты из белого списка (Яндекс, VK, Госуслуги) — Unblock технически не сможет помочь.
-          </div>
+          <div class="callout warn"><strong>❗️ Ограничение:</strong> Если не работают даже сайты из белого списка (Яндекс, VK, Госуслуги) — Unblock технически не сможет помочь.</div>
           <div style="margin-top: 18px">
             <a class="btn primary big" href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">🦾 Подключить Special Unblock</a>
           </div>
@@ -1927,86 +1762,49 @@ footer {
 
 <footer>
   <div class="wrap foot">
-    <div class="foot-left">
-      <strong>WolfPN</strong> © 2026 — Премиальный VPN сервис • <span style="color: rgba(255,255,255,.55); font-weight: 700">Поддержка 24/7</span>
-    </div>
-    <a href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">
-      Открыть Telegram-бот →
-    </a>
+    <div class="foot-left"><strong>WolfPN</strong> © 2026 — Премиальный VPN сервис • <span style="color: rgba(255,255,255,.55); font-weight: 700">Поддержка 24/7</span></div>
+    <a href="https://t.me/WolfPN_bot?start=MTMwNjIwNjU3Nw" rel="noopener" target="_blank">Открыть Telegram-бот →</a>
   </div>
 </footer>
 
 <script>
-// Intersection Observer for reveal animations
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('show');
-  });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.reveal, .surprise').forEach(el => obs.observe(el));
+requestAnimationFrame(() => { document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('show')); });
 
-// Show hero elements immediately
-requestAnimationFrame(() => {
-  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('show'));
-});
-
-// Progress bar
 const bar = document.querySelector('.progress > i');
 const updateProgress = () => {
   const doc = document.documentElement;
   const max = doc.scrollHeight - doc.clientHeight;
-  const p = max > 0 ? doc.scrollTop / max : 0;
-  bar.style.transform = `scaleX(${p})`;
+  bar.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
 };
 updateProgress();
-
 let progTick = false;
 window.addEventListener('scroll', () => {
   if (progTick) return;
   progTick = true;
-  requestAnimationFrame(() => {
-    progTick = false;
-    updateProgress();
-  });
+  requestAnimationFrame(() => { progTick = false; updateProgress(); });
 }, { passive: true });
 
-// Mobile navigation
 const mnav = document.getElementById('mnav');
 const menuBtn = document.getElementById('menuBtn');
 const closeNav = document.getElementById('closeNav');
-
-const openMenu = () => {
-  mnav.classList.add('open');
-  document.body.style.overflow = 'hidden';
-};
-
-const closeMenu = () => {
-  mnav.classList.remove('open');
-  document.body.style.overflow = '';
-};
-
+const openMenu = () => { mnav.classList.add('open'); document.body.style.overflow = 'hidden'; };
+const closeMenu = () => { mnav.classList.remove('open'); document.body.style.overflow = ''; };
 menuBtn?.addEventListener('click', openMenu);
 closeNav?.addEventListener('click', closeMenu);
-mnav?.addEventListener('click', e => {
-  if (e.target === mnav) closeMenu();
-});
-
+mnav?.addEventListener('click', e => { if (e.target === mnav) closeMenu(); });
 document.querySelectorAll('.mclose').forEach(a => a.addEventListener('click', closeMenu));
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
-      closeMenu();
-    }
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); closeMenu(); }
   });
 });
 
-// Headline letter animation
 const h = document.getElementById('headline');
 if (h && !h.dataset.splitDone) {
   const text = h.textContent || '';
@@ -2018,7 +1816,6 @@ if (h && !h.dataset.splitDone) {
   h.innerHTML = `<span class="sr-only">${text}</span><span class="headline-anim" aria-hidden="true">${letters}</span>`;
 }
 
-// Show plaque after headline animation (только на десктопе)
 const plaque = document.getElementById('heroPlaque');
 if (plaque && h && window.innerWidth > 600) {
   const letters = h.querySelectorAll('.letter');
@@ -2031,7 +1828,6 @@ if (plaque && h && window.innerWidth > 600) {
     const fmt = new Intl.NumberFormat('ru-RU');
     const t0 = performance.now();
     const dur = 1400;
-
     const tick = (now) => {
       const p = Math.min((now - t0) / dur, 1);
       const eased = 1 - Math.pow(1 - p, 3);
@@ -2053,7 +1849,6 @@ if (plaque && h && window.innerWidth > 600) {
   }
 }
 
-// Deal timer
 const TIMER_KEY = 'wolfpn_deal_ends_at';
 const DURATION = 2 * 3600 + 34 * 60 + 15;
 
@@ -2091,31 +1886,20 @@ const renderTimer = () => {
 renderTimer();
 setInterval(renderTimer, 1000);
 
-// KV pack - auto close on mobile
 (function() {
   var d = document.querySelector('.kv-pack-details');
   if (!d) return;
-
   function sync() {
     var isMobile = window.matchMedia && window.matchMedia('(max-width:600px)').matches;
-    if (isMobile) {
-      d.removeAttribute('open');
-    } else {
-      d.setAttribute('open', '');
-    }
+    if (isMobile) { d.removeAttribute('open'); }
+    else { d.setAttribute('open', ''); }
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', sync, { once: true });
-  } else {
-    sync();
-  }
-
+  } else { sync(); }
   if (window.matchMedia) {
     var mq = window.matchMedia('(max-width:600px)');
-    if (mq.addEventListener) {
-      mq.addEventListener('change', sync);
-    }
+    if (mq.addEventListener) { mq.addEventListener('change', sync); }
   }
 })();
 </script>

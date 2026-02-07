@@ -25,28 +25,6 @@
 <meta content="WolfPN" property="og:site_name"/>
 
 <!-- ВСТАВЬТЕ ПОЛНЫЙ CSS ИЗ GAMING (он одинаковый для всех страниц) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "WolfPN для игр",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "iOS, Android, Windows, macOS",
-  "description": "Игровой VPN с низким пингом для Valorant, CS2, Dota 2",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "RUB",
-    "description": "Пробный тест"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "2847"
-  }
-}
-</script>
-
 <style>
 :root {
   --bg: #000000;
@@ -98,7 +76,7 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   white-space: nowrap; border: 0;
 }
 
-/* ===== ФОН - ИСПРАВЛЕН ПУТЬ ===== */
+/* ===== ФОН - ИСПРАВЛЕН ПУТЬ (абсолютный от корня) ===== */
 .bg {
   position: fixed;
   inset: 0;
@@ -135,6 +113,7 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   50% { opacity: 1; transform: scale(1.05); }
 }
 
+/* ===== ЧАСТИЦЫ ===== */
 .particles {
   position: fixed;
   inset: 0;
@@ -185,6 +164,7 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   100% { transform: translateY(-100vh) translateX(50px) rotate(360deg); opacity: 0; }
 }
 
+/* ===== СВЕЧЕНИЕ КУРСОРА ===== */
 .cursor-glow {
   position: fixed;
   width: 300px;
@@ -202,6 +182,7 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   opacity: 1;
 }
 
+/* ===== ПРОГРЕСС БАР ===== */
 .progress {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -231,6 +212,7 @@ h1, h2, h3, p, span, a, b, strong, summary, li {
   100% { background-position: 200% 0; }
 }
 
+/* ===== HEADER ===== */
 header {
   position: fixed;
   top: 16px;
@@ -241,7 +223,7 @@ header {
   max-width: calc(100% - 32px);
 }
 
-/* ===== МЕНЮ - БЛЮР СРАЗУ ВИДЕН ===== */
+/* ===== МЕНЮ-ОСТРОВОК - БЛЮР СРАЗУ ВИДЕН ===== */
 .nav-island {
   display: flex;
   align-items: center;
@@ -254,8 +236,9 @@ header {
   -webkit-backdrop-filter: var(--blur-menu) saturate(180%);
   box-shadow: var(--glass-shadow);
   min-width: 700px;
+  /* УБРАНА ЗАДЕРЖКА - блюр виден сразу */
   animation: islandFloat 6s ease-in-out infinite;
-  /* УБРАНА АНИМАЦИЯ ПОЯВЛЕНИЯ - блюр сразу виден */
+  transition: all .3s ease;
 }
 
 @keyframes islandFloat {
@@ -284,6 +267,7 @@ header {
   border-color: rgba(255,255,255,.25);
 }
 
+/* ===== БРЕНД ===== */
 .brand {
   display: flex;
   align-items: center;
@@ -338,6 +322,7 @@ header {
   z-index: 1;
 }
 
+/* ===== НАВИГАЦИЯ ===== */
 .nav-links {
   display: flex;
   align-items: center;
@@ -383,6 +368,7 @@ header {
   background: rgba(255,255,255,.1);
 }
 
+/* ===== CTA КНОПКА В МЕНЮ ===== */
 .cta-island {
   padding: 10px 22px;
   border-radius: 30px;
@@ -418,6 +404,7 @@ header {
   left: 100%;
 }
 
+/* ===== КНОПКА МЕНЮ (МОБИЛЬНАЯ) ===== */
 .menuBtn {
   display: none;
   width: 38px;
@@ -443,6 +430,7 @@ header {
   opacity: .8;
 }
 
+/* ===== МОБИЛЬНОЕ МЕНЮ ===== */
 .mnav {
   position: fixed;
   inset: 0;
@@ -562,6 +550,7 @@ header {
   font-weight: 800;
 }
 
+/* ===== КОНТЕЙНЕРЫ ===== */
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
@@ -572,6 +561,7 @@ header {
   max-width: var(--heroMax);
 }
 
+/* ===== HERO ===== */
 .hero {
   padding: 140px 0 80px;
   min-height: 100vh;
@@ -596,7 +586,6 @@ header {
   position: relative;
   overflow: hidden;
   transition: all .4s ease;
-  /* Блюр виден сразу, без анимации */
 }
 
 .card::before {
@@ -641,6 +630,7 @@ header {
   padding: var(--heroPad);
 }
 
+/* ===== БЕЙДЖИ ===== */
 .page-badge {
   display: inline-flex;
   align-items: center;
@@ -668,6 +658,7 @@ header {
   margin-bottom: 22px;
 }
 
+/* ===== ЧИПЫ ===== */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -719,6 +710,7 @@ header {
   transform: translateY(-3px) scale(1.02);
 }
 
+/* ===== ЗАГОЛОВКИ ===== */
 h1 {
   font-size: clamp(36px, 6vw, 64px);
   font-weight: 800;
@@ -772,6 +764,7 @@ h1 {
   max-width: 740px;
 }
 
+/* ===== СЕРВИСЫ ===== */
 .services {
   display: flex;
   gap: 12px;
@@ -805,6 +798,7 @@ h1 {
   font-size: 18px;
 }
 
+/* ===== КНОПКИ ===== */
 .hero-actions {
   display: flex;
   gap: 14px;
@@ -910,6 +904,7 @@ h1 {
   font-size: 18px;
 }
 
+/* ===== TRUST ROW ===== */
 .trust-row {
   display: flex;
   flex-wrap: wrap;
@@ -947,6 +942,7 @@ h1 {
   font-weight: 800;
 }
 
+/* ===== СЕКЦИИ ===== */
 section {
   padding: 120px 0;
 }
@@ -982,12 +978,14 @@ section {
   max-width: 620px;
 }
 
+/* ===== GRID ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
+/* ===== FEATURE КАРТОЧКИ ===== */
 .feature {
   padding: 24px;
   border-radius: 20px;
@@ -1068,6 +1066,7 @@ section {
   line-height: 1.6;
 }
 
+/* ===== DEAL ===== */
 .deal {
   border-radius: 22px;
   border: 1px solid var(--glass-border);
@@ -1129,6 +1128,7 @@ section {
   50% { opacity: .7; }
 }
 
+/* ===== PRICING ===== */
 .pricing {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1276,6 +1276,7 @@ section {
   margin-top: auto;
 }
 
+/* ===== FAQ ===== */
 .faq {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1349,6 +1350,7 @@ details p {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== FINAL CTA ===== */
 .final {
   border-radius: 28px;
   border: 1px solid var(--glass-border);
@@ -1394,6 +1396,7 @@ details p {
   flex-wrap: wrap;
 }
 
+/* ===== FOOTER ===== */
 footer {
   padding: 28px 0 60px;
   border-top: 1px solid var(--line);
@@ -1447,6 +1450,7 @@ footer {
   width: 100%;
 }
 
+/* ===== REVEAL АНИМАЦИИ ===== */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -1479,6 +1483,7 @@ footer {
 .faq .reveal:nth-child(5) { transition-delay: .3s; }
 .faq .reveal:nth-child(6) { transition-delay: .35s; }
 
+/* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
   .grid { grid-template-columns: 1fr 1fr; }
   .pricing { grid-template-columns: 1fr 1fr; }
@@ -1499,6 +1504,7 @@ footer {
 @media (max-width: 600px) {
   :root { --heroPad: 20px; }
   
+  /* МОБИЛЬНЫЙ ФОН - ИСПРАВЛЕН ПУТЬ */
   .bg {
     background: 
       linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.45) 50%, rgba(0,0,0,.7) 100%),
@@ -1798,11 +1804,16 @@ footer {
 
 <!-- ВСТАВЬТЕ ПОЛНЫЙ JS ИЗ GAMING (он одинаковый для всех страниц) -->
 <script>
+// ===== REVEAL АНИМАЦИИ =====
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  entries.forEach(e => { 
+    if (e.isIntersecting) e.target.classList.add('show'); 
+  });
 }, { threshold: 0.1 });
+
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
+// ===== PROGRESS BAR =====
 const bar = document.querySelector('.progress > i');
 const updateProgress = () => {
   const doc = document.documentElement;
@@ -1810,24 +1821,32 @@ const updateProgress = () => {
   bar.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
 };
 updateProgress();
+
 let progTick = false;
 window.addEventListener('scroll', () => {
   if (progTick) return;
   progTick = true;
-  requestAnimationFrame(() => { progTick = false; updateProgress(); });
+  requestAnimationFrame(() => { 
+    progTick = false; 
+    updateProgress(); 
+  });
 }, { passive: true });
 
+// ===== CURSOR GLOW (только десктоп) =====
 const cursorGlow = document.getElementById('cursorGlow');
 if (cursorGlow && window.innerWidth > 600) {
   let glowX = 0, glowY = 0, currentX = 0, currentY = 0;
+  
   document.addEventListener('mousemove', (e) => {
     glowX = e.clientX;
     glowY = e.clientY;
     cursorGlow.classList.add('active');
   });
+  
   document.addEventListener('mouseleave', () => {
     cursorGlow.classList.remove('active');
   });
+  
   function animateGlow() {
     currentX += (glowX - currentX) * 0.1;
     currentY += (glowY - currentY) * 0.1;
@@ -1838,44 +1857,73 @@ if (cursorGlow && window.innerWidth > 600) {
   animateGlow();
 }
 
+// ===== МОБИЛЬНОЕ МЕНЮ =====
 const mnav = document.getElementById('mnav');
 const menuBtn = document.getElementById('menuBtn');
 const closeNav = document.getElementById('closeNav');
-const openMenu = () => { mnav.classList.add('open'); document.body.style.overflow = 'hidden'; };
-const closeMenu = () => { mnav.classList.remove('open'); document.body.style.overflow = ''; };
+
+const openMenu = () => { 
+  mnav.classList.add('open'); 
+  document.body.style.overflow = 'hidden'; 
+};
+
+const closeMenu = () => { 
+  mnav.classList.remove('open'); 
+  document.body.style.overflow = ''; 
+};
+
 menuBtn?.addEventListener('click', openMenu);
 closeNav?.addEventListener('click', closeMenu);
-mnav?.addEventListener('click', e => { if (e.target === mnav) closeMenu(); });
-document.querySelectorAll('.mclose').forEach(a => a.addEventListener('click', closeMenu));
+mnav?.addEventListener('click', e => { 
+  if (e.target === mnav) closeMenu(); 
+});
 
+document.querySelectorAll('.mclose').forEach(a => {
+  a.addEventListener('click', closeMenu);
+});
+
+// ===== SMOOTH SCROLL (для ссылок на секции этой страницы) =====
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); closeMenu(); }
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    
+    const target = document.querySelector(href);
+    if (target) { 
+      e.preventDefault(); 
+      target.scrollIntoView({ behavior: 'smooth' }); 
+      closeMenu(); 
+    }
   });
 });
 
+// ===== HEADLINE ANIMATION =====
 const h = document.getElementById('headline');
 if (h && !h.dataset.splitDone) {
   const text = h.textContent || '';
   h.dataset.splitDone = '1';
   h.setAttribute('aria-label', text);
+  
   const letters = Array.from(text).map((ch, i) =>
     `<span class="letter" style="--i:${i}" aria-hidden="true">${ch === ' ' ? '&nbsp;' : ch.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>`
   ).join('');
+  
   h.innerHTML = `<span class="sr-only">${text}</span><span class="headline-anim" aria-hidden="true">${letters}</span>`;
 }
 
+// ===== TIMER =====
 const TIMER_KEY = 'wolfpn_deal_ends_at';
-const DURATION = 2 * 3600 + 34 * 60 + 15;
+const DURATION = 2 * 3600 + 34 * 60 + 15; // 2:34:15
 
 const getEnd = () => {
   const raw = localStorage.getItem(TIMER_KEY);
   const now = Date.now();
+  
   if (raw) {
     const end = parseInt(raw, 10);
     if (!Number.isNaN(end) && end > now + 1000) return end;
   }
+  
   const end = now + DURATION * 1000;
   localStorage.setItem(TIMER_KEY, String(end));
   return end;
@@ -1887,13 +1935,16 @@ let endAt = getEnd();
 
 const renderTimer = () => {
   if (!timerEl) return;
+  
   const now = Date.now();
   let s = Math.max(0, Math.floor((endAt - now) / 1000));
   const hh = Math.floor(s / 3600);
   s %= 3600;
   const mm = Math.floor(s / 60);
   const ss = s % 60;
+  
   timerEl.textContent = `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+  
   if (endAt <= now) {
     localStorage.removeItem(TIMER_KEY);
     endAt = getEnd();
@@ -1903,6 +1954,7 @@ const renderTimer = () => {
 renderTimer();
 setInterval(renderTimer, 1000);
 
+// ===== PARALLAX ЧАСТИЦ (только десктоп) =====
 if (window.innerWidth > 600) {
   const particles = document.querySelector('.particles');
   if (particles) {
@@ -1913,6 +1965,7 @@ if (window.innerWidth > 600) {
   }
 }
 
+// ===== HOVER ЭФФЕКТ НА КАРТОЧКАХ =====
 document.querySelectorAll('.card, .feature, .plan').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();

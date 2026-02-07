@@ -1,3 +1,38 @@
+# robots.txt for wolfpn.site
+# Разрешаем индексацию всего сайта
+
 User-agent: *
 Allow: /
-Sitemap: https://wolfpn.github.io/sitemap.xml
+
+# Основные страницы
+Allow: /streaming/
+Allow: /gaming/
+Allow: /iphone/
+Allow: /android/
+Allow: /windows/
+Allow: /security/
+Allow: /free-trial/
+Allow: /work/
+
+# Карта сайта
+Sitemap: https://wolfpn.site/sitemap.xml
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Запрещаем служебные файлы
+Disallow: /*.json$
+Disallow: /404.html
+
+# Host (для Яндекса)
+Host: https://wolfpn.site
